@@ -1,0 +1,42 @@
+[
+  {
+    "family": "is the following instrument brass, woodwind,",
+    "n_published": 1960,
+    "control_distinct": 0.083,
+    "control_collide": 1.0,
+    "treated_distinct": 0.25,
+    "treated_collide": 0.833
+  },
+  {
+    "family": "classify each animal as a mammal",
+    "n_published": 1606,
+    "control_distinct": 0.5,
+    "control_collide": 0.083,
+    "treated_distinct": 1.0,
+    "treated_collide": 0.0
+  },
+  {
+    "family": "which category\u2014brass, woodwind, string, or percussion\u2014does",
+    "n_published": 1484,
+    "control_distinct": 0.167,
+    "control_collide": 0.917,
+    "treated_distinct": 0.667,
+    "treated_collide": 0.417
+  },
+  {
+    "family": "classify the following instrument as brass,",
+    "n_published": 1257,
+    "control_distinct": 0.167,
+    "control_collide": 1.0,
+    "treated_distinct": 0.417,
+    "treated_collide": 0.75
+  },
+  {
+    "family": "classify each animal as a bird",
+    "n_published": 1115,
+    "control_distinct": 0.917,
+    "control_collide": 0.0,
+    "treated_distinct": 0.833,
+    "treated_collide": 0.083
+  }
+]

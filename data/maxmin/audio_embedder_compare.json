@@ -1,0 +1,165 @@
+{
+  "sets": {
+    "steer": 22,
+    "naive": 47,
+    "ihd": 47
+  },
+  "embedders": {
+    "clap_fused": {
+      "has_text": true
+    },
+    "clap_music": {
+      "has_text": true
+    },
+    "muq_mulan": {
+      "has_text": true
+    },
+    "mert": {
+      "has_text": false
+    }
+  },
+  "agreement": {
+    "steer": {
+      "clap_fused~clap_music": 0.3292,
+      "clap_fused~muq_mulan": 0.7889,
+      "clap_fused~mert": 0.7138,
+      "clap_music~muq_mulan": 0.2232,
+      "clap_music~mert": 0.4123,
+      "muq_mulan~mert": 0.7254
+    },
+    "naive": {
+      "clap_fused~clap_music": 0.3522,
+      "clap_fused~muq_mulan": 0.8374,
+      "clap_fused~mert": 0.7326,
+      "clap_music~muq_mulan": 0.315,
+      "clap_music~mert": 0.5108,
+      "muq_mulan~mert": 0.7352
+    },
+    "ihd": {
+      "clap_fused~clap_music": 0.4115,
+      "clap_fused~muq_mulan": 0.7554,
+      "clap_fused~mert": 0.6296,
+      "clap_music~muq_mulan": 0.4741,
+      "clap_music~mert": 0.5776,
+      "muq_mulan~mert": 0.7604
+    }
+  },
+  "steerability": {
+    "clap_fused": {
+      "naive": 0.4981,
+      "ihd": 0.2136
+    },
+    "clap_music": {
+      "naive": 0.1807,
+      "ihd": 0.0592
+    },
+    "muq_mulan": {
+      "naive": 0.6811,
+      "ihd": 0.4668
+    }
+  },
+  "verdicts": {
+    "steer": {
+      "clap_fused": {
+        "vendi_centered": 8.5,
+        "median_nn_dist": 0.0563,
+        "most_redundant_pair": [
+          5,
+          14
+        ]
+      },
+      "clap_music": {
+        "vendi_centered": 10.02,
+        "median_nn_dist": 0.0048,
+        "most_redundant_pair": [
+          12,
+          18
+        ]
+      },
+      "muq_mulan": {
+        "vendi_centered": 10.74,
+        "median_nn_dist": 0.1831,
+        "most_redundant_pair": [
+          1,
+          20
+        ]
+      },
+      "mert": {
+        "vendi_centered": 13.22,
+        "median_nn_dist": 0.0307,
+        "most_redundant_pair": [
+          2,
+          14
+        ]
+      }
+    },
+    "naive": {
+      "clap_fused": {
+        "vendi_centered": 11.51,
+        "median_nn_dist": 0.0276,
+        "most_redundant_pair": [
+          31,
+          45
+        ]
+      },
+      "clap_music": {
+        "vendi_centered": 16.43,
+        "median_nn_dist": 0.0038,
+        "most_redundant_pair": [
+          5,
+          26
+        ]
+      },
+      "muq_mulan": {
+        "vendi_centered": 12.9,
+        "median_nn_dist": 0.0795,
+        "most_redundant_pair": [
+          34,
+          44
+        ]
+      },
+      "mert": {
+        "vendi_centered": 20.71,
+        "median_nn_dist": 0.0169,
+        "most_redundant_pair": [
+          31,
+          40
+        ]
+      }
+    },
+    "ihd": {
+      "clap_fused": {
+        "vendi_centered": 14.05,
+        "median_nn_dist": 0.0466,
+        "most_redundant_pair": [
+          24,
+          43
+        ]
+      },
+      "clap_music": {
+        "vendi_centered": 15.65,
+        "median_nn_dist": 0.0041,
+        "most_redundant_pair": [
+          35,
+          39
+        ]
+      },
+      "muq_mulan": {
+        "vendi_centered": 15.96,
+        "median_nn_dist": 0.1038,
+        "most_redundant_pair": [
+          41,
+          42
+        ]
+      },
+      "mert": {
+        "vendi_centered": 20.42,
+        "median_nn_dist": 0.0232,
+        "most_redundant_pair": [
+          25,
+          39
+        ]
+      }
+    }
+  }
+}

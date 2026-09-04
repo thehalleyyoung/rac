@@ -1,0 +1,8 @@
+{
+  "n_images": 199,
+  "pairwise_sim_correlation": 0.1554895377448599,
+  "text_vendi_centered": 45.95324050970308,
+  "image_vendi_centered": 72.41265106201172,
+  "text_median_nn": 0.045703298622631394,
+  "image_median_nn": 0.20786985754966736
+}

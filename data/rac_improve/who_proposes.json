@@ -1,0 +1,157 @@
+{
+  "axis_sets": {
+    "llama-3.3-70b-instruct": {
+      "Temporal Stance": [
+        "Past",
+        "Present",
+        "Future",
+        "Timeless",
+        "Cyclical"
+      ],
+      "Address Mode": [
+        "Self",
+        "Other",
+        "Unknown",
+        "Collective",
+        "Nature"
+      ],
+      "Claim Relationship": [
+        "Direct",
+        "Irony",
+        "Metaphor",
+        "Allusion",
+        "Paradox"
+      ],
+      "Syntactic Complexity": [
+        "Simple",
+        "Compound",
+        "Complex",
+        "Embedded",
+        "Fragmented"
+      ],
+      "Line Break Function": [
+        "Pause",
+        "Breath",
+        "Caesura",
+        "Enjamb",
+        "Fragment"
+      ],
+      "Excluded Register": [
+        "Formal",
+        "Informal",
+        "Colloquial",
+        "Slang",
+        "Jargon"
+      ],
+      "Knowledge Stance": [
+        "Certain",
+        "Uncertain",
+        "Speculative",
+        "Skeptical",
+        "Mysterious"
+      ]
+    },
+    "qwen-2.5-72b-instruct": {
+      "Temporal Stance": [
+        "Present-focused",
+        "Past-focused",
+        "Future-focused",
+        "Eternal perspective"
+      ],
+      "Addressed Reader": [
+        "Self",
+        "Specific other",
+        "General audience",
+        "Abstract entity"
+      ],
+      "Self-Referentiality": [
+        "None",
+        "Subtle",
+        "Explicit",
+        "Meta-commentary"
+      ],
+      "Syntactic Complexity": [
+        "Simple",
+        "Complex",
+        "Fragmented",
+        "Run-on"
+      ],
+      "Line Break Function": [
+        "Natural pause",
+        "Emphasis",
+        "Rhythm",
+        "Disruption"
+      ],
+      "Tonal Register": [
+        "Casual",
+        "Formal",
+        "Playful",
+        "Serious",
+        "Ironical"
+      ],
+      "Linguistic Texture": [
+        "Concrete",
+        "Abstract",
+        "Verbose",
+        "Sparse",
+        "Euphonic"
+      ]
+    },
+    "deepseek-chat": {
+      "Temporal Perspective": [
+        "Immediate present unfolding",
+        "Retrospective reconstruction",
+        "Speculative future projection",
+        "Timeless or cyclical",
+        "Layered temporal collage"
+      ],
+      "Address Stance": [
+        "Direct second-person invocation",
+        "Third-person observation",
+        "Self-as-character monologue",
+        "Untargeted cosmic address",
+        "Shifting or ambiguous audience"
+      ],
+      "Reality Negotiation": [
+        "Concrete documentary",
+        "Surreal transformation",
+        "Metaphorical allegory",
+        "Ironic hyperbole",
+        "Unstable fabulation"
+      ],
+      "Syntactic Density": [
+        "Telegraphic fragments",
+        "Natural speech flow",
+        "Baroque subordination",
+        "Paratactic accumulation",
+        "Erased or elliptical"
+      ],
+      "Line-Break Logic": [
+        "Breath or speech unit",
+        "Grammatical integrity",
+        "Semantic disruption",
+        "Visual or spatial",
+        "Variable cadence"
+      ],
+      "Register Refusal": [
+        "Rejects abstraction",
+        "Rejects closure",
+        "Rejects ornament",
+        "Rejects linearity",
+        "Rejects seriousness"
+      ],
+      "Claim Posture": [
+        "Dogmatic assertion",
+        "Tentative wondering",
+        "Performative contradiction",
+        "Interrogative doubt",
+        "Data without thesis"
+      ]
+    }
+  },
+  "spread_self": 6.585130753787834,
+  "spread_cross": 6.091546989759427,
+  "reach_cross_into_self": 0.6794871794871795,
+  "reach_self_into_cross": 0.7051282051282052,
+  "craft_cross": 6.128205128205129
+}

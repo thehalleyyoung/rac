@@ -1,0 +1,201 @@
+{
+  "budget_generations": 2400,
+  "n_steer": 3000,
+  "n_eval": 3000,
+  "seeds": 175,
+  "reference": "databricks-dolly-15k held-out half",
+  "arms": {
+    "self_instruct": {
+      "arm": "self_instruct",
+      "n": 1833,
+      "generations": 2400,
+      "rejected": 567,
+      "eval_k3": {
+        "coverage": 0.1817,
+        "density": 0.9658,
+        "precision": 0.8625,
+        "recall": 0.1063
+      },
+      "eval_k5": {
+        "coverage": 0.2557,
+        "density": 1.0496,
+        "precision": 0.9493,
+        "recall": 0.1607
+      },
+      "eval_k10": {
+        "coverage": 0.3697,
+        "density": 1.1115,
+        "precision": 0.9896,
+        "recall": 0.2653
+      },
+      "eval_k20": {
+        "coverage": 0.4977,
+        "density": 1.1586,
+        "precision": 0.9973,
+        "recall": 0.3793
+      },
+      "eval_coverage_auc_over_k": 0.3262,
+      "coverage_per_1k_generations": 0.1359
+    },
+    "random_seed": {
+      "arm": "random_seed",
+      "n": 2399,
+      "generations": 2400,
+      "rejected": 0,
+      "eval_k3": {
+        "coverage": 0.1793,
+        "density": 0.9793,
+        "precision": 0.8558,
+        "recall": 0.087
+      },
+      "eval_k5": {
+        "coverage": 0.248,
+        "density": 1.052,
+        "precision": 0.935,
+        "recall": 0.152
+      },
+      "eval_k10": {
+        "coverage": 0.37,
+        "density": 1.0982,
+        "precision": 0.9883,
+        "recall": 0.2467
+      },
+      "eval_k20": {
+        "coverage": 0.5013,
+        "density": 1.1529,
+        "precision": 0.9975,
+        "recall": 0.3777
+      },
+      "eval_coverage_auc_over_k": 0.3246,
+      "coverage_per_1k_generations": 0.1353
+    },
+    "ours": {
+      "arm": "ours",
+      "n": 304,
+      "generations": 2432,
+      "rejected": 0,
+      "eval_k3": {
+        "coverage": 0.1113,
+        "density": 0.9079,
+        "precision": 0.7862,
+        "recall": 0.0637
+      },
+      "eval_k5": {
+        "coverage": 0.1747,
+        "density": 1.0086,
+        "precision": 0.9276,
+        "recall": 0.099
+      },
+      "eval_k10": {
+        "coverage": 0.296,
+        "density": 1.1046,
+        "precision": 0.9803,
+        "recall": 0.177
+      },
+      "eval_k20": {
+        "coverage": 0.4543,
+        "density": 1.216,
+        "precision": 0.9967,
+        "recall": 0.2803
+      },
+      "eval_coverage_auc_over_k": 0.2591,
+      "coverage_per_1k_generations": 0.1065
+    },
+    "ours_v4": {
+      "arm": "ours_v4",
+      "n": 2398,
+      "generations": 2400,
+      "rejected": 0,
+      "eval_k3": {
+        "coverage": 0.397,
+        "density": 1.3692,
+        "precision": 0.8974,
+        "recall": 0.1243
+      },
+      "eval_k5": {
+        "coverage": 0.561,
+        "density": 1.6369,
+        "precision": 0.96,
+        "recall": 0.1777
+      },
+      "eval_k10": {
+        "coverage": 0.762,
+        "density": 2.0593,
+        "precision": 0.9925,
+        "recall": 0.299
+      },
+      "eval_k20": {
+        "coverage": 0.9187,
+        "density": 2.3661,
+        "precision": 0.9979,
+        "recall": 0.4367
+      },
+      "eval_coverage_auc_over_k": 0.6597,
+      "coverage_per_1k_generations": 0.2749
+    },
+    "ours_keepall": {
+      "arm": "ours_keepall",
+      "n": 1310,
+      "generations": 2400,
+      "rejected": 0,
+      "eval_k3": {
+        "coverage": 0.1543,
+        "density": 0.6234,
+        "precision": 0.7267,
+        "recall": 0.0513
+      },
+      "eval_k5": {
+        "coverage": 0.2287,
+        "density": 0.7044,
+        "precision": 0.8641,
+        "recall": 0.0683
+      },
+      "eval_k10": {
+        "coverage": 0.36,
+        "density": 0.7805,
+        "precision": 0.9641,
+        "recall": 0.113
+      },
+      "eval_k20": {
+        "coverage": 0.516,
+        "density": 0.8571,
+        "precision": 0.9954,
+        "recall": 0.2087
+      },
+      "eval_coverage_auc_over_k": 0.3147,
+      "coverage_per_1k_generations": 0.1311
+    },
+    "ours_v3": {
+      "arm": "ours_v3",
+      "n": 1152,
+      "generations": 2400,
+      "rejected": 0,
+      "eval_k3": {
+        "coverage": 0.1377,
+        "density": 0.6366,
+        "precision": 0.7448,
+        "recall": 0.0357
+      },
+      "eval_k5": {
+        "coverage": 0.2137,
+        "density": 0.7342,
+        "precision": 0.8845,
+        "recall": 0.061
+      },
+      "eval_k10": {
+        "coverage": 0.3373,
+        "density": 0.8059,
+        "precision": 0.9653,
+        "recall": 0.1087
+      },
+      "eval_k20": {
+        "coverage": 0.4877,
+        "density": 0.9021,
+        "precision": 0.9957,
+        "recall": 0.1873
+      },
+      "eval_coverage_auc_over_k": 0.2941,
+      "coverage_per_1k_generations": 0.1225
+    }
+  }
+}

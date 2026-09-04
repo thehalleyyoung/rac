@@ -1,0 +1,25 @@
+{
+  "base": {
+    "decide": 27,
+    "plan": 23,
+    "classify": 2,
+    "code": 20,
+    "rewrite": 3,
+    "explain": 11,
+    "critique": 4,
+    "summarize": 5,
+    "extract": 5
+  },
+  "full": {
+    "plan": 8,
+    "code": 25,
+    "extract": 8,
+    "creative": 7,
+    "explain": 9,
+    "classify": 8,
+    "critique": 8,
+    "decide": 9,
+    "summarize": 9,
+    "rewrite": 9
+  }
+}

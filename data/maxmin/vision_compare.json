@@ -1,0 +1,100 @@
+{
+  "matched_n": 96,
+  "quality": "high",
+  "arms": {
+    "naive": {
+      "label": "naive repeated prompting",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.3684,
+      "self_repetition_4": 0.279,
+      "ngram_vendi_2": 61.3,
+      "text_vendi_centered": 38.79,
+      "text_median_nn": 0.046,
+      "image_vendi_centered": 50.37,
+      "image_median_nn": 0.2127,
+      "text_image_sim_corr": 0.1789
+    },
+    "high_temp": {
+      "label": "high temperature (T=1.6)",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.3743,
+      "self_repetition_4": 0.277,
+      "ngram_vendi_2": 62.5,
+      "text_vendi_centered": 37.82,
+      "text_median_nn": 0.0525,
+      "image_vendi_centered": 52.33,
+      "image_median_nn": 0.2075,
+      "text_image_sim_corr": 0.2005
+    },
+    "self_instruct": {
+      "label": "Self-Instruct (ROUGE filter)",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.5531,
+      "self_repetition_4": 0.1512,
+      "ngram_vendi_2": 76.8,
+      "text_vendi_centered": 40.68,
+      "text_median_nn": 0.0968,
+      "image_vendi_centered": 50.68,
+      "image_median_nn": 0.1897,
+      "text_image_sim_corr": 0.1734
+    },
+    "evol_instruct": {
+      "label": "Evol-Instruct (WizardLM)",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.4414,
+      "self_repetition_4": 0.2983,
+      "ngram_vendi_2": 61.7,
+      "text_vendi_centered": 37.21,
+      "text_median_nn": 0.0328,
+      "image_vendi_centered": 54.06,
+      "image_median_nn": 0.2158,
+      "text_image_sim_corr": 0.2956
+    },
+    "persona": {
+      "label": "persona conditioning",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.6609,
+      "self_repetition_4": 0.1137,
+      "ngram_vendi_2": 78.0,
+      "text_vendi_centered": 42.79,
+      "text_median_nn": 0.0913,
+      "image_vendi_centered": 57.97,
+      "image_median_nn": 0.2474,
+      "text_image_sim_corr": 0.3265
+    },
+    "ihd": {
+      "label": "IHD (ours)",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.7496,
+      "self_repetition_4": 0.0474,
+      "ngram_vendi_2": 91.9,
+      "text_vendi_centered": 54.15,
+      "text_median_nn": 0.1878,
+      "image_vendi_centered": 55.83,
+      "image_median_nn": 0.2508,
+      "text_image_sim_corr": 0.429
+    },
+    "vision": {
+      "label": "IHD + vision steering (ours)",
+      "n": 96,
+      "exact_dup_rate": 0.0,
+      "distinct_2": 0.7368,
+      "self_repetition_4": 0.0374,
+      "ngram_vendi_2": 91.6,
+      "text_vendi_centered": 58.45,
+      "text_median_nn": 0.1832,
+      "image_vendi_centered": 61.8,
+      "image_median_nn": 0.2829,
+      "text_image_sim_corr": 0.3087
+    }
+  },
+  "rank_agreement_spearman": 0.642857142857143,
+  "best_text_arm": "vision",
+  "best_image_arm": "vision"
+}

@@ -1,0 +1,52 @@
+{
+  "results": {
+    "P1_fixed_prompt_rate_is_m": {
+      "pass": true,
+      "detail": "m=2: fitted -0.472 vs -1/m=-0.500; m=3: fitted -0.309 vs -1/m=-0.333; m=5: fitted -0.195 vs -1/m=-0.200  [ambient d=32 would predict -0.031]"
+    },
+    "P2_slice_deficit_exponent": {
+      "pass": true,
+      "detail": "d=8, m=2: fitted eps-exponent 5.06 vs predicted d-m=6; covered fractions [0.0508, 0.0066, 0.0011, 0.0003, 0.0001] at eps=[np.float64(0.5), np.float64(0.35), np.float64(0.25), np.float64(0.18), np.float64(0.12)]"
+    },
+    "P3a_free_switching_is_maximal_breadth": {
+      "pass": true,
+      "detail": "with no prompt-switch cost the optimum is n*=1 (one sample per prompt): coverage {\"1\": 0.995, \"3\": 0.994, \"10\": 0.977, \"30\": 0.88, \"100\": 0.6, \"300\": 0.382, \"1200\": 0.091}"
+    },
+    "P3b_interior_optimum_under_switch_cost": {
+      "pass": true,
+      "detail": "optimal depth n* grows with switch cost c: c=3 -> n*=10, c=30 -> n*=30; coverage at c=30: {\"1\": 0.165, \"3\": 0.413, \"10\": 0.652, \"30\": 0.706, \"100\": 0.533, \"300\": 0.355, \"1200\": 0.06}"
+    },
+    "P3c_depth_only_wastes_budget": {
+      "pass": true,
+      "detail": "spending the whole budget on ONE prompt reaches only 9.1% of the coverage maximal breadth reaches"
+    },
+    "P4_transversality": {
+      "pass": true,
+      "detail": "effective dimension of the union: parallel shifts 1.88 (stays ~m=2), transverse shifts 11.18"
+    },
+    "P5_gate_necessity": {
+      "pass": true,
+      "detail": "P(selected is off-manifold) = 0.0418 vs per-candidate rate p=0.005 -- a 8.4x amplification (K=8). P(selected is junk | junk present in pool) = 1.000 at n=5000 (1.000 at n=50): max-min selects the off-manifold candidate essentially whenever one appears, at every corpus size"
+    }
+  },
+  "depth_sweep": {
+    "3.0": {
+      "1": 0.79025,
+      "3": 0.9384166666666667,
+      "10": 0.9450833333333334,
+      "30": 0.88675,
+      "100": 0.6565,
+      "300": 0.2683333333333333,
+      "1200": 0.058333333333333334
+    },
+    "30.0": {
+      "1": 0.16516666666666666,
+      "3": 0.41258333333333336,
+      "10": 0.6520833333333333,
+      "30": 0.7061666666666667,
+      "100": 0.5331666666666667,
+      "300": 0.3550833333333333,
+      "1200": 0.059583333333333335
+    }
+  }
+}

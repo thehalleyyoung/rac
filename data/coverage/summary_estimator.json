@@ -1,0 +1,52 @@
+{
+  "A_single_ball_vs_analytic_volume": {
+    "d=2,eps=0.2": {
+      "analytic_volume": 0.125664,
+      "mc_estimate": 0.12598,
+      "abs_error": 0.000316,
+      "mc_standard_error": 0.000524,
+      "within_3_se": true
+    },
+    "d=3,eps=0.25": {
+      "analytic_volume": 0.06545,
+      "mc_estimate": 0.064507,
+      "abs_error": 0.000942,
+      "mc_standard_error": 0.000391,
+      "within_3_se": true
+    },
+    "d=4,eps=0.3": {
+      "analytic_volume": 0.039972,
+      "mc_estimate": 0.040115,
+      "abs_error": 0.000143,
+      "mc_standard_error": 0.00031,
+      "within_3_se": true
+    }
+  },
+  "B_disjoint_balls_union": {
+    "m_centers": 9,
+    "eps": 0.05,
+    "min_center_spacing": 0.3,
+    "analytic_union_volume": 0.070686,
+    "mc_estimate": 0.07089,
+    "abs_error": 0.000204,
+    "mc_standard_error": 0.000287,
+    "within_3_se": true
+  },
+  "C_duplicate_center_adds_zero": {
+    "one_center": 0.0659,
+    "three_identical_centers": 0.0659,
+    "delta": 0.0,
+    "duplicate_adds_zero": true
+  },
+  "D_known_optimum_1d": {
+    "N": 300,
+    "r": 3,
+    "k": 10,
+    "eps": 3.5,
+    "analytic_optimum_points_covered": 70,
+    "greedy_points_covered": 70,
+    "greedy_equals_optimum": true,
+    "ratio": 1.0
+  },
+  "all_checks_passed": true
+}

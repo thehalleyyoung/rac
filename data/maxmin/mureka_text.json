@@ -1,0 +1,22 @@
+{
+  "naive": {
+    "n": 100,
+    "mean_chars": 1024.0,
+    "exact_dup_rate": 0.0,
+    "distinct_2": 0.3481,
+    "self_repetition_4": 0.2913,
+    "ngram_vendi_2": 56.0,
+    "embed_vendi_centered": 22.99,
+    "median_nn_cos_dist": 0.0268
+  },
+  "ihd": {
+    "n": 100,
+    "mean_chars": 1000.6,
+    "exact_dup_rate": 0.0,
+    "distinct_2": 0.545,
+    "self_repetition_4": 0.1397,
+    "ngram_vendi_2": 75.3,
+    "embed_vendi_centered": 43.03,
+    "median_nn_cos_dist": 0.0791
+  }
+}

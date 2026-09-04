@@ -1,0 +1,77 @@
+{
+  "delta_calibration": {
+    "n_judged": 236,
+    "enemy_rate": 0.1016949152542373,
+    "logistic_w": -13.741,
+    "logistic_b": 0.486,
+    "delta_50pct": 0.0354,
+    "delta_empirical_window": null
+  },
+  "enemy_radius_delta": 0.0354,
+  "judge": "openai/gpt-5.6-luna, blind to distance and provenance",
+  "banks": {
+    "MMLU (human-written)": {
+      "n_evaluated": 2500,
+      "exact_dup_rate": 0.024,
+      "items_with_an_enemy": 0.092,
+      "enemy_pairs": 195,
+      "usable_bank_after_floor": 2373,
+      "usable_fraction": 0.9492,
+      "median_nn_dist": 0.2395
+    },
+    "generated: naive": {
+      "n_evaluated": 2500,
+      "exact_dup_rate": 0.6948,
+      "items_with_an_enemy": 0.8836,
+      "enemy_pairs": 1158634,
+      "usable_bank_after_floor": 382,
+      "usable_fraction": 0.1528,
+      "median_nn_dist": -0.0
+    },
+    "generated: high_temp": {
+      "n_evaluated": 2500,
+      "exact_dup_rate": 0.7104,
+      "items_with_an_enemy": 0.8972,
+      "enemy_pairs": 1243520,
+      "usable_bank_after_floor": 365,
+      "usable_fraction": 0.146,
+      "median_nn_dist": -0.0
+    },
+    "generated: self_instruct": {
+      "n_evaluated": 2500,
+      "exact_dup_rate": 0.0472,
+      "items_with_an_enemy": 0.6156,
+      "enemy_pairs": 7564,
+      "usable_bank_after_floor": 1373,
+      "usable_fraction": 0.5492,
+      "median_nn_dist": 0.0219
+    },
+    "generated: evol_instruct": {
+      "n_evaluated": 2500,
+      "exact_dup_rate": 0.0124,
+      "items_with_an_enemy": 0.4236,
+      "enemy_pairs": 1567,
+      "usable_bank_after_floor": 1870,
+      "usable_fraction": 0.748,
+      "median_nn_dist": 0.0426
+    },
+    "generated: persona": {
+      "n_evaluated": 2500,
+      "exact_dup_rate": 0.0072,
+      "items_with_an_enemy": 0.0472,
+      "enemy_pairs": 486,
+      "usable_bank_after_floor": 2425,
+      "usable_fraction": 0.97,
+      "median_nn_dist": 0.113
+    },
+    "generated: ihd": {
+      "n_evaluated": 1058,
+      "exact_dup_rate": 0.0,
+      "items_with_an_enemy": 0.0,
+      "enemy_pairs": 0,
+      "usable_bank_after_floor": 1058,
+      "usable_fraction": 1.0,
+      "median_nn_dist": 0.2099
+    }
+  }
+}

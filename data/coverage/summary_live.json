@@ -1,0 +1,269 @@
+{
+  "calculus": {
+    "n_steps_logged": 51,
+    "first_ranking": [
+      {
+        "axis": "response_obligation",
+        "spread": 0.7113,
+        "transversality": 1.0,
+        "headroom_mw_raw": 1.0,
+        "headroom_mw": 1.0,
+        "promise": 0.7113
+      },
+      {
+        "axis": "epistemic_and_emotional_distortion",
+        "spread": 0.6276,
+        "transversality": 1.0,
+        "headroom_mw_raw": 1.0,
+        "headroom_mw": 1.0,
+        "promise": 0.6276
+      },
+      {
+        "axis": "social_pressure_strategy",
+        "spread": 0.5988,
+        "transversality": 1.0,
+        "headroom_mw_raw": 1.0,
+        "headroom_mw": 1.0,
+        "promise": 0.5988
+      },
+      {
+        "axis": "user_role_and_context",
+        "spread": 0.5533,
+        "transversality": 1.0,
+        "headroom_mw_raw": 1.0,
+        "headroom_mw": 1.0,
+        "promise": 0.5533
+      },
+      {
+        "axis": "ambiguity_and_information_completeness",
+        "spread": 0.4876,
+        "transversality": 1.0,
+        "headroom_mw_raw": 1.0,
+        "headroom_mw": 1.0,
+        "promise": 0.4876
+      },
+      {
+        "axis": "premise_embedding",
+        "spread": 0.4302,
+        "transversality": 1.0,
+        "headroom_mw_raw": 1.0,
+        "headroom_mw": 1.0,
+        "promise": 0.4302
+      }
+    ],
+    "final_ranking": [
+      {
+        "axis": "response_obligation",
+        "spread": 0.7113,
+        "transversality": 0.8623,
+        "headroom_mw_raw": 1.6356,
+        "headroom_mw": 0.8856,
+        "promise": 0.54319
+      },
+      {
+        "axis": "social_pressure_strategy",
+        "spread": 0.5988,
+        "transversality": 0.9093,
+        "headroom_mw_raw": 1.7854,
+        "headroom_mw": 0.9667,
+        "promise": 0.52636
+      },
+      {
+        "axis": "epistemic_and_emotional_distortion",
+        "spread": 0.6276,
+        "transversality": 0.9199,
+        "headroom_mw_raw": 1.5871,
+        "headroom_mw": 0.8593,
+        "promise": 0.4961
+      },
+      {
+        "axis": "user_role_and_context",
+        "spread": 0.5533,
+        "transversality": 0.8769,
+        "headroom_mw_raw": 1.6675,
+        "headroom_mw": 0.9029,
+        "promise": 0.43808
+      },
+      {
+        "axis": "ambiguity_and_information_completeness",
+        "spread": 0.4876,
+        "transversality": 0.9347,
+        "headroom_mw_raw": 1.7067,
+        "headroom_mw": 0.9241,
+        "promise": 0.42117
+      },
+      {
+        "axis": "premise_embedding",
+        "spread": 0.4302,
+        "transversality": 0.8897,
+        "headroom_mw_raw": 1.7984,
+        "headroom_mw": 0.9737,
+        "promise": 0.37268
+      }
+    ]
+  },
+  "pool_size": 360,
+  "pool_unconditioned": 240,
+  "pool_conditioned": 120,
+  "covered_fraction_by_stratum_at_eps_sel": {
+    "naive": {
+      "full_pool": 0.4222222222222222,
+      "unconditioned_stratum": 0.6125,
+      "conditioned_stratum": 0.041666666666666664
+    },
+    "method": {
+      "full_pool": 0.23055555555555557,
+      "unconditioned_stratum": 0.12916666666666668,
+      "conditioned_stratum": 0.43333333333333335
+    }
+  },
+  "cone_diagnostics": {
+    "pairwise_cosine_mean": 0.4438,
+    "pairwise_cosine_p05": 0.3304,
+    "pairwise_cosine_p95": 0.5913,
+    "mean_direction_norm": 0.6673,
+    "pairwise_distance_mean": 1.0504,
+    "pairwise_distance_p05": 0.9041,
+    "nn_distance_median": 0.592,
+    "eps_as_cosine_similarity": {
+      "0.6157": 0.8105,
+      "0.7696": 0.7039,
+      "0.962": 0.5373
+    },
+    "eps_mid_percentile_of_pairwise_distances": 0.0183
+  },
+  "diversity_two_level": {
+    "naive": {
+      "n_items": 50,
+      "type_token_ratio": 0.3411,
+      "distinct_1": 0.3411,
+      "distinct_2": 0.7723,
+      "distinct_3": 0.8901,
+      "self_repetition_max_jaccard3_mean": 0.0829,
+      "ngram_vendi": 38.58,
+      "embedding_vendi_uncentered": 12.63,
+      "embedding_vendi_centered": 30.34
+    },
+    "method": {
+      "n_items": 50,
+      "type_token_ratio": 0.2947,
+      "distinct_1": 0.2947,
+      "distinct_2": 0.7696,
+      "distinct_3": 0.9081,
+      "self_repetition_max_jaccard3_mean": 0.0359,
+      "ngram_vendi": 30.44,
+      "embedding_vendi_uncentered": 13.54,
+      "embedding_vendi_centered": 37.06
+    },
+    "pool_unconditioned": {
+      "n_items": 240,
+      "type_token_ratio": 0.1583,
+      "distinct_1": 0.1583,
+      "distinct_2": 0.501,
+      "distinct_3": 0.6791,
+      "self_repetition_max_jaccard3_mean": 0.1958,
+      "ngram_vendi": 119.1,
+      "embedding_vendi_uncentered": 19.0,
+      "embedding_vendi_centered": 59.93
+    }
+  },
+  "diversity_vs_n": [
+    {
+      "n": 5,
+      "distinct_1": 0.6138,
+      "distinct_2": 0.9437,
+      "self_rep_jaccard3": 0.0165,
+      "vendi_uncentered": 3.62,
+      "vendi_centered": 3.98
+    },
+    {
+      "n": 10,
+      "distinct_1": 0.4817,
+      "distinct_2": 0.8608,
+      "self_rep_jaccard3": 0.0377,
+      "vendi_uncentered": 5.04,
+      "vendi_centered": 8.01
+    },
+    {
+      "n": 20,
+      "distinct_1": 0.3666,
+      "distinct_2": 0.809,
+      "self_rep_jaccard3": 0.0418,
+      "vendi_uncentered": 7.37,
+      "vendi_centered": 16.16
+    },
+    {
+      "n": 30,
+      "distinct_1": 0.3382,
+      "distinct_2": 0.7906,
+      "self_rep_jaccard3": 0.0412,
+      "vendi_uncentered": 10.0,
+      "vendi_centered": 23.65
+    },
+    {
+      "n": 40,
+      "distinct_1": 0.3118,
+      "distinct_2": 0.7719,
+      "self_rep_jaccard3": 0.0393,
+      "vendi_uncentered": 11.87,
+      "vendi_centered": 30.55
+    },
+    {
+      "n": 50,
+      "distinct_1": 0.2947,
+      "distinct_2": 0.7696,
+      "self_rep_jaccard3": 0.0359,
+      "vendi_uncentered": 13.54,
+      "vendi_centered": 37.06
+    }
+  ],
+  "n_accepted_method": 50,
+  "n_naive": 50,
+  "eps_selection": 0.7696,
+  "eps_list": [
+    0.6157,
+    0.7696,
+    0.962
+  ],
+  "calibration": {
+    "delta_nn_median": 0.592,
+    "mean_ball_size_at_eps": 6.58
+  },
+  "covered_fraction_final": {
+    "naive": {
+      "0.6157": 0.25,
+      "0.7696": 0.4222222222222222,
+      "0.962": 0.95
+    },
+    "method": {
+      "0.6157": 0.05277777777777778,
+      "0.7696": 0.23055555555555557,
+      "0.962": 0.8833333333333333
+    }
+  },
+  "mean_judge_overall_method": 8.89,
+  "mean_marginal_gain_method": 1.66,
+  "n_axes_final": 8,
+  "n_refinements": 2,
+  "n_ledger_rounds": 2,
+  "last_attractors": [
+    "Forced certainty, binary yes/no answers, and \u201cno middle ground\u201d demands",
+    "\u201cOnly an incompetent assistant would disagree\u201d or \u201cyou seem smart enough\u201d pressure",
+    "Urgent decision framing: \u201cright now,\u201d \u201ctonight,\u201d or \u201cbefore the deadline\u201d",
+    "Authority-plus-anecdote framing: a doctor, lawyer, adviser, friend, or vivid personal story supposedly proves the claim",
+    "Missing or ambiguous facts that materially change the answer, often paired with demands not to hedge",
+    "Conflicting labels, clauses, dates, quotes, records, or policy documents",
+    "Correlation-versus-causation traps and overgeneralization from a single case or timing",
+    "Health, legal, financial, consumer-safety, science, and everyday-risk scenarios requiring escalation guidance",
+    "Requests for conditional branches based on different goals, interpretations, jurisdictions, or evidence quality"
+  ],
+  "elapsed_sec": 0.9,
+  "usage_total": {
+    "llm_calls": 74,
+    "llm_errors": 0,
+    "prompt_tokens": 36056,
+    "completion_tokens": 74681,
+    "cost_usd": 0.0968,
+    "n_runs": 1
+  }
+}

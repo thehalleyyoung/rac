@@ -1,0 +1,115 @@
+{
+  "budget_generations": 10000,
+  "K": 8,
+  "results": {
+    "naive": {
+      "n": 10000,
+      "vendi": 21.29,
+      "mean_quality": 0.669,
+      "junk_fraction": 0.0042,
+      "median_gap": 0.966,
+      "min_gap": 0.3912,
+      "modes_covered": 38
+    },
+    "high_temp": {
+      "n": 10000,
+      "vendi": 28.12,
+      "mean_quality": 0.671,
+      "junk_fraction": 0.0195,
+      "median_gap": 1.542,
+      "min_gap": 0.5961,
+      "modes_covered": 40
+    },
+    "random_latent": {
+      "n": 10000,
+      "vendi": 26.76,
+      "mean_quality": 0.7,
+      "junk_fraction": 0.0054,
+      "median_gap": 0.936,
+      "min_gap": 0.418,
+      "modes_covered": 40
+    },
+    "dedup_post": {
+      "n": 9517,
+      "vendi": 21.56,
+      "mean_quality": 0.671,
+      "junk_fraction": 0.0046,
+      "median_gap": 0.978,
+      "min_gap": 0.6,
+      "modes_covered": 39,
+      "tau": 0.6
+    },
+    "fps_post": {
+      "n": 1250,
+      "vendi": 22.63,
+      "mean_quality": 0.622,
+      "junk_fraction": 0.0408,
+      "median_gap": 1.445,
+      "min_gap": 1.3933,
+      "modes_covered": 38
+    },
+    "novelty_online": {
+      "n": 1250,
+      "vendi": 22.48,
+      "mean_quality": 0.622,
+      "junk_fraction": 0.044,
+      "median_gap": 1.359,
+      "min_gap": 0.6309,
+      "modes_covered": 38
+    },
+    "ihd_full": {
+      "n": 312,
+      "vendi": 22.6,
+      "mean_quality": 0.763,
+      "junk_fraction": 0.0,
+      "median_gap": 1.268,
+      "min_gap": 0.6237,
+      "modes_covered": 36
+    },
+    "ihd_no_gate": {
+      "n": 312,
+      "vendi": 23.0,
+      "mean_quality": 0.766,
+      "junk_fraction": 0.0096,
+      "median_gap": 1.254,
+      "min_gap": 0.6951,
+      "modes_covered": 34
+    },
+    "ihd_no_orth": {
+      "n": 312,
+      "vendi": 21.65,
+      "mean_quality": 0.759,
+      "junk_fraction": 0.0,
+      "median_gap": 1.227,
+      "min_gap": 0.6909,
+      "modes_covered": 36
+    },
+    "ihd_no_quality": {
+      "n": 312,
+      "vendi": 24.35,
+      "mean_quality": 0.664,
+      "junk_fraction": 0.0128,
+      "median_gap": 1.389,
+      "min_gap": 0.8,
+      "modes_covered": 36
+    },
+    "ihd_no_repulsion": {
+      "n": 312,
+      "vendi": 21.44,
+      "mean_quality": 0.783,
+      "junk_fraction": 0.0,
+      "median_gap": 1.101,
+      "min_gap": 0.5976,
+      "modes_covered": 35
+    },
+    "ihd_no_ledger": {
+      "n": 1250,
+      "vendi": 23.8,
+      "mean_quality": 0.75,
+      "junk_fraction": 0.0008,
+      "median_gap": 1.17,
+      "min_gap": 0.6466,
+      "modes_covered": 38
+    }
+  }
+}

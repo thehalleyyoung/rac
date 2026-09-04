@@ -1,0 +1,467 @@
+{
+  "seed": 20260830,
+  "domains": {
+    "dalle": {
+      "domain": "dalle",
+      "reference": {
+        "source": "dalle_naive/ (unconditioned prompting)",
+        "n_raw": 10000,
+        "n_unique": 10000,
+        "exact_duplicate_rate": 0.0,
+        "most_common_count": 1,
+        "most_common_text": "Create a mixed-media digital collage on distressed canvas: arrange a fragmented classical statue, neon supermarket signa",
+        "n_reference_points": 5000,
+        "split": "random half of the deduped naive corpus; the naive arm is scored from the complementary half",
+        "delta_median_self_nn_dedup": 0.2531,
+        "median_self_nn_raw_pool": 0.2532,
+        "eps_list": [
+          0.1518,
+          0.2531,
+          0.4049
+        ]
+      },
+      "matched_n": 200,
+      "arms": {
+        "naive": {
+          "n_available": 5000,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.1368,
+            "0.4049": 0.9448
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.135,
+            "0.4049": 0.9416
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0178,
+            "0.2531": 0.1448,
+            "0.4049": 0.9432
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.0571,
+            "0.4049": 0.3036
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.2932,
+          "vendi_centered": 50.34,
+          "vendi_uncentered": 2.18,
+          "distinct_1": 0.06,
+          "distinct_2": 0.2841
+        },
+        "high_temp": {
+          "n_available": 2500,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.1354,
+            "0.4049": 0.941
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.147,
+            "0.4049": 0.9428
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.1462,
+            "0.4049": 0.9434
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.0529,
+            "0.4049": 0.2943
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.3032,
+          "vendi_centered": 50.7,
+          "vendi_uncentered": 2.23,
+          "distinct_1": 0.0635,
+          "distinct_2": 0.2909
+        },
+        "self_instruct": {
+          "n_available": 2500,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0154,
+            "0.4049": 0.534
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.1066
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.1032
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.005,
+            "0.4049": 0.2379
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.4988,
+          "vendi_centered": 67.9,
+          "vendi_uncentered": 4.69,
+          "distinct_1": 0.1344,
+          "distinct_2": 0.5449
+        },
+        "evol_instruct": {
+          "n_available": 2500,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0114,
+            "0.4049": 0.6802
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.0124,
+            "0.4049": 0.6936
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0136,
+            "0.4049": 0.6918
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.0057,
+            "0.4049": 0.3064
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.385,
+          "vendi_centered": 62.1,
+          "vendi_uncentered": 3.64,
+          "distinct_1": 0.103,
+          "distinct_2": 0.3855
+        },
+        "persona": {
+          "n_available": 2500,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.1026
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0014
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0016
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0386
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.3996,
+          "vendi_centered": 57.82,
+          "vendi_uncentered": 5.18,
+          "distinct_1": 0.1738,
+          "distinct_2": 0.5824
+        },
+        "ihd": {
+          "n_available": 1338,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.6381,
+          "vendi_centered": 85.37,
+          "vendi_uncentered": 8.65,
+          "distinct_1": 0.1845,
+          "distinct_2": 0.66
+        },
+        "vision": {
+          "n_available": 200,
+          "n_scored": 200,
+          "n_scored_dedup": 200,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "covered_raw_ref": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "covered_union_loo": {
+            "0.1518": 0.0,
+            "0.2531": 0.0,
+            "0.4049": 0.0
+          },
+          "n_union_points": 1400,
+          "median_self_nn": 0.6202,
+          "vendi_centered": 91.97,
+          "vendi_uncentered": 8.48,
+          "distinct_1": 0.2011,
+          "distinct_2": 0.6985
+        }
+      }
+    },
+    "psychometric": {
+      "domain": "psychometric",
+      "reference": {
+        "source": "psychometric_naive/ (unconditioned prompting)",
+        "n_raw": 10000,
+        "n_unique": 2645,
+        "exact_duplicate_rate": 0.7355,
+        "most_common_count": 2726,
+        "most_common_text": "What number comes next in the sequence: 2, 6, 12, 20, 30, ?\nA. 40\nB. 42\nC. 44\nD. 46",
+        "n_reference_points": 1322,
+        "split": "random half of the deduped naive corpus; the naive arm is scored from the complementary half",
+        "delta_median_self_nn_dedup": 0.1727,
+        "median_self_nn_raw_pool": 0.0,
+        "eps_list": [
+          0.1036,
+          0.1727,
+          0.2762
+        ]
+      },
+      "matched_n": 346,
+      "arms": {
+        "naive": {
+          "n_available": 1323,
+          "n_scored": 346,
+          "n_scored_dedup": 346,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1036": 0.202,
+            "0.1727": 0.3502,
+            "0.2762": 0.4977
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1036": 0.2224,
+            "0.1727": 0.3737,
+            "0.2762": 0.5121
+          },
+          "covered_raw_ref": {
+            "0.1036": 0.7753,
+            "0.1727": 0.8396,
+            "0.2762": 0.8752
+          },
+          "covered_union_loo": {
+            "0.1036": 0.0833,
+            "0.1727": 0.1469,
+            "0.2762": 0.2225
+          },
+          "n_union_points": 2076,
+          "median_self_nn": 0.3051,
+          "vendi_centered": 33.83,
+          "vendi_uncentered": 8.54,
+          "distinct_1": 0.0557,
+          "distinct_2": 0.2653
+        },
+        "high_temp": {
+          "n_available": 2500,
+          "n_scored": 346,
+          "n_scored_dedup": 346,
+          "exact_duplicate_rate": 0.7104,
+          "covered_dedup_ref": {
+            "0.1036": 0.2617,
+            "0.1727": 0.3714,
+            "0.2762": 0.503
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1036": 0.152,
+            "0.1727": 0.2405,
+            "0.2762": 0.3472
+          },
+          "covered_raw_ref": {
+            "0.1036": 0.7284,
+            "0.1727": 0.7723,
+            "0.2762": 0.8101
+          },
+          "covered_union_loo": {
+            "0.1036": 0.1007,
+            "0.1727": 0.1402,
+            "0.2762": 0.2076
+          },
+          "n_union_points": 2076,
+          "median_self_nn": 0.2041,
+          "vendi_centered": 23.93,
+          "vendi_uncentered": 7.72,
+          "distinct_1": 0.0573,
+          "distinct_2": 0.2564
+        },
+        "self_instruct": {
+          "n_available": 2500,
+          "n_scored": 346,
+          "n_scored_dedup": 346,
+          "exact_duplicate_rate": 0.0472,
+          "covered_dedup_ref": {
+            "0.1036": 0.0605,
+            "0.1727": 0.2065,
+            "0.2762": 0.3616
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1036": 0.1082,
+            "0.1727": 0.2163,
+            "0.2762": 0.4017
+          },
+          "covered_raw_ref": {
+            "0.1036": 0.6543,
+            "0.1727": 0.7466,
+            "0.2762": 0.823
+          },
+          "covered_union_loo": {
+            "0.1036": 0.0356,
+            "0.1727": 0.1219,
+            "0.2762": 0.1951
+          },
+          "n_union_points": 2076,
+          "median_self_nn": 0.3359,
+          "vendi_centered": 50.86,
+          "vendi_uncentered": 12.04,
+          "distinct_1": 0.0614,
+          "distinct_2": 0.2988
+        },
+        "evol_instruct": {
+          "n_available": 2500,
+          "n_scored": 346,
+          "n_scored_dedup": 346,
+          "exact_duplicate_rate": 0.0124,
+          "covered_dedup_ref": {
+            "0.1036": 0.0091,
+            "0.1727": 0.0129,
+            "0.2762": 0.0492
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1036": 0.0295,
+            "0.1727": 0.0764,
+            "0.2762": 0.1203
+          },
+          "covered_raw_ref": {
+            "0.1036": 0.5182,
+            "0.1727": 0.6876,
+            "0.2762": 0.7042
+          },
+          "covered_union_loo": {
+            "0.1036": 0.0058,
+            "0.1727": 0.0087,
+            "0.2762": 0.0303
+          },
+          "n_union_points": 2076,
+          "median_self_nn": 0.4714,
+          "vendi_centered": 72.4,
+          "vendi_uncentered": 10.11,
+          "distinct_1": 0.0604,
+          "distinct_2": 0.3014
+        },
+        "persona": {
+          "n_available": 2500,
+          "n_scored": 346,
+          "n_scored_dedup": 346,
+          "exact_duplicate_rate": 0.0072,
+          "covered_dedup_ref": {
+            "0.1036": 0.0045,
+            "0.1727": 0.028,
+            "0.2762": 0.0416
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1036": 0.0174,
+            "0.1727": 0.0416,
+            "0.2762": 0.0756
+          },
+          "covered_raw_ref": {
+            "0.1036": 0.1498,
+            "0.1727": 0.59,
+            "0.2762": 0.6301
+          },
+          "covered_union_loo": {
+            "0.1036": 0.0043,
+            "0.1727": 0.0241,
+            "0.2762": 0.0289
+          },
+          "n_union_points": 2076,
+          "median_self_nn": 0.5615,
+          "vendi_centered": 80.99,
+          "vendi_uncentered": 16.1,
+          "distinct_1": 0.096,
+          "distinct_2": 0.4988
+        },
+        "ihd": {
+          "n_available": 346,
+          "n_scored": 346,
+          "n_scored_dedup": 346,
+          "exact_duplicate_rate": 0.0,
+          "covered_dedup_ref": {
+            "0.1036": 0.0,
+            "0.1727": 0.0,
+            "0.2762": 0.0
+          },
+          "covered_dedup_ref_no_arm_dedup": {
+            "0.1036": 0.0,
+            "0.1727": 0.0,
+            "0.2762": 0.0
+          },
+          "covered_raw_ref": {
+            "0.1036": 0.0,
+            "0.1727": 0.0,
+            "0.2762": 0.0
+          },
+          "covered_union_loo": {
+            "0.1036": 0.0,
+            "0.1727": 0.0,
+            "0.2762": 0.0
+          },
+          "n_union_points": 2076,
+          "median_self_nn": 0.6966,
+          "vendi_centered": 103.67,
+          "vendi_uncentered": 16.6,
+          "distinct_1": 0.0718,
+          "distinct_2": 0.5104
+        }
+      }
+    }
+  }
+}

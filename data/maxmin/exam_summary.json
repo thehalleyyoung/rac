@@ -1,0 +1,56 @@
+{
+  "first_legal": {
+    "bank_size": 2000,
+    "real_bank_size": 1439,
+    "junk_in_bank": 561,
+    "exhausted": false,
+    "templates_used": 25,
+    "total_generator_calls": 296112,
+    "gen_per_accepted_item": 148.056
+  },
+  "farthest_legal": {
+    "bank_size": 2000,
+    "real_bank_size": 1386,
+    "junk_in_bank": 614,
+    "exhausted": false,
+    "templates_used": 25,
+    "total_generator_calls": 323328,
+    "gen_per_accepted_item": 161.664
+  },
+  "tightest_legal": {
+    "bank_size": 2000,
+    "real_bank_size": 1519,
+    "junk_in_bank": 481,
+    "exhausted": false,
+    "templates_used": 25,
+    "total_generator_calls": 352832,
+    "gen_per_accepted_item": 176.416
+  },
+  "first_legal_gated": {
+    "bank_size": 1270,
+    "real_bank_size": 1270,
+    "junk_in_bank": 0,
+    "exhausted": true,
+    "templates_used": 25,
+    "total_generator_calls": 171056,
+    "gen_per_accepted_item": 134.68976377952757
+  },
+  "farthest_legal_gated": {
+    "bank_size": 1375,
+    "real_bank_size": 1367,
+    "junk_in_bank": 8,
+    "exhausted": true,
+    "templates_used": 25,
+    "total_generator_calls": 254656,
+    "gen_per_accepted_item": 185.20436363636364
+  },
+  "tightest_legal_gated": {
+    "bank_size": 1464,
+    "real_bank_size": 1464,
+    "junk_in_bank": 0,
+    "exhausted": true,
+    "templates_used": 25,
+    "total_generator_calls": 303424,
+    "gen_per_accepted_item": 207.2568306010929
+  }
+}

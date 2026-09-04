@@ -1,0 +1,253 @@
+{
+  "generated": "2026-08-31T07:19:02",
+  "git_rev": "7b4df73",
+  "procedures": {
+    "P1": {
+      "name": "simulation-only",
+      "llm": null,
+      "selection": "over sampled candidates",
+      "rejection": true,
+      "measured_in": "synthetic embedding space",
+      "artifact_rendered": false,
+      "calculus": "text/level-description space (score_axes)"
+    },
+    "P2": {
+      "name": "real-text, select-and-reject",
+      "llm": "openai/gpt-5.6-luna",
+      "selection": "over K rendered-as-text candidates, losers discarded",
+      "rejection": true,
+      "measured_in": "text (n-gram + nomic-embed-text)",
+      "artifact_rendered": false,
+      "calculus": "text/level-description space (score_axes)"
+    },
+    "P2.5": {
+      "name": "cross-modal gate WITH rejection (superseded)",
+      "llm": "openai/gpt-5.6-luna",
+      "selection": "render, then accept/reject on CLAP validity + novelty",
+      "rejection": true,
+      "measured_in": "rendered artifact (CLAP audio)",
+      "artifact_rendered": true,
+      "calculus": "bandit-style axis credit, not the calculus proper"
+    },
+    "P3": {
+      "name": "cross-modal steering, no rejection",
+      "llm": "openai/gpt-5.6-luna",
+      "selection": "over PROMPTS pre-render, via shared text/artifact embedding",
+      "rejection": false,
+      "measured_in": "rendered artifact (CLAP/MERT audio, CLIP image)",
+      "artifact_rendered": true,
+      "calculus": "real space (score_axes_realized / score_axes_coverage)"
+    },
+    "P5_dedup_rescore": {
+      "what": "Scale-free Dolly coverage re-scored after collapsing each corpus to its distinct instructions, alongside the as-generated score.",
+      "procedure": "coverage/rescore_dedup.py; STEER-disjoint Dolly half (n=3000) as reference, reference-side k-NN radii, AUC over k in {3,5,10,20}, matched evaluated n=450, seed 20260830 for the reference draw.",
+      "date": "2026-08-31",
+      "note": "A separate scoring pass from the published head-to-head, so its as-generated numbers differ slightly from that table (0.4532 vs 0.4441 for the retrieval-aimed arm) through a different sample draw. The as-is and dedup columns are paired within this pass.",
+      "outputs": "coverage/figures/summary_dedup_rescore.json"
+    }
+  },
+  "results": {
+    "figures/summary.json": {
+      "procedure": "P1",
+      "script": "simulate.py",
+      "note": "poetry world, 6 policies, n=10,000",
+      "bytes": 2326,
+      "modified": "2026-08-30T15:25:57"
+    },
+    "figures/exam_summary.json": {
+      "procedure": "P1",
+      "script": "simulate_exam.py",
+      "note": "hard-floor bank packing",
+      "bytes": 1399,
+      "modified": "2026-08-30T15:32:49"
+    },
+    "figures/budget_comparison.json": {
+      "procedure": "P1",
+      "script": "experiment_budget.py",
+      "note": "budget-matched baselines + ablations",
+      "bytes": 2514,
+      "modified": "2026-08-30T15:38:28"
+    },
+    "figures/coverage_horizon.json": {
+      "procedure": "P1",
+      "script": "coverage_horizon.py",
+      "note": "inability-to-be-novel, 5 -> 10,000",
+      "bytes": 18084,
+      "modified": "2026-08-30T15:49:04"
+    },
+    "figures/slice_world.json": {
+      "procedure": "P1",
+      "script": "simulate_slices.py",
+      "note": "conditional world, d=24 m=3",
+      "bytes": 25751,
+      "modified": "2026-08-30T15:50:45"
+    },
+    "figures/theory_checks.json": {
+      "procedure": "P1",
+      "script": "verify_theory.py",
+      "note": "8 theorem checks",
+      "bytes": 1001,
+      "modified": "2026-08-30T15:33:49"
+    },
+    "figures/slice_theory_checks.json": {
+      "procedure": "P1",
+      "script": "verify_slices.py",
+      "note": "7 conditional-dimension checks",
+      "bytes": 2279,
+      "modified": "2026-08-30T15:45:26"
+    },
+    "figures/real_curves.json": {
+      "procedure": "P2",
+      "script": "metrics.py",
+      "note": "literal+latent diversity, n=5..10,000",
+      "bytes": 4417,
+      "modified": "2026-08-30T16:07:15"
+    },
+    "figures/arm_comparison.json": {
+      "procedure": "P2",
+      "script": "compare_arms.py",
+      "note": "7 arms at matched n, text metrics",
+      "bytes": 7983,
+      "modified": "2026-08-30T16:31:09"
+    },
+    "figures/head_to_head.json": {
+      "procedure": "P2",
+      "script": "head_to_head.py",
+      "note": "vs MMLU, matched n=1000",
+      "bytes": 3816,
+      "modified": "2026-08-30T17:23:17"
+    },
+    "figures/mureka_text.json": {
+      "procedure": "P2",
+      "script": "audio_domain.py prompts",
+      "note": "instrumental PROMPT diversity only, no audio",
+      "bytes": 477,
+      "modified": "2026-08-30T17:33:54"
+    },
+    "figures/vision_summary.json": {
+      "procedure": "P2",
+      "script": "figures_real.py",
+      "note": "text vs CLIP on 199 low-quality renders",
+      "bytes": 244,
+      "modified": "2026-08-31T07:14:05"
+    },
+    "figures/vision_compare.json": {
+      "procedure": "P2",
+      "script": "vision_compare.py VISION_TAG=high",
+      "note": "7 arms x 100 HIGH-quality renders of P2 corpora, matched n=96; a medium-quality n=48 pass exists and differs in BOTH quality and n, so the two are not a clean quality ablation",
+      "bytes": 2796,
+      "modified": "2026-08-30T18:46:54"
+    },
+    "real/lyria_steer/run_summary.json": {
+      "procedure": "P3",
+      "script": "lyria_steer.py",
+      "note": "100 tracks, CLAP-steered, 0 rejections. RETRACTION NOTE: figures from the session-2 summary (plan_match 0.0, alignment -0.09) were computed on corrupted prompt-audio pairings (async filename mismatch + broken resume); 22/24 pairings were exactly recovered via plan-shape + audio-scalar bipartite matching, 2 renders quarantined; clean values: plan_match 0.11 @658 chars, alignment +0.05",
+      "bytes": 6382,
+      "modified": "2026-08-30T21:27:21"
+    },
+    "real/dalle_steer_maxmin/run_summary.json": {
+      "procedure": "P3",
+      "script": "image_steer.py maxmin",
+      "note": "CLIP-steered max-min, 0 rejections",
+      "bytes": 2226,
+      "modified": "2026-08-30T19:14:50"
+    },
+    "real/dalle_steer_coverage/run_summary.json": {
+      "procedure": "P3",
+      "script": "image_steer.py coverage",
+      "note": "CLIP-steered coverage, 0 rejections",
+      "bytes": 2227,
+      "modified": "2026-08-30T19:31:09"
+    },
+    "figures/steer_crossscore.json": {
+      "procedure": "P3",
+      "script": "post-hoc from image_steer.py outputs",
+      "note": "2x2 crossover: each objective wins itself, loses the other; same machinery and budget",
+      "bytes": 331,
+      "modified": "2026-08-30T19:32:01"
+    },
+    "coverage/figures/summary_scalefree_h2h.json": {
+      "procedure": "P2",
+      "script": "coverage/scalefree_h2h.py",
+      "note": "released corpora vs ours on neutral Dolly ref; Naeem coverage/density",
+      "bytes": 10791,
+      "modified": "2026-08-30T21:52:11"
+    },
+    "coverage/figures/summary_duality.json": {
+      "procedure": "P1",
+      "script": "coverage/duality.py",
+      "note": "packing/covering duality checks + eps*(n) calibration on real embeddings",
+      "bytes": 2054,
+      "modified": "2026-08-30T19:08:17"
+    },
+    "coverage/figures/summary_fair_fight.json": {
+      "procedure": "P3",
+      "script": "coverage/fair_fight.py",
+      "note": "same 175 human seeds, same generator, budget matched in GENERATOR CALLS, scored on disjoint held-out Dolly",
+      "bytes": 4651,
+      "modified": "2026-08-30T21:49:15"
+    },
+    "coverage/figures/summary_scalefree_h2h_cleanref.json": {
+      "procedure": "P3",
+      "script": "REF_MODE=fair_eval coverage/scalefree_h2h.py 450",
+      "note": "THE OFFICIAL TABLE: 12 corpora, matched n=450, STEER-disjoint reference; v4 first at 0.4441 vs Alpaca 0.3722",
+      "bytes": 10807,
+      "modified": "2026-08-30T21:52:03"
+    },
+    "real/dalle_steer2_maxmin/run_summary.json": {
+      "procedure": "P3",
+      "script": "image_steer.py maxmin 60 steer2",
+      "note": "four-quadrant literal+latent repulsion, before/after vs v1",
+      "bytes": 2852,
+      "modified": "2026-08-30T20:20:47"
+    },
+    "real/dalle_steer2_coverage/run_summary.json": {
+      "procedure": "P3",
+      "script": "image_steer.py coverage 60 steer2",
+      "note": "four-quadrant repulsion, coverage objective; ref coverage 0.206->0.247",
+      "bytes": 2948,
+      "modified": "2026-08-30T20:43:19"
+    },
+    "figures/audio_embedder_compare.json": {
+      "procedure": "P3",
+      "script": "audio_embedders.py",
+      "note": "CLAP-fused vs CLAP-music vs MuQ-MuLan vs MERT: agreement 0.22-0.84, steerability MuQ 0.68/0.47 vs CLAP 0.50/0.21 vs CLAP-music 0.18/0.06; verdicts embedder-relative",
+      "bytes": 3304,
+      "modified": "2026-08-30T22:27:39"
+    },
+    "figures/exam_real.json": {
+      "procedure": "P3",
+      "script": "exam_real.py",
+      "note": "enemy-item radius calibrated by blind adjudication of 236 stratified MMLU pairs (delta=0.0354), applied to 6 generated banks + the human bank; usable-capacity after the floor",
+      "bytes": 2138,
+      "modified": "2026-08-31T07:18:16"
+    },
+    "real/lyria_online/run_summary.json": {
+      "procedure": "P2.5",
+      "script": "lyria_online.py",
+      "note": "CLAP gate WITH rejection -- superseded by lyria_steer.py; kept for the rejection-cost comparison",
+      "bytes": 2795,
+      "modified": "2026-08-30T18:26:47"
+    },
+    "P5_dedup_rescore": {
+      "headline": {
+        "ours_v4_as_is": 0.4532,
+        "ours_v4_dedup": 0.4752,
+        "alpaca": 0.3919,
+        "ours_v3_orthcond": 0.1999
+      },
+      "duplicate_rates_full_corpus": {
+        "ours_v4": 0.2106,
+        "random_seed": 0.2059,
+        "self_instruct": 0.0791,
+        "ours_keepall": 0.0,
+        "ours_v3": 0.0,
+        "ours_selective": 0.0
+      }
+    }
+  },
+  "missing_not_yet_produced": [
+    "figures/audio_compare.json",
+    "figures/lyria_length_probe.json"
+  ]
+}

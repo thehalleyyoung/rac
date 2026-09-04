@@ -1,0 +1,193 @@
+{
+  "submodularity": {
+    "n_trials": 5000,
+    "eps": 1.0,
+    "diminishing_returns_violations": 0,
+    "monotonicity_violations": 0,
+    "worst_violation": 0.0,
+    "_elapsed_sec": 1.0
+  },
+  "selection_rules": {
+    "eps": 1.0,
+    "k": 300,
+    "n_ground": 2000,
+    "greedy": {
+      "covered_fraction_heldout": 0.52815,
+      "covered_fraction_train": 0.5419,
+      "min_gap": 0.5773561458826426
+    },
+    "stream_greedy_K4": {
+      "covered_fraction_heldout": 0.4837,
+      "covered_fraction_train": 0.49145,
+      "min_gap": 0.684198513907946
+    },
+    "maxmin": {
+      "covered_fraction_heldout": 0.14265,
+      "covered_fraction_train": 0.1461,
+      "min_gap": 1.4389770254243002
+    },
+    "random": {
+      "covered_fraction_heldout": 0.42,
+      "covered_fraction_train": 0.42305,
+      "min_gap": 0.5316814294763089
+    },
+    "_elapsed_sec": 0.7
+  },
+  "greedy_bound": {
+    "n_instances": 10,
+    "bound": 0.6321205588285577,
+    "ratios": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "min_ratio": 1.0,
+    "bound_satisfied_all": true,
+    "_elapsed_sec": 5.2
+  },
+  "mc_error": {
+    "eps": 1.0,
+    "truth_pool": 200000,
+    "true_covered_fraction": 0.413435,
+    "delta": 0.05,
+    "pools": {
+      "500": {
+        "hoeffding_t95": 0.06074,
+        "empirical_mean_abs_err": 0.01584,
+        "empirical_q95_abs_err": 0.04159,
+        "fraction_within_hoeffding_band": 0.99
+      },
+      "2000": {
+        "hoeffding_t95": 0.03037,
+        "empirical_mean_abs_err": 0.00896,
+        "empirical_q95_abs_err": 0.01997,
+        "fraction_within_hoeffding_band": 0.99
+      },
+      "8000": {
+        "hoeffding_t95": 0.01518,
+        "empirical_mean_abs_err": 0.00459,
+        "empirical_q95_abs_err": 0.01107,
+        "fraction_within_hoeffding_band": 0.995
+      }
+    },
+    "_elapsed_sec": 7.9
+  },
+  "allocation": {
+    "n": 10000,
+    "M": 60,
+    "eps_grid": [
+      0.6,
+      1.0,
+      1.6,
+      2.4
+    ],
+    "rules": {
+      "equal": {
+        "0.6": 0.04614,
+        "1.0": 0.49372,
+        "1.6": 0.99162,
+        "2.4": 0.99208
+      },
+      "proportional": {
+        "0.6": 0.05956,
+        "1.0": 0.54662,
+        "1.6": 0.99174,
+        "2.4": 0.99208
+      },
+      "sqrt": {
+        "0.6": 0.05544,
+        "1.0": 0.531,
+        "1.6": 0.99182,
+        "2.4": 0.99208
+      },
+      "greedy_marginal": {
+        "0.6": 0.00362,
+        "1.0": 0.61784,
+        "1.6": 0.9919,
+        "2.4": 0.99208
+      }
+    },
+    "greedy_elapsed_sec": 61.5,
+    "greedy_picks_top5_cells": [
+      5083,
+      479,
+      382,
+      378,
+      374
+    ],
+    "greedy_cells_used": 58,
+    "corr_greedy_vs_equal": 0.1179,
+    "corr_greedy_vs_proportional": 0.1422,
+    "corr_greedy_vs_sqrt": 0.1745,
+    "_elapsed_sec": 66.8
+  },
+  "reachability_gap": {
+    "eps": 1.0,
+    "k": 300,
+    "n_ground": 2000,
+    "modes_reached_base": 25,
+    "modes_total": 60,
+    "oracle_ground_covered": 0.38665,
+    "proposal_limited_covered": 0.21235,
+    "refined_proposal_covered": 0.3736,
+    "reachability_gap": 0.1743,
+    "gap_recovered_by_refinement": 0.9251,
+    "_elapsed_sec": 32.4
+  },
+  "lattice_vs_reachable_dim": {
+    "n_budget": 2000,
+    "pool": 20000,
+    "full_rank": {
+      "lattice_size": 1024.0,
+      "level_dir_rank": 10,
+      "reachable_dim": 13,
+      "covered_fraction_own_pool": 0.48985
+    },
+    "low_rank": {
+      "lattice_size": 1024.0,
+      "level_dir_rank": 2,
+      "reachable_dim": 5,
+      "covered_fraction_own_pool": 0.6805
+    },
+    "eps": 0.2715,
+    "_elapsed_sec": 0.6
+  },
+  "refinement_direction": {
+    "local": {
+      "eps_coverage_radius": 0.3573,
+      "occupied_span_dim_95pct": 6,
+      "child_offspan_energy_frac": 0.823,
+      "already_covered_by_old_corpus_frac": 0.3667,
+      "effdim_corpus": 5.2,
+      "effdim_corpus_plus_children": 5.22,
+      "effdim_gain": 0.02
+    },
+    "isotropic": {
+      "eps_coverage_radius": 0.3573,
+      "occupied_span_dim_95pct": 6,
+      "child_offspan_energy_frac": 0.823,
+      "already_covered_by_old_corpus_frac": 0.0,
+      "effdim_corpus": 5.2,
+      "effdim_corpus_plus_children": 5.33,
+      "effdim_gain": 0.13
+    },
+    "transverse": {
+      "eps_coverage_radius": 0.3573,
+      "occupied_span_dim_95pct": 6,
+      "child_offspan_energy_frac": 0.9153,
+      "already_covered_by_old_corpus_frac": 0.0,
+      "effdim_corpus": 5.2,
+      "effdim_corpus_plus_children": 5.34,
+      "effdim_gain": 0.14
+    },
+    "offspan_ratio_transverse_vs_isotropic": 1.11,
+    "note": "NN-distance to corpus does NOT discriminate the modes (both ~1.04 in a prior version of this check): density-vs-reach is a span property, invisible to per-point distances"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "base (7 architectural axes)": {
+    "compute": 3,
+    "reliability": 35,
+    "storage": 19,
+    "security": 14,
+    "cost": 22,
+    "networking": 6,
+    "identity": 1
+  },
+  "content (+3 recovered axes)": {
+    "storage": 17,
+    "reliability": 47,
+    "security": 6,
+    "cost": 20,
+    "compute": 3,
+    "data": 3,
+    "networking": 4
+  },
+  "blueprint (+1 aligned axis)": {
+    "identity": 16,
+    "security": 19,
+    "networking": 16,
+    "migration": 17,
+    "monitoring": 16,
+    "reliability": 4,
+    "cost": 12
+  }
+}

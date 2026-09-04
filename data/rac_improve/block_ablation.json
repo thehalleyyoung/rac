@@ -1,0 +1,51 @@
+{
+  "arms": {
+    "contracts": {
+      "n": 110,
+      "device_share": 0.5636065600180432,
+      "medium_entropy": 0.8829883204634397,
+      "top_medium": "photo",
+      "top_share": 0.36363636363636365
+    },
+    "+avoid": {
+      "n": 110,
+      "device_share": 0.43970244711871503,
+      "medium_entropy": 0.8185259904746017,
+      "top_medium": "photo",
+      "top_share": 0.35454545454545455
+    },
+    "+hard": {
+      "n": 110,
+      "device_share": 0.7233418716672304,
+      "medium_entropy": 0.8963885383382929,
+      "top_medium": "sculpture",
+      "top_share": 0.37272727272727274
+    },
+    "+both": {
+      "n": 110,
+      "device_share": 0.8429397644708648,
+      "medium_entropy": 0.7702882617807015,
+      "top_medium": "sculpture",
+      "top_share": 0.33636363636363636
+    }
+  },
+  "attractors": [
+    "Appropriated fragments of canonical Renaissance, classical, or triumphal imagery, often displaced from their original context and fused with contemporary commercial or bureaucratic materials.",
+    "Repeated institutional signs and paper ephemera: numbered placards, museum labels, receipts, catalog pages, seals, captions, footnotes, packaging, tape, staples, and filing objects.",
+    "A tension between tiny human participants and expansive, diagrammatic spaces\u2014plazas, grids, stages, planimetric surfaces, or civic squares\u2014often arranged around a strong center or procession.",
+    "Mixed-media or visibly constructed surfaces: collage seams, cardboard, vinyl, linen, glossy paper, corrugated material, clamps, staples, photocopies, and painterly or photographic textures.",
+    "A recurring palette of institutional neutrals and dark accents, punctuated by theatrical or commercial color such as crimson, cobalt, cream, black, amber, or cyan, with hard directional lighting and sharp graphic contrast.",
+    "Postmodern strategies of copying, displacement, fragmentation, and self-reference, especially the collision of high art with lotteries, shopping, office systems, advertising, and mass-produced commodities.",
+    "Mechanical or process-based gestures\u2014repetition, drifting text, radial or panning blur, long-exposure trails, tilted viewpoints, and visibly mediated reproduction\u2014that question originality, authority, and the museum frame."
+  ],
+  "hot_words": [
+    "light",
+    "media",
+    "mixed",
+    "while",
+    "angle",
+    "view",
+    "sharp",
+    "paper"
+  ]
+}

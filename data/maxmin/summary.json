@@ -1,0 +1,62 @@
+{
+  "naive": {
+    "elapsed_sec": 4.69945216178894,
+    "n_modes_covered": 38,
+    "final_junk_fraction_last2000": 0.002,
+    "final_vendi_score": 21.107961604393704,
+    "final_anchor_dist_last500_mean": 1.8155776589195212,
+    "final_nn_dist_last500_mean": 1.1346149976736832,
+    "mean_true_quality": 0.6683332127205042,
+    "mean_true_quality_last2000": 0.6682513683262289
+  },
+  "novelty_only": {
+    "elapsed_sec": 5.74329400062561,
+    "n_modes_covered": 39,
+    "final_junk_fraction_last2000": 0.0355,
+    "final_vendi_score": 22.863213955550393,
+    "final_anchor_dist_last500_mean": 3.287942881681383,
+    "final_nn_dist_last500_mean": 2.79770425466084,
+    "mean_true_quality": 0.6263090710912377,
+    "mean_true_quality_last2000": 0.6287223188945049
+  },
+  "anchor_repulsion": {
+    "elapsed_sec": 3.2771942615509033,
+    "n_modes_covered": 38,
+    "final_junk_fraction_last2000": 0.0385,
+    "final_vendi_score": 16.861742166493627,
+    "final_anchor_dist_last500_mean": 2.952544729708099,
+    "final_nn_dist_last500_mean": 2.6038864824964403,
+    "mean_true_quality": 0.6243694254666061,
+    "mean_true_quality_last2000": 0.6253015446984446
+  },
+  "gated_anchor_repulsion": {
+    "elapsed_sec": 3.0817489624023438,
+    "n_modes_covered": 38,
+    "final_junk_fraction_last2000": 0.0,
+    "final_vendi_score": 14.651643348187529,
+    "final_anchor_dist_last500_mean": 1.4902024902654356,
+    "final_nn_dist_last500_mean": 1.211315839584529,
+    "mean_true_quality": 0.6416409531714399,
+    "mean_true_quality_last2000": 0.6416468117685695
+  },
+  "spectral": {
+    "elapsed_sec": 6.083348035812378,
+    "n_modes_covered": 39,
+    "final_junk_fraction_last2000": 0.0,
+    "final_vendi_score": 23.283485495210087,
+    "final_anchor_dist_last500_mean": 1.7507088194417992,
+    "final_nn_dist_last500_mean": 1.1657243040809109,
+    "mean_true_quality": 0.7531578863804421,
+    "mean_true_quality_last2000": 0.7525130276286985
+  },
+  "spectral_ledger": {
+    "elapsed_sec": 5.6709229946136475,
+    "n_modes_covered": 39,
+    "final_junk_fraction_last2000": 0.0,
+    "final_vendi_score": 22.28847664447824,
+    "final_anchor_dist_last500_mean": 1.7311529537173023,
+    "final_nn_dist_last500_mean": 1.1380808978543953,
+    "mean_true_quality": 0.779107454183082,
+    "mean_true_quality_last2000": 0.7831288986056565
+  }
+}

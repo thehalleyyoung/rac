@@ -1,0 +1,110 @@
+{
+  "ours-v4-covretr": {
+    "as-is": {
+      "auc": 0.453175,
+      "precision": 0.9667,
+      "n_available": 2398
+    },
+    "dedup": {
+      "auc": 0.475175,
+      "precision": 0.94,
+      "n_available": 1893
+    }
+  },
+  "ours-keepall": {
+    "as-is": {
+      "auc": 0.21392499999999998,
+      "precision": 0.8444,
+      "n_available": 1310
+    },
+    "dedup": {
+      "auc": 0.21392499999999998,
+      "precision": 0.8444,
+      "n_available": 1310
+    }
+  },
+  "ours-v3-orthcond": {
+    "as-is": {
+      "auc": 0.199925,
+      "precision": 0.8778,
+      "n_available": 1152
+    },
+    "dedup": {
+      "auc": 0.199925,
+      "precision": 0.8778,
+      "n_available": 1152
+    }
+  },
+  "ours-selective": {
+    "as-is": {
+      "auc": 0.259075,
+      "precision": 0.9276,
+      "n_available": 304
+    },
+    "dedup": {
+      "auc": 0.259075,
+      "precision": 0.9276,
+      "n_available": 304
+    }
+  },
+  "self-instruct (reimpl)": {
+    "as-is": {
+      "auc": 0.22635,
+      "precision": 0.9511,
+      "n_available": 1833
+    },
+    "dedup": {
+      "auc": 0.22435,
+      "precision": 0.9333,
+      "n_available": 1688
+    }
+  },
+  "random-seed": {
+    "as-is": {
+      "auc": 0.19695000000000001,
+      "precision": 0.9244,
+      "n_available": 2399
+    },
+    "dedup": {
+      "auc": 0.21489999999999998,
+      "precision": 0.94,
+      "n_available": 1905
+    }
+  },
+  "Alpaca (52k)": {
+    "as-is": {
+      "auc": 0.391925,
+      "precision": 0.8822,
+      "n_available": 51993
+    },
+    "dedup": {
+      "auc": 0.391925,
+      "precision": 0.8822,
+      "n_available": 51993
+    }
+  },
+  "PersonaHub (50k)": {
+    "as-is": {
+      "auc": 0.24864999999999998,
+      "precision": 0.72,
+      "n_available": 50000
+    },
+    "dedup": {
+      "auc": 0.24864999999999998,
+      "precision": 0.72,
+      "n_available": 50000
+    }
+  },
+  "WizardLM (143k)": {
+    "as-is": {
+      "auc": 0.249425,
+      "precision": 0.7289,
+      "n_available": 142750
+    },
+    "dedup": {
+      "auc": 0.25049999999999994,
+      "precision": 0.7556,
+      "n_available": 141296
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "control": {
+    "n": 1200,
+    "n_imitate": 851,
+    "n_axis": 349,
+    "imitate_share": 0.7091666666666666,
+    "dup_imitate": 0.14453584018801413,
+    "dup_axis": 0.0,
+    "dup_all": 0.10250000000000004,
+    "tmpl_imitate": 0.3254994124559342,
+    "tmpl_all": 0.23083333333333333,
+    "distinct_per_call": 0.8975
+  },
+  "negatives + exhaustion": {
+    "n": 1198,
+    "n_imitate": 874,
+    "n_axis": 324,
+    "imitate_share": 0.7295492487479132,
+    "dup_imitate": 0.041189931350114395,
+    "dup_axis": 0.0,
+    "dup_all": 0.03005008347245408,
+    "tmpl_imitate": 0.12700228832951946,
+    "tmpl_all": 0.09348914858096828,
+    "distinct_per_call": 0.9699499165275459
+  }
+}

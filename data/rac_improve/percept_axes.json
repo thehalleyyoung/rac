@@ -1,0 +1,78 @@
+[
+  {
+    "name": "[percept] Camera viewpoint and angle",
+    "levels": [
+      "Extreme low-angle view looking sharply upward from ground level",
+      "High-angle view looking down from above the scene",
+      "True overhead bird\u2019s-eye view with surfaces seen planimetrically",
+      "Strict side-profile view with the subject seen edge-on",
+      "Strong Dutch-angle three-quarter view with the horizon visibly tilted",
+      "Centered eye-level frontal view"
+    ],
+    "parent": null,
+    "depth": 0
+  },
+  {
+    "name": "[percept] Shot scale",
+    "levels": [
+      "Extreme macro detail showing only a small surface fragment",
+      "Tight close-up filling the frame with one object or face",
+      "Medium view showing a complete object or small arrangement",
+      "Wide view showing the arrangement within a substantial environment",
+      "Distant long shot with tiny subjects surrounded by expansive space"
+    ],
+    "parent": null,
+    "depth": 0
+  },
+  {
+    "name": "[percept] Motion and temporal blur",
+    "levels": [
+      "Pin-sharp freeze-frame with every edge clearly resolved",
+      "Directional motion blur on moving forms while the background remains sharp",
+      "Panning exposure with a sharp moving subject against horizontally streaked surroundings",
+      "Long-exposure trails and smeared highlights from movement through the frame",
+      "Multiple-exposure ghosting showing several displaced positions of the same forms",
+      "Radial zoom blur converging toward the image center"
+    ],
+    "parent": null,
+    "depth": 0
+  },
+  {
+    "name": "[percept] Lighting direction and hardness",
+    "levels": [
+      "Flat overcast illumination with nearly shadowless, even tonal coverage",
+      "Hard overhead midday light with short, sharply defined shadows",
+      "Strong side light producing deep chiaroscuro and a narrow bright key",
+      "Low-angle warm sunset light with long shadows and golden highlights",
+      "Backlight creating a bright rim and mostly silhouetted forms",
+      "Colored theatrical light with contrasting cool and warm directional sources"
+    ],
+    "parent": null,
+    "depth": 0
+  },
+  {
+    "name": "[percept] Illumination",
+    "levels": [
+      "Flat, shadowless overcast illumination with uniformly soft edges",
+      "Hard midday sunlight from the upper left with crisp cast shadows",
+      "Low side-raking sunset light producing long shadows and strong warm highlights",
+      "Single narrow spotlight in a dark setting with dramatic chiaroscuro",
+      "Bright backlight creating a glowing rim and near-black silhouettes"
+    ],
+    "parent": null,
+    "depth": 0
+  },
+  {
+    "name": "[percept] Medium and Surface",
+    "levels": [
+      "Photorealistic camera photograph with optical detail, lens falloff, and natural surface texture",
+      "Polished 3D render with smooth materials, specular reflections, and ambient occlusion",
+      "Minimal black ink line drawing on clean white paper with no painted fill",
+      "Flat-color screen print with sharp registration, halftone dots, and crisp edges",
+      "Watercolor wash on visibly absorbent cold-press paper with translucent bleeding",
+      "Cracked fresco or thick impasto oil painting with raised, tactile pigment"
+    ],
+    "parent": null,
+    "depth": 0
+  }
+]

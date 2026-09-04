@@ -1,0 +1,23 @@
+{
+  "base": {
+    "compute": 3,
+    "reliability": 35,
+    "storage": 19,
+    "security": 14,
+    "cost": 22,
+    "networking": 6,
+    "identity": 1
+  },
+  "full": {
+    "identity": 10,
+    "security": 9,
+    "compute": 6,
+    "migration": 8,
+    "reliability": 20,
+    "cost": 24,
+    "networking": 5,
+    "monitoring": 7,
+    "storage": 7,
+    "data": 4
+  }
+}

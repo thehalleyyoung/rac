@@ -1,0 +1,42 @@
+[
+  {
+    "run": "dalle_steer2_coverage",
+    "n": 60,
+    "spearman_attribution": -0.3214285714285714,
+    "spearman_manipulation": -0.3928571428571428,
+    "inert_axes": [
+      "Textual agency",
+      "Status hierarchy treatment",
+      "Register collision",
+      "Appropriation distance",
+      "Copy and seriality logic"
+    ],
+    "old_rank": {
+      "Textual agency": 4,
+      "Status hierarchy treatment": 7,
+      "Register collision": 6,
+      "Appropriation distance": 2,
+      "Materiality disclosure": 3,
+      "Self-referentiality": 5,
+      "Copy and seriality logic": 1
+    },
+    "new_rank": {
+      "Textual agency": 1,
+      "Status hierarchy treatment": 2,
+      "Register collision": 3,
+      "Appropriation distance": 4,
+      "Materiality disclosure": 5,
+      "Self-referentiality": 6,
+      "Copy and seriality logic": 7
+    },
+    "realization": {
+      "Textual agency": 0.0279,
+      "Status hierarchy treatment": 0.0299,
+      "Register collision": 0.0202,
+      "Appropriation distance": 0.0114,
+      "Materiality disclosure": 0.015,
+      "Self-referentiality": 0.0156,
+      "Copy and seriality logic": 0.0
+    }
+  }
+]

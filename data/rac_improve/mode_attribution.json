@@ -1,0 +1,50 @@
+{
+  "n_imitate": 4026,
+  "n_axis": 4026,
+  "by_size": [
+    {
+      "n": 500,
+      "k3_imitate": 0.146,
+      "k3_axis": 0.1341,
+      "k5_imitate": 0.2354,
+      "k5_axis": 0.2113,
+      "k10_imitate": 0.4142,
+      "k10_axis": 0.3805
+    },
+    {
+      "n": 1000,
+      "k3_imitate": 0.2038,
+      "k3_axis": 0.2054,
+      "k5_imitate": 0.3184,
+      "k5_axis": 0.3175,
+      "k10_imitate": 0.5208,
+      "k10_axis": 0.5182
+    },
+    {
+      "n": 2000,
+      "k3_imitate": 0.2676,
+      "k3_axis": 0.2852,
+      "k5_imitate": 0.4064,
+      "k5_axis": 0.424,
+      "k10_imitate": 0.6344,
+      "k10_axis": 0.6309
+    },
+    {
+      "n": 4000,
+      "k3_imitate": 0.3433,
+      "k3_axis": 0.3851,
+      "k5_imitate": 0.5,
+      "k5_axis": 0.5292,
+      "k10_imitate": 0.7281,
+      "k10_axis": 0.728
+    }
+  ],
+  "complementarity": {
+    "n_matched": 4000,
+    "imitate_only": 0.1495,
+    "axis_only": 0.18,
+    "both": 0.3493,
+    "neither": 0.3212,
+    "union": 0.6787
+  }
+}
