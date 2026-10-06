@@ -64,7 +64,8 @@ from real_run import Corpus, EMBED_BATCH
 LYRIA_MODEL = "lyria-3-pro-preview"
 LYRIA_URL = ("https://generativelanguage.googleapis.com/v1beta/models/"
              "{model}:generateContent?key={key}")
-GEMINI_KEYFILE = Path("/Users/halley/Documents/newsuno/compositionplans/keys/geminiapikey.txt")
+# Optional fallbacks when the key is not in the environment: a file holding it.
+GEMINI_KEYFILE = Path(os.environ.get("GEMINI_KEYFILE", "gemini_api_key.txt"))
 # Lyria's token limit is ~1M, so nothing external caps prompt length. The cap
 # below is a claim about the MODEL, not the API: a text-to-music model honours
 # concrete musical direction (instruments, texture, register, articulation,
@@ -201,7 +202,7 @@ def _load_mureka_key() -> str | None:
             if m:
                 os.environ["MUREKA_API_KEY"] = m.group(1)
                 return m.group(1)
-    keyfile = Path("/Users/halley/Documents/newsuno/compositionplans/keys/mureka_api_key.txt")
+    keyfile = Path(os.environ.get("MUREKA_KEYFILE", "mureka_api_key.txt"))
     if keyfile.is_file():
         v = keyfile.read_text().strip()
         if v:

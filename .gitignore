@@ -5,3 +5,7 @@ __pycache__/
 *.out
 *.toc
 .DS_Store
+code/figures/
+code/coverage/figures/
+*_api_key.txt
+.env

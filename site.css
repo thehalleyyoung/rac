@@ -28,3 +28,6 @@ hr{border:none;border-top:1px solid var(--rule);margin:2.4rem 0}
 .banner{background:var(--code);border:1px solid var(--rule);border-radius:8px;
 padding:1rem 1.2rem;margin:1.5rem 0 2rem}
 .banner a{font-weight:600}
+.paper-head h1{margin-bottom:.5rem}
+.byline{font-size:1.05rem;color:var(--muted);margin:0 0 1.4rem}
+main p a{overflow-wrap:anywhere}

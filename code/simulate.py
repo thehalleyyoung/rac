@@ -39,6 +39,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 
 HERE = Path(__file__).resolve().parent
+(HERE / "figures").mkdir(exist_ok=True)   # scripts write their outputs here
 
 RNG_SEED = 20260830
 D = 32                # embedding dimensionality

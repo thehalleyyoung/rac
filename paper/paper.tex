@@ -142,13 +142,14 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Recursive Axis Conditioning for Diverse Synthetic Data Generation},
+  pdfauthor={Halley Young},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Recursive Axis Conditioning for Diverse Synthetic Data
 Generation}
-\author{}
-\date{}
+\author{Halley Young\\[0.2em]{\normalsize\texttt{thehalleyyoung@gmail.com}}}
+\date{October 2026}
 
 \begin{document}
 \maketitle
@@ -167,15 +168,15 @@ selected --- and everything else is shared.
 It wins where it is pointed. On coverage of a held-out human-written
 reference that no corpus was aimed at, RAC places \textbf{first of
 twelve corpora, 0.4441 against Alpaca\textquotesingle s 0.3722} at
-matched evaluated \emph{n}, from 2,400 generator calls against
-Alpaca\textquotesingle s 52,000, with the highest precision in the field
-(0.973); PersonaHub (50k) and WizardLM Evol-Instruct (143k) finish below
-RAC\textquotesingle s 304-item selective arm. On automatic item
-generation, a naively prompted bank of 2,500 items yields \textbf{382
-that can legally coexist on one exam form --- 15.3\% of nominal
-capacity}, against 94.9\% for human-written MMLU, while
-RAC\textquotesingle s 1,999-item bank contains \textbf{no enemy pair at
-all} at a blind-adjudicated radius.
+matched evaluated \emph{n}, from a corpus built with 2,400 generator
+calls against Alpaca\textquotesingle s 52,002 released items, with the
+highest precision in the field (0.973); PersonaHub (50k) and WizardLM
+Evol-Instruct (143k) finish below RAC\textquotesingle s 304-item
+selective arm. On automatic item generation, a naively prompted bank of
+2,500 items yields \textbf{382 that can legally coexist on one exam form
+--- 15.3\% of nominal capacity}, against 94.9\% for human-written MMLU,
+while RAC\textquotesingle s 1,999-item bank contains \textbf{no enemy
+pair at all} at a blind-adjudicated radius.
 
 The evidence we trust most is measured in channels the loop never
 optimizes, so it cannot be a restatement of the selection rule. At
@@ -188,16 +189,16 @@ and \textbf{1.53× the optical spread} on pixel statistics, {[}1.38,
 1.68{]}, with every one of eleven RAC image corpora above every one of
 five published baselines (\emph{U} = 55 of 55, \emph{p} = 0.0002).
 
-Two results generalize past the method. First, \textbf{corpus objectives
-divide into two classes and the machinery load-bearing for one is
-harmful to the other}. Greedy \emph{k}-center, the classical packing
-algorithm, wins min-gap in both of our domains and finishes last on
-coverage, at a sixth of random selection; orthogonalized conditioning,
-which is what makes RAC work under max-min, finishes last of the nine
-seeded arms on coverage and below plain conditioning at both matched
-\emph{n} and matched budget; the two highest-Vendi selectors are the two
-worst covering ones. A diversity number carries no information until its
-objective is named.
+The first result to generalize past the method is that \textbf{corpus
+objectives divide into two classes and the machinery load-bearing for
+one is harmful to the other}. Greedy \emph{k}-center, the classical
+packing algorithm, wins min-gap in both of our domains and finishes last
+on coverage, at a sixth of random selection; orthogonalized
+conditioning, which is what makes RAC work under max-min, finishes last
+of the nine seeded arms on coverage and below plain conditioning at both
+matched \emph{n} and matched budget; the two highest-Vendi selectors are
+the two worst covering ones. A diversity number carries no information
+until its objective is named.
 
 Second, a \textbf{completeness rule} for conditioning, established over
 seven controlled comparisons with blind judges. An axis that enumerates
@@ -253,24 +254,25 @@ with one question repeated 2,726 times; of a 2,500-item sample only 382
 items can legally coexist on one exam form.
 
 This paper presents \textbf{Recursive Axis Conditioning} (RAC), a
-generation loop that fixes this well enough to beat the released state
-of the art on a twentieth of its budget, and three results that came out
+generation loop that fixes this well enough to beat the best released
+corpus with one a twentieth of its size, and three results that came out
 of building it.
 
 \textbf{The loop works, and the margin does not come from scale.}
 Against Alpaca, PersonaHub and WizardLM Evol-Instruct on coverage of a
 held-out human reference, RAC places first of twelve corpora from 2,400
-generator calls against Alpaca\textquotesingle s 52,000 (§7.3). On
-psychometric item generation it produces a bank with no enemy pair at
-all under a blind-adjudicated radius, where the naive bank yields 15.3\%
-of its nominal capacity and human-written MMLU yields 94.9\% (§7.4). And
-the separation survives being measured where the method cannot be gaming
-it: in each of the three artifact domains there is a channel nothing in
-the loop optimizes --- prosody for poems, item architecture for exam
-banks, pixel statistics for renders --- and RAC separates from the
-baselines on all three at matched generator budget (Figure 1, §7.5).
+generator calls, against Alpaca\textquotesingle s 52,002 released items
+(§7.3). On psychometric item generation it produces a bank with no enemy
+pair at all under a blind-adjudicated radius, where the naive bank
+yields 15.3\% of its nominal capacity and human-written MMLU yields
+94.9\% (§7.4). And the separation survives being measured where the
+method cannot be gaming it: in each of the three artifact domains there
+is a channel nothing in the loop optimizes --- prosody for poems, item
+architecture for exam banks, pixel statistics for renders --- and RAC
+separates from the baselines on all three at matched generator budget
+(Figure 1, §7.5).
 
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 1. Separation measured outside the objective. Left: every image corpus at matched n = 60 on nine pixel statistics --- a channel with no connection to the CLIP or text embeddings the loop selects on. Every one of our eleven corpora exceeds every one of the five published baselines. Right: the same comparison in all three artifact domains, on the channel each domain\textquotesingle s objective cannot see, at matched generator budget; intervals are bootstrap 95\% CIs on the ratio of group means where the group sizes support them, and the annotation gives the number of resamples favouring RAC.}]{figures/fig22_out_of_objective.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 1. Separation measured outside the objective. Left: every image corpus at matched n = 60 on nine pixel statistics --- a channel with no connection to the CLIP or text embeddings the loop selects on. Every one of our eleven corpora exceeds every one of the five published baselines. Right: the same comparison in all three artifact domains, on the channel each domain\textquotesingle s objective cannot see, at matched generator budget; intervals are bootstrap 95\% CIs on the ratio of group means where the group sizes support them, and the annotation gives the number of pairs or draws favouring RAC.}]{figures/fig22_out_of_objective.png}}
 
 \emph{Figure 1. Separation measured outside the objective. Left: every
 image corpus at matched n = 60 on nine pixel statistics --- a channel
@@ -280,7 +282,7 @@ baselines. Right: the same comparison in all three artifact domains, on
 the channel each domain\textquotesingle s objective cannot see, at
 matched generator budget; intervals are bootstrap 95\% CIs on the ratio
 of group means where the group sizes support them, and the annotation
-gives the number of resamples favouring RAC.}
+gives the number of pairs or draws favouring RAC.}
 
 \textbf{The objective has to be named before the number means anything.}
 Corpus objectives fall into two classes --- \emph{covering} the
@@ -374,11 +376,11 @@ write by how nearly their induced output distributions point that way.
   damages the other\textquotesingle s score.
 \item
   \textbf{A manipulation-based scoring rule for conditioning variables}
-  (§5.3). The obvious observational estimator is not merely noisy but
-  \emph{inverted}: it penalizes an axis in proportion to how well the
-  axis works. On data where the answer is fixed by construction, the
-  observational form ranks the inert axis first in 17 of 24 runs; the
-  repair recovers the true order in 24 of 24.
+  (§5.3). The obvious observational estimator is \emph{inverted}: it
+  penalizes an axis in proportion to how well the axis works. On data
+  where the answer is fixed by construction, the observational form
+  ranks the inert axis first in 17 of 24 runs; the repair recovers the
+  true order in 24 of 24.
 \item
   \textbf{The completeness rule for conditioning} (§8.3), with the two
   audits that make it visible: realization has to be checked between
@@ -406,12 +408,12 @@ one of those results it says so and cites the section.
 2023) bootstraps instructions from a seed pool with few-shot exemplars
 and a ROUGE-L similarity filter; the Stanford Alpaca corpus (Taori et
 al., 2023; 52,002 items) is its canonical output. Evol-Instruct /
-WizardLM (Xu et al., 2023) \emph{mutates} existing instructions with
+WizardLM (Xu et al., 2024) \emph{mutates} existing instructions with
 depth and breadth operators, released as WizardLM\_evol\_instruct\_V2
 (143,000 items). Persona-Hub (Ge et al., 2024) conditions on a catalogue
 of \textasciitilde1B personas, releasing 50,000 persona-synthesized
 instructions; it is the closest published relative of latent-axis
-conditioning, differing in that its catalogue is mined at scale and
+conditioning, differing in that its catalogue is mined from web data and
 flat, where our axes are elicited from the generator and refined into a
 tree. AttrPrompt (Yu et al., 2023) similarly conditions on attribute
 dimensions. We compare against the \emph{released artifacts} of the
@@ -419,7 +421,8 @@ first three (§7.3) rather than against reimplementations, since a
 reimplementation can be weak in ways that flatter us.
 
 \textbf{Selection and subset choice.} Farthest-point traversal
-(Gonzalez, 1985) 2-approximates \emph{k}-center, the packing objective;
+(Gonzalez, 1985) 2-approximates \emph{k}-center and, by the same
+argument, max-min dispersion, the packing objective (Ravi et al., 1994);
 SemDeDup (Abbas et al., 2023) removes semantic near-duplicates at a
 fixed radius; determinantal point processes (Kulesza \& Taskar, 2012;
 Chen et al., 2018) model repulsion via volume. All are \emph{post hoc}
@@ -436,11 +439,10 @@ and facility location (Lin \& Bilmes, 2011) is the standard submodular
 model of representativeness. \emph{k}-median/facility-location minimizes
 \emph{average} service distance and behaves like our coverage objective
 --- measure-weighted, bulk-first, outlier-indifferent --- where
-\emph{k}-center does not; coreset constructions (Har-Peled \& Mazumdar,
-2004) draw the same line. Our contribution is not new theory for these
+\emph{k}-center does not. Our contribution is not new theory for these
 objects but the identification of which one a corpus-construction
-requirement actually is, and measurement of what optimizing the wrong
-one costs (§3.4).
+requirement is, and measurement of what optimizing the wrong one costs
+(§3.4).
 
 \textbf{Quality-diversity.} MAP-Elites (Mouret \& Clune, 2015) maintains
 one elite per cell of a hand-designed behavior space. Our axis lattice
@@ -450,16 +452,18 @@ refines itself when a cell saturates, and allocation is
 marginal-gain-driven rather than one-per-cell. §4.6 quantifies what the
 fixed-grid choice costs at small ε.
 
-\textbf{Diversity metrics.} The Vendi Score (Friedman \& Dieng, 2022) is
+\textbf{Diversity metrics.} The Vendi Score (Friedman \& Dieng, 2023) is
 the exponential of the von Neumann entropy of a normalized similarity
 matrix, interpretable as an effective number of distinct items; we use
-it throughout, and §4.6 and §7.5 record two regimes in which it is the
-wrong estimator. Repeated sampling from aligned models is well
-documented to produce low lexical and semantic entropy relative to base
-models; we take that as the empirical starting point. Red-teaming work
-(Ganguli et al., 2022; Perez et al., 2022) documents exactly the
-clustering-into-attack-families failure that motivates a coverage
-objective for safety suites.
+it throughout, and §7.1 and §7.5 record two regimes in which it is the
+wrong estimator. Alignment narrows what a model writes: RLHF lowers
+output diversity relative to supervised fine-tuning across a range of
+measures (Kirk et al., 2024), and we take that narrowing as the
+empirical starting point. Red-teaming work clusters the attacks it
+collects by type (Ganguli et al., 2022) and finds a trade-off between
+how often generated test cases succeed and how diverse they are (Perez
+et al., 2022), which is the case for a coverage objective in safety
+suites.
 
 \subsection{3. Two objectives, and why the number needs one
 named}\label{3-two-objectives-and-why-the-number-needs-one-named}
@@ -679,7 +683,7 @@ Five practices follow, and we use them throughout.
   \textbf{Measure at the level of the artifact you ship.} Text-embedding
   similarity explains 14.5\% of the variance in whether rendered images
   look alike, pooled across seven rendered arms, and 8.2\% within-arm
-  (§7.7; companion §4.2).
+  (§7.7; companion §7.1).
 \item
   \textbf{Audit in a channel the objective never optimizes} (§7.5,
   §8.3). It is the only measurement in this paper that cannot be a
@@ -941,8 +945,8 @@ optimal depth vs switch cost (Theorem 4) & \emph{n}* = 1 / 10 / 30 at
 packing as a coverage algorithm (2,000 candidates, \emph{k} = 300,
 held-out 20k pool) & full greedy 0.528, stream greedy (\emph{K} = 4)
 0.484, random 0.420, max-min 0.143 \\
-reachability gap (Proposition 1) & oracle 0.387, proposal-limited 0.212,
-refined 0.374 \\
+reachability gap (§4.5) & oracle 0.387, proposal-limited 0.212, refined
+0.374 \\
 \end{longtable}}
 
 Two of these carry more than confirmation. The packing row is the
@@ -1050,10 +1054,10 @@ axis \emph{a} has language-valued levels; we embed the level
 descriptions and read off four quantities.
 
 \textbf{Spread} --- mean pairwise distance between
-\emph{a}\textquotesingle s level embeddings. Are this
-axis\textquotesingle s values actually different \emph{from each other}?
-This catches the commonest failure of LLM-proposed axes:
-plausible-sounding dimensions whose levels are near-synonyms.
+\emph{a}\textquotesingle s level embeddings. Do this
+axis\textquotesingle s values differ \emph{from each other}? This
+catches the commonest failure of LLM-proposed axes: plausible-sounding
+dimensions whose levels are near-synonyms.
 
 \textbf{Transversality} --- the fraction of \emph{a}\textquotesingle s
 level-to-level variation lying outside the corpus\textquotesingle s
@@ -1096,9 +1100,9 @@ All four factors are computed from \emph{level vectors}: one embedding
 per level of each axis. In the text-only setting those are embeddings of
 the level descriptions --- what a level \emph{claims} it will do. Once
 the artifact can be embedded, the natural improvement is to replace them
-with the centroid of everything actually produced under each level: what
-the level \emph{did}. That substitution is what makes the scoring
-empirical, and on its own it is wrong.
+with the centroid of everything produced under each level: what the
+level \emph{did}. That substitution is what makes the scoring empirical,
+and on its own it is wrong.
 
 A centroid computed that way is a \textbf{marginal mean where the score
 needs a partial effect}. Specs are sampled independently, so every other
@@ -1109,17 +1113,16 @@ axis moves the artifact" from "this axis co-occurred with movement", and
 nothing in the loop ever intervenes on one axis while holding the rest
 fixed.
 
-The consequence is not a modest loss of precision. It is a
-\textbf{systematic inversion}, and the mechanism is our own
-transversality term. An axis that genuinely moves the artifact fills the
-corpus with variance along its own direction; the occupied eigenspace
-absorbs that direction; and transversality --- the fraction of an
-axis\textquotesingle s variation lying \emph{outside} the occupied span
---- collapses toward zero for precisely that axis. An axis the generator
-ignores contributes only isotropic noise, little of which the occupied
-basis captures, so its transversality stays high. Because promise is
-multiplicative, the effective axis sinks and the inert one rises.
-\textbf{The better an axis is, the harder the score punishes it.}
+The consequence is a \textbf{systematic inversion}, and the mechanism is
+our own transversality term. An axis that genuinely moves the artifact
+fills the corpus with variance along its own direction; the occupied
+eigenspace absorbs that direction; and transversality --- the fraction
+of an axis\textquotesingle s variation lying \emph{outside} the occupied
+span --- collapses toward zero for precisely that axis. An axis the
+generator ignores contributes only isotropic noise, little of which the
+occupied basis captures, so its transversality stays high. Because
+promise is multiplicative, the effective axis sinks and the inert one
+rises. \textbf{The better an axis is, the harder the score punishes it.}
 
 A ground-truth test makes this exact. Construct three axes whose effects
 are known by fiat: \textbf{A} displaces the output strongly along a
@@ -1127,8 +1130,7 @@ fixed direction, \textbf{C} weakly along another, and \textbf{B} does
 nothing at all; sample specs independently, as the method samples them.
 Over 24 seeds the attribution scoring ranks the \emph{inert} axis first
 in 17 of 24 runs and the \emph{strongest} axis last in 16 of 24 (Figure
-4, left). This is not noise around a correct answer; it is close to the
-reverse of one.
+4, left). The resulting ranking is close to the reverse of the true one.
 
 The repair has three parts, and only the second changes the score.
 
@@ -1141,12 +1143,12 @@ own coefficients. Effect coding rather than dummy coding, so no level is
 silently privileged as a baseline.
 
 \textbf{Realization.} Add a fifth factor: the share of corpus variance
-the axis\textquotesingle s levels actually explain, with the null
-expectation removed. Under exchangeable labels the between-group share
-of variance has expectation (\emph{k}−1)/(\emph{n}−1) for \emph{k}
-levels and \emph{n} items, per dimension and therefore for the sum over
-dimensions, so the correction is analytic rather than a permutation loop
-inside the generation path:
+the axis\textquotesingle s levels explain, with the null expectation
+removed. Under exchangeable labels the between-group share of variance
+has expectation (\emph{k}−1)/(\emph{n}−1) for \emph{k} levels and
+\emph{n} items, per dimension and therefore for the sum over dimensions,
+so the correction is analytic rather than a permutation loop inside the
+generation path:
 
 \[
 \rho(a) = \max\left(0,\ \frac{\eta^2(a) - \frac{k-1}{n-1}}{1 - \frac{k-1}{n-1}}\right)
@@ -1255,7 +1257,7 @@ instantiation}\label{55-the-covering-instantiation}
 
 The covering instantiation is the same stack with the selection
 objective and its bookkeeping swapped; we write RAC-coverage for it and
-RAC-packing for the other. Four things change and one is added.
+RAC-packing for the other.
 
 \textbf{The reachable pool becomes the denominator.} Before selection
 begins, draw a pool of cheap unconditioned samples from the generator
@@ -1315,28 +1317,30 @@ contributes.
 Forcing randomness --- raising temperature, injecting random seed words
 --- buys variance in the surface while leaving the mode structure
 intact, and degrades quality monotonically because temperature cannot
-distinguish \emph{surprising} from \emph{wrong}. The measurements bear
-this out: raising sampling temperature to 1.6 moves distinct-2 from
-0.3341 to 0.3342 and leaves 71.0\% of the corpus byte-identical
-duplicates, against 73.6\% at the default. Forcing approximate
-orthogonality asks a different question --- which direction is this
-corpus not yet spending energy on --- which has a computable answer,
-improves rather than degrades quality when paired with a quality term,
-and stays informative as \emph{n} grows. "Be random" gets no harder to
-satisfy and no more useful.
+distinguish \emph{surprising} from \emph{wrong}. Our temperature arm
+cannot test this, because the setting may never have reached the
+generator (§6): requesting temperature 1.6 moved distinct-2 from 0.3341
+to 0.3342 and left 71.0\% of the corpus byte-identical duplicates,
+against 73.6\% at the default. Forcing approximate orthogonality asks a
+different question --- which direction is this corpus not yet spending
+energy on --- which has a computable answer, improves rather than
+degrades quality when paired with a quality term, and stays informative
+as \emph{n} grows. "Be random" gets no harder to satisfy and no more
+useful.
 
 \subsection{6. Experimental setup}\label{6-experimental-setup}
 
 \textbf{Generator and embedders.} \texttt{openai/gpt-5.6-luna} via
 OpenRouter for generation, judging, attractor mining and axis
-elicitation. Text embeddings: \texttt{nomic-embed-text} (768-d,
-unit-normalized) served locally by Ollama, so embedding is free and the
-loop is never rate-limited by its own measuring instrument. Images:
-\texttt{gpt-image-1-mini}, embedded with CLIP ViT-B/32. Audio: Lyria 3
-Pro instrumentals, embedded with CLAP and MERT. Every corpus is
-append-only JSONL with embeddings checkpointed alongside, resumable
-after a kill; every number carries a provenance tag naming the procedure
-that produced it.
+elicitation. Text embeddings: \texttt{nomic-embed-text} (Nussbaum et
+al., 2025; 768-d, unit-normalized) served locally by Ollama, so
+embedding is free and the loop is never rate-limited by its own
+measuring instrument. Images: \texttt{gpt-image-1-mini}, embedded with
+CLIP ViT-B/32 (Radford et al., 2021). Audio: Lyria 3 Pro instrumentals,
+embedded with CLAP (Wu et al., 2023) and MERT (Li et al., 2024). Every
+corpus is append-only JSONL with embeddings checkpointed alongside,
+resumable after a kill; every number carries a provenance tag naming the
+procedure that produced it.
 
 \textbf{Domains.} \emph{DALL·E instructions for post-modern artworks},
 where diversity is the product and the same corpus can be measured in
@@ -1374,7 +1378,7 @@ add constraint, harder reasoning, mutate form) \\
 of personas × attributes, sampled uniformly \\
 \texttt{rac} & \textbf{Recursive Axis Conditioning} (ours) \\
 \texttt{rac+vision} & RAC, plus steering on the \emph{rendered image}
-(§7.7; companion §5.1) \\
+(§7.7; companion §7.6) \\
 \end{longtable}}
 
 \texttt{persona} is the load-bearing comparison. It has language-valued
@@ -1391,6 +1395,19 @@ reimplementation \emph{weaker} than the original at large \emph{n}, and
 the reason is itself a finding: the original\textquotesingle s
 redundancy check does not have an infinite horizon, because its cost
 grows linearly in the corpus it is protecting.
+
+\textbf{A caveat on the temperature arm.} \texttt{high\_temp} requests
+temperature 1.6 from \texttt{openai/gpt-5.6-luna} through OpenRouter. A
+later audit found that none of that model\textquotesingle s listed
+endpoints accepts a \texttt{temperature} parameter, and OpenRouter
+documents that a provider ignores parameters it does not support.
+Nothing in our logs shows the setting reaching the model. The
+\texttt{high\_temp} rows may therefore be a second sample at the default
+configuration, and the near-identical figures for the two arms
+(distinct-2 of 0.3342 against 0.3341) are what an ignored setting would
+produce. We keep the rows, label them as requested rather than applied,
+and draw no conclusion from them about what temperature does on this
+generator.
 
 \textbf{What we measure, and what each measure misses.} We report
 several because they disagree, and a corpus that one of them calls
@@ -1442,21 +1459,20 @@ healthy another calls collapsed.
   cannot be circular.
 \end{itemize}
 
-Two facts about circularity are worth stating before the results. Our
-packing selection rule maximizes a weighted sum of embedding-space
-orthogonality and embedding-space min-gap, and we then report
-embedding-space diversity metrics; centered Vendi is a monotone function
-of how flat the Gram spectrum is, which is close to what the
-orthogonality term climbs, and median nearest-neighbour distance
-\emph{is} the min-gap term. Those wins should be read as confirmation
-that the optimizer works, not as independent evidence. The independent
-evidence is the literal measures, which the method never observes, and
-the out-of-objective channels of §7.5, which live downstream of a
-rendering step or in a feature space nothing in the loop touches. Sorted
-by how much weight they can bear: embedding-space measures are partly
-circular; literal-space measures are independent; rendered-artifact and
-out-of-objective measures are the most independent, and they carry the
-argument.
+Some of the results below are partly circular. Our packing selection
+rule maximizes a weighted sum of embedding-space orthogonality and
+embedding-space min-gap, and we then report embedding-space diversity
+metrics; centered Vendi is a monotone function of how flat the Gram
+spectrum is, which is close to what the orthogonality term climbs, and
+median nearest-neighbour distance \emph{is} the min-gap term. Those wins
+should be read as confirmation that the optimizer works, not as
+independent evidence. The independent evidence is the literal measures,
+which the method never observes, and the out-of-objective channels of
+§7.5, which live downstream of a rendering step or in a feature space
+nothing in the loop touches. Sorted by how much weight they can bear:
+embedding-space measures are partly circular; literal-space ones are
+independent; rendered-artifact and out-of-objective ones are the most
+independent, and they carry the argument.
 
 \textbf{Scale and cost.} The text corpora comprise 43,171 real
 generations for roughly \$8.50 of OpenRouter spend, plus 1,796 rendered
@@ -1465,8 +1481,8 @@ further 285 renders for the two render-side probes of §8, 100 rendered
 Lyria instrumentals, and 236 adjudicated exam-item pairs. Both
 \texttt{naive} arms reach \emph{n} = 10,000; the reimplemented baselines
 reach 2,500 each. Every comparison is reported at a matched \emph{n}
-that all compared arms actually reached. Total API spend across the
-project is roughly \$40.
+that all compared arms reached. Total API spend across the project is
+roughly \$40.
 
 \subsection{7. Results}\label{7-results}
 
@@ -1514,16 +1530,17 @@ B. 48 C. 50 D. 52) \\
 Deduplication does not rescue this corpus: removing the 2,726 identical
 copies leaves the three paraphrases behind, and a paraphrase of a live
 item is an enemy item on any bank a psychometrician would sign off on.
-No embedding, threshold or interpretation is required to see it.
-Temperature barely helps --- at \emph{T} = 1.6 the duplicate rate is
-still 0.710 --- and conditioning nearly eliminates it: persona
-conditioning drops it to 0.009 and axis conditioning to 0.000. Between
-those two numbers is the whole argument of §5.6: randomness does not buy
-diversity, conditioning does. It also shows the failure is domain-shaped
-and invisible from one vantage point. The identical pipeline, prompt
-style and model produce zero duplicates on DALL·E instructions; a
-practitioner who validated on the first domain and deployed on the
-second would ship a bank that is three-quarters one question.
+No embedding, threshold or interpretation is required to see it. The arm
+that requested \emph{T} = 1.6 still has a duplicate rate of 0.710 (the
+request may not have been applied; §6), and conditioning nearly
+eliminates it: persona conditioning drops it to 0.009 and axis
+conditioning to 0.000. Between those two numbers is the whole argument
+of §5.6: randomness does not buy diversity, conditioning does. It also
+shows the failure is domain-shaped and invisible from one vantage point.
+The identical pipeline, prompt style and model produce zero duplicates
+on DALL·E instructions; a practitioner who validated on the first domain
+and deployed on the second would ship a bank that is three-quarters one
+question.
 
 \textbf{The same failure is visible in a corpus with no duplicates at
 all.} The poetry pilot has an exact-duplicate rate of 0.000 under naive
@@ -1554,9 +1571,9 @@ random from those sixty:
 Eight of eight are the same sentence with two slots filled. The closest
 pair sits at cosine similarity 0.946 and shares its first line verbatim
 before diverging into the same sparrow stitching the same thread across
-the same evening. Sixty samples from one prompt behave like two and a
-half distinct items by Vendi Score, and the duplicate counter sees none
-of it.
+an evening. Sixty samples from one prompt behave like two and a half
+distinct items by Vendi Score, and the duplicate counter sees none of
+it.
 
 Eight openings from the sixty RAC produced under the same generator and
 budget:
@@ -1664,12 +1681,13 @@ than half of each new instruction\textquotesingle s 4-grams have already
 appeared --- while latent diversity rises and then saturates. Reporting
 either alone supports an opposite conclusion about the same corpus.
 
-\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 5. The decoupling, normalized to each series\textquotesingle{} value at n = 5. Literal diversity falls monotonically while latent diversity rises: two measurements of two different quantities that one word, "diversity", has been covering for.}]{figures/fig11_literal_vs_latent.png}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Figure 5. The decoupling, normalized to each series\textquotesingle{} value at n = 5. Literal diversity falls monotonically while latent diversity rises. The two series measure different quantities, which one word, "diversity", has been covering for.}]{figures/fig11_literal_vs_latent.png}}
 
 \emph{Figure 5. The decoupling, normalized to each
 series\textquotesingle{} value at n = 5. Literal diversity falls
-monotonically while latent diversity rises: two measurements of two
-different quantities that one word, "diversity", has been covering for.}
+monotonically while latent diversity rises. The two series measure
+different quantities, which one word, "diversity", has been covering
+for.}
 
 \subsubsection{\texorpdfstring{7.2 Competitive comparison at matched
 \emph{n}}{7.2 Competitive comparison at matched n}}\label{72-competitive-comparison-at-matched-n}
@@ -1698,23 +1716,24 @@ persona conditioning & 0.582 & 0.130 & 124.7 & 56.50 & 0.080 \\
 
 RAC wins every column, and adding vision steering improves on the
 text-only variant by a further 18\% in centered Vendi. Three baselines
-fail in different ways, and the failures are informative. High
-temperature buys nothing: distinct-2 of 0.291 against
-naive\textquotesingle s 0.293, an identical median nearest-neighbour
-distance of 0.045. Evol-Instruct comes out \emph{worse than naive} at
-the one thing a diversity method exists for --- its median
-nearest-neighbour distance is 0.021 against naive\textquotesingle s
-0.045, so it produces items closer to the existing corpus than
-independent sampling does. The mechanism is working as designed:
-mutating an existing item produces a neighbour of that item. It raises
-distinct-2 (0.386 against 0.293) because the mutations reword things, so
-a purely literal evaluation would score it as an improvement; measuring
-both levels is what catches it. Self-Instruct\textquotesingle s guard is
-literal and defends the literal level only: it achieves the best
-self-repetition of any baseline (0.131 --- its ROUGE filter is doing
-real work) while its centered Vendi trails RAC by ten points. A ROUGE-L
-threshold cannot see semantic redundancy, and semantic redundancy is
-what remains once the lexical kind is filtered.
+fail in different ways, and the failures are informative. The
+high-temperature arm buys nothing, though the setting may not have been
+applied (§6): distinct-2 of 0.291 against naive\textquotesingle s 0.293,
+an identical median nearest-neighbour distance of 0.045. Evol-Instruct
+comes out \emph{worse than naive} at the one thing a diversity method
+exists for --- its median nearest-neighbour distance is 0.021 against
+naive\textquotesingle s 0.045, so it produces items closer to the
+existing corpus than independent sampling does. The mechanism is working
+as designed: mutating an existing item produces a neighbour of that
+item. It raises distinct-2 (0.386 against 0.293) because the mutations
+reword things, so a purely literal evaluation would score it as an
+improvement; measuring both levels is what catches it.
+Self-Instruct\textquotesingle s guard is literal and defends the literal
+level only: it achieves the best self-repetition of any baseline (0.131
+--- its ROUGE filter is doing real work) while its centered Vendi trails
+RAC by ten points. A ROUGE-L threshold cannot see semantic redundancy,
+and semantic redundancy is what remains once the lexical kind is
+filtered.
 
 \pandocbounded{\includegraphics[keepaspectratio,alt={Figure 6. Competitive comparison on real corpora at matched n, both text domains, across four metrics.}]{figures/fig14_arms.png}}
 
@@ -1755,26 +1774,26 @@ has a perfect twin.
 corpora}\label{73-head-to-head-against-released-instruction-corpora}
 
 Reimplementations are the right experiment for isolating mechanisms and
-the wrong one for the question \emph{is this actually good?} So we also
-compare against the released artifacts of the three most-used
+the wrong one for the question \emph{is this good?} So we also compare
+against the released artifacts of three widely used
 synthetic-instruction methods --- Alpaca (52k), PersonaHub (50k) and
 WizardLM Evol-Instruct (143k).
 
-\textbf{Protocol.} The human-written reference is databricks-dolly-15k,
-split into two disjoint 3,000-item halves: a STEER half our method may
-read as embeddings on the selection side, and an evaluation half that
-nothing in any pipeline ever reads and at which no corpus, ours or
-released, was ever aimed. All scores are on the evaluation half.
-Estimator: Naeem et al. (2020) coverage/density with reference-side
-\emph{k}-NN radii, reported as AUC over \emph{k} ∈ \{3, 5, 10, 20\}; the
-radii are a property of the reference alone, identical for every corpus,
-with nothing tunable per corpus. Every corpus is evaluated as a uniform
-random sample at matched \emph{n} = 450. Our arms and the reimplemented
-baselines all receive the same 175 human seed tasks --- the seed set
-Alpaca was built from --- the same generator, and the same budget of
-2,400 generator calls, with rejection and selection losses counted
-rather than hidden. The generator never sees a reference word in any
-arm.
+\textbf{Protocol.} The human-written reference is databricks-dolly-15k
+(Conover et al., 2023), split into two disjoint 3,000-item halves: a
+STEER half our method may read as embeddings on the selection side, and
+an evaluation half that nothing in any pipeline ever reads and at which
+no corpus, ours or released, was ever aimed. All scores are on the
+evaluation half. Estimator: Naeem et al. (2020) coverage/density with
+reference-side \emph{k}-NN radii, reported as AUC over \emph{k} ∈ \{3,
+5, 10, 20\}; the radii are a property of the reference alone, identical
+for every corpus, with nothing tunable per corpus. Every corpus is
+evaluated as a uniform random sample at matched \emph{n} = 450. Our arms
+and the reimplemented baselines all receive the same 175 human seed
+tasks --- the seed set Alpaca was built from --- the same generator, and
+the same budget of 2,400 generator calls, with rejection and selection
+losses counted rather than hidden. The generator never sees a reference
+word in any arm.
 
 \pandocbounded{\includegraphics[keepaspectratio,alt={Figure 7. Scale-free coverage of a held-out human-written reference. (a) Coverage at every reference-side radius. (b) All twelve corpora at matched evaluated n = 450. (c) Coverage against precision: the winning corpus is also the one that stays inside the reference manifold.}]{figures/fig_h2h_scalefree.png}}
 
@@ -1807,11 +1826,15 @@ rank & corpus & AUC & precision \\
 \end{longtable}}
 
 First place, 19\% above Alpaca, with the highest precision in the field,
-at roughly one-twentieth of Alpaca\textquotesingle s generation budget.
-An interim measurement at 22\% of budget (\emph{n} = 528) already scored
-0.4276 against Alpaca\textquotesingle s 0.3666 on the same protocol, so
-the result does not depend on final corpus size. PersonaHub and WizardLM
-finish below our 304-item selective arm despite 20--60× the scale.
+from a corpus about one-twentieth the size of Alpaca\textquotesingle s.
+Item counts are not call counts: Alpaca\textquotesingle s pipeline asked
+a different model for twenty instructions per completion, so its 52,002
+items cost a few thousand completions, and we make no claim about
+generation budget against it. An interim measurement at 22\% of budget
+(\emph{n} = 528) already scored 0.4276 against Alpaca\textquotesingle s
+0.3666 on the same protocol, so the result does not depend on final
+corpus size. PersonaHub and WizardLM finish below our 304-item selective
+arm despite 20--60× the scale.
 
 \textbf{What the ranking is a claim about.} Our retrieval-aimed arm
 reads a sample of the target distribution, as embeddings, on the
@@ -1822,9 +1845,9 @@ at parity with the Self-Instruct family. The precise claim is therefore:
 \textbf{given a specification of the space to cover --- even one the
 generator never reads a word of --- retrieval-aimed, density-adaptive
 conditioning covers it substantially better than the strongest seeded
-baseline covers it at twenty times the budget.} That is a capability
-statement about targeted generation, and it is the one the ablation
-supports.
+baseline covers it with twenty times as many items.} That is a
+capability statement about targeted generation, and it is the one the
+ablation supports.
 
 Budget-matched ablation, 2,400 generator calls each, same evaluation
 half. These rows are \textbf{not} at matched \emph{n}: \texttt{kept} is
@@ -1886,7 +1909,7 @@ min-distance check must be exact against the full bank rather than
 subsampled. Item templates expose few manipulable slots, so each mode is
 a low-dimensional disk and the δ-packing number of a bank is finite and
 small: a bank has a \emph{capacity}, and the operative question is what
-fraction of a nominal bank is actually usable.
+fraction of a nominal bank is usable.
 
 That turns on δ, so we measured it rather than assuming it. 236 item
 pairs drawn from a human-written bank across the full range of embedding
@@ -1925,9 +1948,9 @@ persona conditioning & 0.007 & 0.047 & 2,425 (97.0\%) \\
 
 A naively generated bank of 2,500 items yields 382 that can coexist on
 one form --- 15\% of nominal capacity, against 94.9\% for the human bank
---- and temperature makes it slightly worse. Both conditioned policies
-exceed the human bank\textquotesingle s usable fraction, and the
-axis-conditioned bank contains \textbf{no enemy pair at all} at the
+--- and the high-temperature arm is slightly worse. Both conditioned
+policies exceed the human bank\textquotesingle s usable fraction, and
+the axis-conditioned bank contains \textbf{no enemy pair at all} at the
 judged radius, a result that holds across the full 1,999-item bank at
 every δ up to 0.0776 under three of four embedders. Two qualifications
 belong with that number: it is measured at 1,999 items against the naive
@@ -1936,9 +1959,10 @@ bank\textquotesingle s lost capacity is exact duplication, which needs
 no radius to detect.
 
 \textbf{Against the human bank itself.} MMLU is \textasciitilde14,000
-multiple-choice items from real practice exams and textbooks across 57
-subjects, by many authors, with editorial review, over years. At matched
-\emph{n} = 1,000 with identical metric code:
+multiple-choice items across 57 subjects, collected by students from
+practice exams such as the GRE and USMLE, course materials and textbook
+question sets, and so written by many authors (Hendrycks et al., 2021).
+At matched \emph{n} = 1,000 with identical metric code:
 
 {\footnotesize
 \begin{longtable}[]{@{}>{\raggedright\arraybackslash}p{\dimexpr 0.2817\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1138\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1138\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1211\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1346\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1175\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1175\linewidth-2\tabcolsep\relax}@{}}
@@ -2035,14 +2059,14 @@ structural spread \\
 naive & 2,645 & 1,160 (43.9\%) & 2.3 & 3.14 \\
 \end{longtable}}
 
-RAC produces very nearly one architecture per item. The naive bank
-reuses each of its 1,160 architectures 2.3 times over, and \textbf{its
-median deduplicated item still has an exact structural twin at distance
-zero} --- items that differ in wording while being built identically,
-which no exact-match deduplication and no embedding metric in this paper
-detects. Structural spread is 1.61× at matched \emph{n}, on 50 of 50
-random draws. Option count is the sharpest single case: it never varies
-at all in the naive bank.
+RAC produces nearly one architecture per item. The naive bank reuses
+each of its 1,160 architectures 2.3 times over, and \textbf{its median
+deduplicated item still has an exact structural twin at distance zero}
+--- items that differ in wording while being built identically, which no
+exact-match deduplication and no embedding metric in this paper detects.
+Structural spread is 1.61× at matched \emph{n}, on 50 of 50 random
+draws. Option count is the sharpest single case: it never varies at all
+in the naive bank.
 
 \textbf{Images: pixel statistics.} Nine statistics computed from the
 render itself --- luminance, contrast, tonal range, saturation,
@@ -2091,6 +2115,7 @@ Together these three comparisons say the same thing in three modalities.
 dimensions no part of the pipeline scores}, which is not something a
 selection rule can manufacture for itself. §8 asks how much of that is
 attributable to any individual axis, and the answer is more complicated.
+
 \textbf{Two further comparisons on these channels belong to the
 companion paper on proxy embeddings}, and are stated there in full. The
 first runs the other way: on non-semantic structural signatures --- a
@@ -2098,13 +2123,13 @@ first runs the other way: on non-semantic structural signatures --- a
 published baselines are \emph{better} than our arms, so our corpora
 occupy a wider region of pixel space while repeating their compositional
 scaffolding more often within it; literal-space structural bans halve
-the palette twins and do not close the gap (companion §4.6). The second
+the palette twins and do not close the gap (companion §7.4). The second
 is reassurance about the instrument: six exam-item corpora scored under
 four independent representations --- CLIP text, TF-IDF, the prosodic
 vector and a function-word profile, three of which the method never
 optimizes --- rank the same way at a mean Kendall τ of +0.83 across
 their six pairings, and RAC ranks first under every one of them
-(companion §4.4).
+(companion §7.3).
 
 \subsubsection{7.6 What the coverage score buys
 downstream}\label{76-what-the-coverage-score-buys-downstream}
@@ -2189,15 +2214,15 @@ reaches 18.0\% that imitation misses, 34.9\% is reached by both and
 \textbf{conditioning contributes the larger unique share on a sixth of
 the budget}.
 
-\textbf{The wasted budget is a prompting failure, and fixing it is a
-one-line change.} The imitate branch shows the generator three
-neighbours of the target and asks for another item of the same kind; it
-is not shown what it has already written there, so a dense target hit
-repeatedly receives the same three examples every time and returns the
-same item. The conditioning branch has always passed its own nearby
-outputs as explicit negatives; the imitate branch computed them and
-discarded them. Two 1,200-call arms with identical seeds and targets,
-differing only in that:
+The wasted budget is a prompting failure, and fixing it is a one-line
+change. The imitate branch shows the generator three neighbours of the
+target and asks for another item of the same kind; it is not shown what
+it has already written there, so a dense target hit repeatedly receives
+the same three examples every time and returns the same item. The
+conditioning branch has always passed its own nearby outputs as explicit
+negatives; the imitate branch computed them and discarded them. Two
+1,200-call arms with identical seeds and targets, differing only in
+that:
 
 {\footnotesize
 \begin{longtable}[]{@{}>{\raggedright\arraybackslash}p{\dimexpr 0.5679\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.2040\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.2281\linewidth-2\tabcolsep\relax}@{}}
@@ -2216,11 +2241,11 @@ coverage AUC & 0.5326 & \textbf{0.5492} \\
 \end{longtable}}
 
 The duplicate rate falls by 83\%, template mass by a factor of three and
-a half, and --- the quantity a budget actually buys --- distinct items
-per call rise from 0.897 to 0.982, with coverage improving rather than
-paying for it, because the calls recovered from repetition are spent on
-targets not yet reached. A neighbourhood whose task family has a small
-extension cannot be rescued this way --- there are finitely many musical
+a half, and --- the quantity a budget buys --- distinct items per call
+rise from 0.897 to 0.982, with coverage improving rather than paying for
+it, because the calls recovered from repetition are spent on targets not
+yet reached. A neighbourhood whose task family has a small extension
+cannot be rescued this way --- there are finitely many musical
 instruments --- and the obvious next move, handing such a neighbourhood
 to the conditioning branch, makes matters worse: duplicate rate 0.041
 against 0.025, distinct per call 0.970 against 0.982, coverage AUC
@@ -2247,25 +2272,25 @@ functional under two radius rules. The table\textquotesingle s content
 is the ordering of the pools and the size of the gaps.
 
 \textbf{And the covering pool wins at every retrieval depth.} Prompting
-a Qwen2.5-0.5B base model with \emph{k} retrieved demonstrations per
-query --- no training anywhere, so the pool is the only thing that
-differs --- the covering pool leads the clustered one at \emph{k} = 1,
-2, 4 and 8 by 6\% to 16\%, with a margin that is flat in \emph{k} rather
-than growing. Alpaca leads the field at \emph{k} = 8 (0.1498 against
-0.1357), so the effect is that coverage beats other ways of spending the
-same generator budget, not that it beats a corpus fifty times larger at
-this task. Across corpora at \emph{k} = 4, coverage AUC predicts
-in-context score at \emph{r} = 0.816. This sweep is sensitive to one
-detail worth recording as a methods caution: the harness builds each
-prompt as demonstrations first and query last, so tokenizing with a
-1,280-token limit and \texttt{truncation\_side} at its \texttt{"right"}
-default silently removes the trailing \emph{query} from any over-long
-prompt --- and long-demonstration arms exceed it far more often, 98.8\%
-of the clustered arm\textquotesingle s prompts at \emph{k} = 8 against
-27.6\% of the covering arm\textquotesingle s. Scored that way the
-advantage appears to climb 1.04× → 1.17× → 1.48× → 2.38×, an apparent
-dose-response that is entirely an artifact of scoring one arm on
-questions it was never shown. Raising the limit to 8,192 removes it.
+a Qwen2.5-0.5B (Yang et al., 2024) base model with \emph{k} retrieved
+demonstrations per query --- no training anywhere, so the pool is the
+only thing that differs --- the covering pool leads the clustered one at
+\emph{k} = 1, 2, 4 and 8 by 6\% to 16\%, with a margin that is flat in
+\emph{k} rather than growing. Alpaca leads the field at \emph{k} = 8
+(0.1498 against 0.1357), so the effect is that coverage beats other ways
+of spending the same generator budget, not that it beats a corpus fifty
+times larger at this task. Across corpora at \emph{k} = 4, coverage AUC
+predicts in-context score at \emph{r} = 0.816. This sweep is sensitive
+to one detail that we record as a methods caution: the evaluation code
+builds each prompt as demonstrations first and query last, so tokenizing
+with a 1,280-token limit and \texttt{truncation\_side} at its
+\texttt{"right"} default silently removes the trailing \emph{query} from
+any over-long prompt --- and long-demonstration arms exceed it far more
+often, 98.8\% of the clustered arm\textquotesingle s prompts at \emph{k}
+= 8 against 27.6\% of the covering arm\textquotesingle s. Scored that
+way the advantage appears to climb 1.04× → 1.17× → 1.48× → 2.38×, an
+apparent dose-response that is entirely an artifact of scoring one arm
+on questions it was never shown. Raising the limit to 8,192 removes it.
 
 \textbf{What this is for, and what it is not.} Demonstration pools,
 retrieval corpora, evaluation suites, item banks --- any artifact
@@ -2308,14 +2333,14 @@ diversity method, ours included, is optimizing a proxy that leaves most
 of what the reader receives unexplained; the \texttt{rac+vision} arm of
 §7.2, which renders a bounded sample and steers in CLIP space, is the
 method applied one level down, and it is the best arm in that table
-(companion §5.1). In audio, whether a prompt can be steered before
+(companion §7.6). In audio, whether a prompt can be steered before
 rendering is a property of the \emph{embedder} --- prompt-to-track
 alignment 0.68 under MuQ-MuLan against 0.18 under CLAP-music --- and
 per-arm diversity verdicts flip between embedders, so no audio-diversity
-number should be published without naming its embedder (companion §4.3).
+number should be published without naming its embedder (companion §7.2).
 And conditioning loses roughly a third of its grip at the seam where the
 model that proposed the axes hands its instruction to a model that never
-saw them (§8.1; companion §6).
+saw them (§8.1; companion §7.7).
 
 \subsection{8. What makes it work: axis-level
 evidence}\label{8-what-makes-it-work-axis-level-evidence}
@@ -2406,25 +2431,26 @@ live run: the probe removes the avoid-block and the local negatives,
 which contribute variance no axis controls, so the same axis accounts
 for a smaller share of a running corpus than it does here. What the
 probe establishes is the direction the observational audit cannot.
-Setting an axis moves the poem. \textbf{Images, by intervention.} The
-image pipeline has two stages --- the model that proposed the axes
-writes an instruction, and \texttt{gpt-image-1-mini} renders it --- so
-the same manipulation can be read on both sides of the handoff. Over all
-eleven axes at three bases and five levels, nine of eleven axes are
-realized in the \textbf{written instruction} at \emph{p} \textless{}
-0.05 (mean ρ = 0.148), against four of eleven in the \textbf{render}
-(mean ρ = 0.096); ten of the eleven attenuate, a mean loss of 35\% of
-the text-side effect (Wilcoxon signed-rank \emph{p} = .005). The
-conditioning is there, in the prompt, and measurable; what fails is its
-survival through a generator that never saw the axis set. The companion
-paper on proxy embeddings takes that seam as its subject (its §6): it
-separates the renderer\textquotesingle s loss from the
-instrument\textquotesingle s, since the four perceptual axes attenuate
-most in CLIP and are exactly the axes CLIP is least equipped to
-register, and it draws the consequence for the modality-agnostic claim
---- it holds for the calculus, which needs only an embedding, and not
-for the conditioning, which needs a generator that reads the language
-the axes are written in.
+Setting an axis moves the poem.
+
+\textbf{Images, by intervention.} The image pipeline has two stages ---
+the model that proposed the axes writes an instruction, and
+\texttt{gpt-image-1-mini} renders it --- so the same manipulation can be
+read on both sides of the handoff. Over all eleven axes at three bases
+and five levels, nine of eleven axes are realized in the \textbf{written
+instruction} at \emph{p} \textless{} 0.05 (mean ρ = 0.148), against four
+of eleven in the \textbf{render} (mean ρ = 0.096); ten of the eleven
+attenuate, a mean loss of 35\% of the text-side effect (Wilcoxon
+signed-rank \emph{p} = .005). The conditioning is there, in the prompt,
+and measurable; what fails is its survival through a generator that
+never saw the axis set. The companion paper on proxy embeddings takes
+that seam as its subject (its §7.7): it separates the
+renderer\textquotesingle s loss from the instrument\textquotesingle s,
+since the four perceptual axes attenuate most in CLIP and are exactly
+the axes CLIP is least equipped to register, and it draws the
+consequence for the modality-agnostic claim --- it holds for the
+calculus, which needs only an embedding, but not the conditioning, which
+needs a generator that reads the language the axes are written in.
 
 \subsubsection{8.2 Expansion: naming what a corpus never
 varies}\label{82-expansion-naming-what-a-corpus-never-varies}
@@ -2526,18 +2552,18 @@ exceeds what one seed can establish. Right: coefficient of variation on
 poem form features, baseline against expanded --- every dimension the
 baseline held nearly constant opens up, line count by a factor of nine.}
 
-\textbf{Images: no measurable effect, and the reason is a budget nobody
+\textbf{Images: no measurable effect, limited by a budget nobody
 models.} Three arms of sixty renders, one seed, identical seeded axes,
 differing only in the mechanism under test, give centered CLIP Vendi
 43.81 (baseline) against 42.97 (+expansion) and 42.37 (+expansion,
 manipulation-scored); only \texttt{min\ NN\ distance} --- the quantity a
-max-min arm actually maximizes --- improves, by 7\%. This is despite the
-added perceptual axes being the \emph{best-realized} axes in the run
-(mean ρ = 0.036 against 0.016 for the seeded axes) and the renders
-visibly acquiring optical modes the baseline never produces: an extreme
-macro, a radial-zoom blur, a wide vista with atmospheric depth. At one
-seed and \emph{n} = 60 a 3\% Vendi gap is inside run-to-run variation,
-so this is a null rather than a ranking.
+max-min arm maximizes --- improves, by 7\%. This is despite the added
+perceptual axes being the \emph{best-realized} axes in the run (mean ρ =
+0.036 against 0.016 for the seeded axes) and the renders visibly
+acquiring optical modes the baseline never produces: an extreme macro, a
+radial-zoom blur, a wide vista with atmospheric depth. At one seed and
+\emph{n} = 60 a 3\% Vendi gap is inside run-to-run variation, so this is
+a null rather than a ranking.
 
 The explanation is that conditioning on more axes means more contracts
 in one prompt, and per-axis obedience falls as that load rises. Four
@@ -2596,13 +2622,14 @@ axes, four fewer contracts --- min nearest-neighbour distance rises
 31.6\%, per-axis realization 33\%, and palette sharing falls a quarter;
 against the baseline, at the same prompt load but drawing from a lattice
 1,300 times larger, min NN is 12.2\% higher, the best value of any arm
-here. Centered Vendi and palette sharing sit slightly below baseline, so
-this is a gain on the objective rather than a sweep, and at one seed per
-arm on the noisiest statistic in this work the magnitude should be read
-as approximate. What is not approximate is the design point it makes
-concrete: \textbf{the lattice describes what the corpus can reach and
-the spec describes what one prompt must carry, and holding the second
-fixed while enlarging the first is what lets expansion pay.}
+here. Centered Vendi sits slightly below baseline and palette sharing
+slightly above it, so this is a gain on the objective rather than a
+sweep, and at one seed per arm on the noisiest statistic in this work
+the magnitude should be read as approximate. What is not approximate is
+the design point it makes concrete: \textbf{the lattice describes what
+the corpus can reach and the spec describes what one prompt must carry,
+and holding the second fixed while enlarging the first is what lets
+expansion pay.}
 
 \subsubsection{8.3 Completeness: enumerate the whole space, or the
 concentration
@@ -2695,12 +2722,12 @@ commanded level \emph{moves} the artifact, and every one computes that
 all of them. The psychometric bank shows one. Its
 \texttt{Irrelevant-information\ treatment} axis is plainly obeyed ---
 items told to carry no irrelevant detail use a colour word 7\% of the
-time, items told to carry some use one 52\% to 62\% of the time --- and
-yet half of the 1,999-item corpus contains a colour word, because the
-red herring is nearly always a coloured card, a star, a printed dot.
-Generating afresh reproduces it: under a judge that names the
-\emph{form} the irrelevant detail takes, blind to arm, 76\% of items use
-a physical-appearance detail and two of eight available forms never
+time, against 52\% to 62\% for items told to carry some --- and yet half
+of the 1,999-item corpus contains a colour word, because the red herring
+is nearly always a coloured card, a star, a printed dot. Generating
+afresh reproduces it: under a judge that names the \emph{form} the
+irrelevant detail takes, blind to arm, 76\% of items use a
+physical-appearance detail and two of eight available forms never
 appear, for a normalized device entropy of 0.425 --- far below the
 between-category spread of any corpus measured here. This is not
 cosmetic. Irrelevant information functions only while the examinee
@@ -2713,11 +2740,11 @@ enumerating the forms a red herring can take, rather than trusting a
 level description to vary its own realization. It takes device entropy
 from 0.425 to 0.933 (+0.504, {[}+0.385, +0.626{]}), the dominant form
 from 76\% to 24\% (−0.507, {[}−0.622, −0.389{]}), and all eight forms
-into use, \textbf{while both arms keep the contract the axis actually
-specifies}: in each, 100\% of items still carry detail whose removal
-would not change the answer. \textbf{Realization therefore has to be
-audited twice --- once to establish that a level moves the artifact, and
-once to establish that it does not move it the same way every time.}
+into use, \textbf{while both arms keep the contract the axis specifies}:
+in each, 100\% of items still carry detail whose removal would not
+change the answer. \textbf{Realization therefore has to be audited twice
+--- once to establish that a level moves the artifact, and once to
+establish that it does not move it the same way every time.}
 
 The defect is general and the poem corpora carry it more heavily.
 Scoring each level by the share of its items using its single most
@@ -2729,11 +2756,11 @@ smoke, I seal this house" --- drawing on a fixed stock of ash, salt,
 bells and thresholds across independently generated poems;
 \emph{Syntactic weather: nested subordinate clauses} reaches for
 \emph{because} in 79\% of its items, and \emph{Register contract:
-ceremonial elevation} for \emph{silence} in 72\%. The measure has one
-limit worth stating: it cannot distinguish a stereotyped device from a
-word the level entails, and \emph{dialogue with conflicting claims}
-scoring 0.73 on \emph{says} is the latter, which is why the levels above
-were read rather than only counted.
+ceremonial elevation} for \emph{silence} in 72\%. The measure cannot
+distinguish a stereotyped device from a word the level entails, and
+\emph{dialogue with conflicting claims} scoring 0.73 on \emph{says} is
+the latter, which is why the levels above were read rather than only
+counted.
 
 \textbf{Three attempts to transfer the remedy fail in the same shape,
 and that is what identifies the rule.} A red herring\textquotesingle s
@@ -2762,10 +2789,10 @@ lower device share overall (0.595 against a 0.662 baseline, −0.068
 three of five levels. Nor does making the ban adaptive: rebuilding it
 every batch from a judge\textquotesingle s reading of the rhetorical
 \emph{moves} the corpus has just started overusing --- the register the
-defect actually lives in --- leaves device share at 0.650 (−0.012,
-{[}−0.136, +0.104{]}), with \emph{let} falling from 88\% to 69\% for
-ritual pronouncement and \emph{through} arriving at 69\%. Twelve banned
-moves is still a subset.
+defect lives in --- leaves device share at 0.650 (−0.012, {[}−0.136,
++0.104{]}), with \emph{let} falling from 88\% to 69\% for ritual
+pronouncement and \emph{through} arriving at 69\%. Twelve banned moves
+is still a subset.
 
 The clearest case is the one that makes the concentration
 \textbf{worse}. Commanding the poem\textquotesingle s concrete nouns
@@ -2777,8 +2804,7 @@ and device share nevertheless \emph{rises}, 0.662 → 0.738 (+0.076,
 craft unharmed. The words carrying the new concentration are the ones
 the axis left free: \emph{confess} in 81\% of confessional poems,
 \emph{mine} in 88\% of refusals, \emph{beneath} in 75\% of flat
-assertions. \textbf{Constraining the nouns concentrated the verbs and
-pronouns.}
+assertions. Constraining the nouns concentrated the verbs and pronouns.
 
 The rule that explains all seven comparisons without appealing to domain
 is therefore about \emph{completeness}:
@@ -2954,15 +2980,94 @@ select them on the channel the objective cannot see.}
 \item
   \textbf{One embedding oracle.} All geometry is
   \texttt{nomic-embed-text} geometry with cosine distance, on both
-  objectives. Whether "diverse" or "covered" under one embedder
-  transfers to another is the subject of the companion paper on proxy
-  embeddings, which measures text-to-CLIP correlations on rendered
+  objectives. Whether \emph{diverse} or \emph{covered} under one
+  embedder transfers to another is the subject of the companion paper on
+  proxy embeddings, which measures text-to-CLIP correlations on rendered
   outputs of only \emph{r} = 0.167 to 0.421 and shows per-arm audio
   diversity verdicts flipping between embedders, and which shows the
   \emph{ranking} of methods surviving four independent representations.
   For any domain with a downstream rendering step the objective should
-  be defined in the space the artifact actually occupies. Here it was
-  not.
+  be defined in the space of the rendered artifact. Here it was not.
+\item
+  \textbf{The head-to-head is not like-for-like.} Our winning arm reads
+  a sample of the target distribution as embeddings on the steering
+  side; the released corpora had no such input. §7.3 states the
+  like-for-like rows explicitly and the claim is scoped to targeted
+  generation. Separately, matched-\emph{n} sampling controls for size
+  and cannot control for the model that wrote the items: the released
+  corpora are 20--70× larger, written by different generators, with
+  human curation in at least one case.
+\item
+  \textbf{ε is chosen, not learned.} Every covering guarantee is stated
+  per-ε, and our calibration from quantiles of reachable
+  nearest-neighbour distance is a heuristic; §4.6 shows what optimizing
+  at the wrong radius costs. A multi-resolution objective, integrating
+  coverage over a prior on ε, is the obvious next step.
+\item
+  \textbf{The pool is the measure.} Coverage is relative to the
+  reachable pool throughout. Behaviours the base generator cannot emit
+  are invisible until refinement opens them, and the pool refresh is
+  only as good as the refinement trigger that fires it.
+\item
+  \textbf{Judge bias is unmeasured.} Language-model judges prefer
+  fluent, typical text, which is the bias that would work against a
+  diversity system. We use a judge for craft, validity, blueprint area,
+  device form and posture, and did not calibrate any of them against
+  human raters. The exam-item enemy radius is likewise adjudicated by a
+  model under a psychometric rubric rather than by a credentialed
+  psychometrician, and δ is specific to this embedder and this item
+  type, with a bootstrap interval that includes zero.
+\item
+  \textbf{Additive spec composition.} The axis scoring treats
+  conditioning attributes as composing additively in embedding space,
+  which is what makes a spec\textquotesingle s position predictable
+  before it is generated. Real interactions between prompt attributes
+  are not additive, and the partial-effect estimator of §5.3 leans on
+  that assumption harder than the original scoring did. The
+  interventional probe is the version that does not assume it, and it
+  costs generations.
+\item
+  \textbf{Observational realization is underpowered and partly
+  unidentifiable.} The audit groups sixty items into five levels per
+  axis, which after the null correction leaves little room to separate a
+  small real effect from none; and at nine to eleven axes a
+  partial-effect design needs more columns than a 50-item corpus has
+  rows. We can say the image axes are much less realized than the poem
+  axes, and that particular axes are inert; we cannot put a confident
+  number on how much of the image corpora\textquotesingle s diversity
+  the axes contribute.
+\item
+  \textbf{Several mechanism results are single-seed.} The image arms are
+  one seed each at \emph{n} = 60, which is why §8.2 reports the image
+  expansion as a null rather than a ranking and why the
+  subset-conditioning margin is reported as approximate. The poem
+  expansion and the selector result are replicated across three seeds;
+  the completeness comparisons are single runs at \emph{n} = 80--100 per
+  arm with bootstrap intervals.
+\item
+  \textbf{Expansion is proposed, not verified, by the same kind of
+  model.} The step that asks what a corpus never varies is a language
+  model looking at artifacts. Its proposals matched an independent
+  reading of the same corpora in three domains, but a blind spot shared
+  between that judge and the axis-proposer would be invisible to us in
+  exactly the way the original missing families were.
+\item
+  \textbf{An axis that changes the artifact\textquotesingle s scale
+  breaks fixed budgets downstream.} Expansion is the one operation here
+  that changes the \emph{scale} of the artifact rather than its
+  character, which couples it to every fixed token cap between the spec
+  and the scored output. The method does not currently represent that
+  coupling.
+\item
+  \textbf{The temperature arm is unverified.} \texttt{high\_temp}
+  requested a temperature the generator\textquotesingle s endpoints do
+  not list as supported (§6), so its rows may replicate the default
+  configuration. Every statement about temperature in §5.6 and §7.1--7.4
+  rests on those rows and carries the same doubt.
+\item
+  \textbf{Quality is scalar.} Craft is not one number, and collapsing it
+  to one lets a system trade away dimensions of quality the judge does
+  not score.
 \end{itemize}
 
 \subsection{10. Conclusion}\label{10-conclusion}
@@ -2980,21 +3085,21 @@ problem.
 Given an embedding oracle and no inverse, the system cannot compute its
 way to the next item; it can only choose what to condition on. Recursive
 Axis Conditioning is our answer, and it works: first of twelve corpora
-against released instruction sets at a twentieth of the budget, an exam
-bank with no enemy pair at a judged radius where naive prompting yields
-15\% of nominal capacity, and separation from every baseline in three
-artifact domains measured on channels the loop never optimizes. Its most
-valuable output is the refine signal --- the moment the scoring reports
-that nothing available is transverse any more is the moment the horizon
-has been reached, and the only remaining move is to ask the generator to
-subdivide its own vocabulary of variation.
+against released instruction sets with a twentieth as many items, an
+exam bank with no enemy pair at a judged radius where naive prompting
+yields 15\% of nominal capacity, and separation from every baseline in
+three artifact domains measured on channels the loop never optimizes.
+Its most valuable output is the refine signal --- the moment the scoring
+reports that nothing available is transverse any more is the moment the
+horizon has been reached, and the only remaining move is to ask the
+generator to subdivide its own vocabulary of variation.
 
-Three lessons transfer past the method.
+The lessons that follow transfer past the method.
 
 \textbf{Name the measure, because the two classes are not one problem.}
 Greedy \emph{k}-center wins min-gap in both domains and finishes last on
 coverage; orthogonalized conditioning, load-bearing under max-min,
-scores below doing nothing at all under coverage. Pointing the loop
+scores below plain conditioning under coverage. Pointing the loop
 changes exactly two things, how an axis is scored and how a candidate is
 chosen, and those two are enough to invert which method looks best. A
 corpus is diverse \emph{with respect to} an objective.
@@ -3049,5 +3154,147 @@ objective cannot see --- it is where we found both our strongest result
 and our largest undetected defect. And read the output, because a corpus
 can be diverse along every dimension you thought to name and uniform
 along the one you did not.
+
+\subsection{References}\label{references}
+
+Abbas, A., Tirumala, K., Simig, D., Ganguli, S., \& Morcos, A. S.
+(2023). SemDeDup: Data-efficient learning at web-scale through semantic
+deduplication. arXiv:2303.09540. \url{https://arxiv.org/abs/2303.09540}
+
+Badanidiyuru, A., Mirzasoleiman, B., Karbasi, A., \& Krause, A. (2014).
+Streaming submodular maximization: Massive data summarization on the
+fly. In \emph{Proceedings of the 20th ACM SIGKDD International
+Conference on Knowledge Discovery and Data Mining} (pp. 671--680).
+\url{https://doi.org/10.1145/2623330.2623637}
+
+Chen, L., Zhang, G., \& Zhou, E. (2018). Fast greedy MAP inference for
+determinantal point process to improve recommendation diversity. In
+\emph{Advances in Neural Information Processing Systems 31}.
+\url{https://proceedings.neurips.cc/paper/2018/hash/dbbf603ff0e99629dda5d75b6f75f966-Abstract.html}
+
+Conover, M., Hayes, M., Mathur, A., Xie, J., Wan, J., Shah, S., Ghodsi,
+A., Wendell, P., Zaharia, M., \& Xin, R. (2023). Free Dolly: Introducing
+the world\textquotesingle s first truly open instruction-tuned LLM.
+Databricks blog.
+\url{https://www.databricks.com/blog/2023/04/12/dolly-first-open-commercially-viable-instruction-tuned-llm}
+
+Feige, U. (1998). A threshold of ln \emph{n} for approximating set
+cover. \emph{Journal of the ACM}, 45(4), 634--652.
+\url{https://doi.org/10.1145/285055.285059}
+
+Friedman, D., \& Dieng, A. B. (2023). The Vendi Score: A diversity
+evaluation metric for machine learning. \emph{Transactions on Machine
+Learning Research}. arXiv:2210.02410.
+\url{https://arxiv.org/abs/2210.02410}
+
+Ganguli, D., Lovitt, L., Kernion, J., Askell, A., Bai, Y., Kadavath, S.,
+et al. (2022). Red teaming language models to reduce harms: Methods,
+scaling behaviors, and lessons learned. arXiv:2209.07858.
+\url{https://arxiv.org/abs/2209.07858}
+
+Ge, T., Chan, X., Wang, X., Yu, D., Mi, H., \& Yu, D. (2024). Scaling
+synthetic data creation with 1,000,000,000 personas. arXiv:2406.20094.
+\url{https://arxiv.org/abs/2406.20094}
+
+Gonzalez, T. F. (1985). Clustering to minimize the maximum intercluster
+distance. \emph{Theoretical Computer Science}, 38, 293--306.
+\url{https://doi.org/10.1016/0304-3975(85)90224-5}
+
+Hendrycks, D., Burns, C., Basart, S., Zou, A., Mazeika, M., Song, D., \&
+Steinhardt, J. (2021). Measuring massive multitask language
+understanding. In \emph{International Conference on Learning
+Representations}. arXiv:2009.03300.
+\url{https://arxiv.org/abs/2009.03300}
+
+Kirk, R., Mediratta, I., Nalmpantis, C., Luketina, J., Hambro, E.,
+Grefenstette, E., \& Raileanu, R. (2024). Understanding the effects of
+RLHF on LLM generalisation and diversity. In \emph{International
+Conference on Learning Representations}. arXiv:2310.06452.
+\url{https://arxiv.org/abs/2310.06452}
+
+Kulesza, A., \& Taskar, B. (2012). Determinantal point processes for
+machine learning. \emph{Foundations and Trends in Machine Learning},
+5(2--3), 123--286. \url{https://doi.org/10.1561/2200000044}
+
+Li, Y., Yuan, R., Zhang, G., Ma, Y., Chen, X., Yin, H., et al. (2024).
+MERT: Acoustic music understanding model with large-scale
+self-supervised training. In \emph{International Conference on Learning
+Representations}. arXiv:2306.00107.
+\url{https://arxiv.org/abs/2306.00107}
+
+Lin, H., \& Bilmes, J. (2011). A class of submodular functions for
+document summarization. In \emph{Proceedings of the 49th Annual Meeting
+of the Association for Computational Linguistics: Human Language
+Technologies} (pp. 510--520). \url{https://aclanthology.org/P11-1052/}
+
+Mouret, J.-B., \& Clune, J. (2015). Illuminating search spaces by
+mapping elites. arXiv:1504.04909. \url{https://arxiv.org/abs/1504.04909}
+
+Naeem, M. F., Oh, S. J., Uh, Y., Choi, Y., \& Yoo, J. (2020). Reliable
+fidelity and diversity metrics for generative models. In
+\emph{Proceedings of the 37th International Conference on Machine
+Learning}, PMLR 119, 7176--7185.
+\url{https://proceedings.mlr.press/v119/naeem20a.html}
+
+Nemhauser, G. L., Wolsey, L. A., \& Fisher, M. L. (1978). An analysis of
+approximations for maximizing submodular set functions---I.
+\emph{Mathematical Programming}, 14(1), 265--294.
+\url{https://doi.org/10.1007/BF01588971}
+
+Nussbaum, Z., Morris, J. X., Duderstadt, B., \& Mulyar, A. (2025). Nomic
+Embed: Training a reproducible long context text embedder.
+\emph{Transactions on Machine Learning Research}. arXiv:2402.01613.
+\url{https://arxiv.org/abs/2402.01613}
+
+Perez, E., Huang, S., Song, F., Cai, T., Ring, R., Aslanides, J., et al.
+(2022). Red teaming language models with language models. In
+\emph{Proceedings of the 2022 Conference on Empirical Methods in Natural
+Language Processing} (pp. 3419--3448).
+\url{https://doi.org/10.18653/v1/2022.emnlp-main.225}
+
+Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S.,
+et al. (2021). Learning transferable visual models from natural language
+supervision. In \emph{Proceedings of the 38th International Conference
+on Machine Learning}, PMLR 139, 8748--8763.
+\url{https://proceedings.mlr.press/v139/radford21a.html}
+
+Ravi, S. S., Rosenkrantz, D. J., \& Tayi, G. K. (1994). Heuristic and
+special case algorithms for dispersion problems. \emph{Operations
+Research}, 42(2), 299--310. \url{https://doi.org/10.1287/opre.42.2.299}
+
+Taori, R., Gulrajani, I., Zhang, T., Dubois, Y., Li, X., Guestrin, C.,
+Liang, P., \& Hashimoto, T. B. (2023). Stanford Alpaca: An
+instruction-following LLaMA model. GitHub repository.
+\url{https://github.com/tatsu-lab/stanford_alpaca}
+
+Wang, Y., Kordi, Y., Mishra, S., Liu, A., Smith, N. A., Khashabi, D., \&
+Hajishirzi, H. (2023). Self-Instruct: Aligning language models with
+self-generated instructions. In \emph{Proceedings of the 61st Annual
+Meeting of the Association for Computational Linguistics} (pp.
+13484--13508). \url{https://doi.org/10.18653/v1/2023.acl-long.754}
+
+Wu, Y., Chen, K., Zhang, T., Hui, Y., Berg-Kirkpatrick, T., \& Dubnov,
+S. (2023). Large-scale contrastive language-audio pretraining with
+feature fusion and keyword-to-caption augmentation. In \emph{ICASSP
+2023: IEEE International Conference on Acoustics, Speech and Signal
+Processing} (pp. 1--5).
+\url{https://doi.org/10.1109/ICASSP49357.2023.10095969}
+
+Xu, C., Sun, Q., Zheng, K., Geng, X., Zhao, P., Feng, J., et al. (2024).
+WizardLM: Empowering large pre-trained language models to follow complex
+instructions. In \emph{International Conference on Learning
+Representations}. arXiv:2304.12244.
+\url{https://arxiv.org/abs/2304.12244}
+
+Yang, A., Yang, B., Zhang, B., Hui, B., Zheng, B., Yu, B., et al.
+(2024). Qwen2.5 technical report. arXiv:2412.15115.
+\url{https://arxiv.org/abs/2412.15115}
+
+Yu, Y., Zhuang, Y., Zhang, J., Meng, Y., Ratner, A. J., Krishna, R.,
+Shen, J., \& Zhang, C. (2023). Large language model as attributed
+training data generator: A tale of diversity and bias. In \emph{Advances
+in Neural Information Processing Systems 36}, Datasets and Benchmarks
+Track (pp. 55734--55784).
+\url{https://proceedings.neurips.cc/paper_files/paper/2023/hash/ae9500c4f5607caf2eff033c67daa9d7-Abstract-Datasets_and_Benchmarks.html}
 
 \end{document}

@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the paper."
+title: "Recursive Axis Conditioning for Diverse Synthetic Data Generation"
+authors:
+  - family-names: Young
+    given-names: Halley
+    email: thehalleyyoung@gmail.com
+date-released: 2026-10-06
+url: "https://thehalleyyoung.github.io/rac/"
+repository-code: "https://github.com/thehalleyyoung/rac"
+license: MIT
+abstract: >-
+  Recursive Axis Conditioning (RAC) is a loop for generating synthetic corpora.
+  It asks the generator to name the axes along which its own outputs vary, ranks
+  those axes, conditions on their most different levels, and splits an axis into
+  finer ones once it stops producing new items. On coverage of a held-out
+  human-written reference, RAC places first of twelve corpora at matched sample
+  size (0.4441 against Alpaca's 0.3722), with a corpus a twentieth the size of
+  Alpaca's.
+keywords:
+  - synthetic data
+  - diversity
+  - coverage
+  - max-min
+  - submodular optimization
+  - large language models
+preferred-citation:
+  type: article
+  title: "Recursive Axis Conditioning for Diverse Synthetic Data Generation"
+  authors:
+    - family-names: Young
+      given-names: Halley
+  year: 2026
+  month: 10
+  url: "https://thehalleyyoung.github.io/rac/"

@@ -1,7 +1,7 @@
 # Does coverage predict downstream SFT quality?
 
-Status: in progress. This file records what is settled, so the negative results
-are not lost if later runs overwrite the picture.
+Lab notes from the fine-tuning experiments behind §7.6 of the paper. They record
+what each run settled, the negative results included.
 
 ## The setup
 
@@ -62,7 +62,7 @@ The effect is half the noise. Interpolating items-to-target puts coverage-
 selected at 929 items and random at 856 to reach 95% of the full-pool ceiling,
 i.e. nominally *worse*. The honest reading is no detectable effect.
 
-Two measurement traps were caught on the way and are worth recording:
+Two measurement traps were caught on the way:
 
 - **Token axis flatters the selected arm.** Coverage-greedy picks items about 6%
   shorter (72 vs 76 tokens/item), so plotting against training tokens shifts its
@@ -71,9 +71,11 @@ Two measurement traps were caught on the way and are worth recording:
   generation and reference to the same budget, is reported alongside. Where the
   two columns move together the gain is not a length artifact.
 
-## Open
+## Cross-corpus comparison
 
-Cross-corpus comparison at matched n: nine corpora that differ by construction
-rather than by subset choice, including faithful re-runs of Self-Instruct,
-Evol-Instruct and Persona-Hub on the same generator. Subset selection within one
-pool is a small perturbation; this is the comparison with room to show an effect.
+Subset selection within one pool is a small perturbation, so the follow-up
+compared corpora that differ by construction, at matched *n*. It is reported in
+§7.6 of the paper: across corpora, coverage AUC against fine-tuned quality is
+*r* = −0.166. The retrieval-aimed corpus yields the best model on the third of
+queries nearest its items (0.1960) and the worst on the third furthest (0.1304),
+and training averages the two.

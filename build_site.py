@@ -2,6 +2,11 @@
 as base64, a sticky contents rail generated from the headings, and a banner
 linking the PDF, the LaTeX, the code and the companion site.
 
+The <head> carries Highwire Press `citation_*` tags, which is what Google
+Scholar reads to index a paper hosted on a personal site. The PDF they point at
+must be served from this same site, and the author name must match the PDF's
+first page.
+
     python3 paper/build_paper.py   # first, to produce paper/paper.md
     python3 build_site.py
 
@@ -13,15 +18,35 @@ import base64, pathlib, re, subprocess
 HERE = pathlib.Path(__file__).resolve().parent
 
 TITLE = "Recursive Axis Conditioning for Diverse Synthetic Data Generation"
+AUTHOR = "Halley Young"            # as on the PDF; Scholar matches the two
+AUTHOR_CITATION = "Young, Halley"  # surname-first form for citation_author
+DATE_SHOWN = "October 2026"
+PUB_DATE = "2026/10/06"            # citation_publication_date, YYYY/MM/DD
+SITE_URL = "https://thehalleyyoung.github.io/rac/"
+PDF_URL = SITE_URL + "paper/paper.pdf"
 REPO_URL = "https://github.com/thehalleyyoung/rac"
 COMPANION_URL = "https://thehalleyyoung.github.io/proxy-embeddings/"
 COMPANION_LABEL = "companion paper: Proxy Embeddings"
 
-LAND = f"""
-# {TITLE}
+# One-paragraph summary for search snippets (meta description, og:description).
+# Keep it in step with the abstract and with CITATION.cff.
+DESCRIPTION = (
+    "Recursive Axis Conditioning (RAC) is a loop for generating synthetic "
+    "corpora. It asks the generator to name the axes along which its own outputs "
+    "vary, ranks those axes, conditions on their most different levels, and "
+    "splits an axis into finer ones once it stops producing new items. On "
+    "coverage of a held-out human-written reference, RAC places first of twelve "
+    "corpora at matched sample size (0.4441 against Alpaca's 0.3722), with a "
+    "corpus a twentieth the size of Alpaca's.")
 
----
-"""
+BIBTEX = f"""@misc{{young2026rac,
+  title        = {{{{{TITLE}}}}},
+  author       = {{{AUTHOR_CITATION}}},
+  year         = {{2026}},
+  month        = oct,
+  howpublished = {{\\url{{{SITE_URL}}}}},
+  note         = {{Code and data: \\url{{{REPO_URL}}}}}
+}}"""
 
 
 NAV_CSS = """
@@ -103,10 +128,42 @@ def build_toc(body: str) -> str:
             + "".join(rows) + "</ol></nav>")
 
 
+def head_meta() -> str:
+    """Scholar's Highwire tags, plus the description and canonical URL."""
+    esc = lambda t: t.replace("&", "&amp;").replace('"', "&quot;")
+    tags = [
+        ("citation_title", TITLE),
+        ("citation_author", AUTHOR_CITATION),
+        ("citation_publication_date", PUB_DATE),
+        ("citation_pdf_url", PDF_URL),
+        ("citation_abstract_html_url", SITE_URL),
+        ("citation_fulltext_html_url", SITE_URL),
+        ("citation_language", "en"),
+        ("description", DESCRIPTION),
+        ("author", AUTHOR),
+    ]
+    out = [f'<meta name="{k}" content="{esc(v)}">' for k, v in tags]
+    out += [f'<meta property="og:title" content="{esc(TITLE)}">',
+            f'<meta property="og:description" content="{esc(DESCRIPTION)}">',
+            f'<meta property="og:type" content="article">',
+            f'<meta property="og:url" content="{SITE_URL}">',
+            f'<link rel="canonical" href="{SITE_URL}">']
+    return "\n".join(out) + "\n"
+
+
+def cite_block() -> str:
+    """A visible "Cite this paper" section at the foot of the page."""
+    esc = lambda t: t.replace("&", "&amp;").replace("<", "&lt;")
+    return ('<h2 id="cite">Cite this paper</h2>\n'
+            f'<p>Young, H. ({DATE_SHOWN.split()[-1]}). <em>{TITLE}</em>. '
+            f'<a href="{SITE_URL}">{SITE_URL}</a></p>\n'
+            f'<pre><code>{esc(BIBTEX)}</code></pre>\n')
+
+
 def main():
     css = (HERE / "site.css").read_text()
     tmp = HERE / ".site.md"
-    tmp.write_text(LAND + (HERE / "paper" / "paper.md").read_text())
+    tmp.write_text((HERE / "paper" / "paper.md").read_text())
     body = subprocess.run(
         ["pandoc", "-f", "gfm+tex_math_dollars", "-t", "html5", "--mathml", str(tmp)],
         capture_output=True, text=True, check=True).stdout
@@ -127,13 +184,17 @@ def main():
               '<a href="paper/paper.tex">LaTeX</a> &middot; '
               f'<a href="{REPO_URL}">code &amp; data</a> &middot; '
               f'<a href="{COMPANION_URL}">{COMPANION_LABEL}</a></div>')
+    body += cite_block()
     toc = build_toc(body)
+    header = (f'<header class="paper-head">\n<h1>{TITLE}</h1>\n'
+              f'<p class="byline">{AUTHOR} &middot; {DATE_SHOWN}</p>\n</header>')
     (HERE / "index.html").write_text(
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width,initial-scale=1">\n'
         f'<title>{TITLE}</title>\n'
+        + head_meta() +
         f'<style>{css}{NAV_CSS}</style>\n</head>\n<body>\n'
-        f'<div class="layout">\n{toc}\n<main>\n{banner}\n{body}\n</main>\n</div>\n'
+        f'<div class="layout">\n{toc}\n<main>\n{header}\n{banner}\n{body}\n</main>\n</div>\n'
         f'{NAV_JS}</body>\n</html>\n')
     tmp.unlink()
     n = (HERE / "index.html").read_text().count("data:image/png;base64,")

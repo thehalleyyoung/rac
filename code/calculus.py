@@ -370,8 +370,8 @@ leave most of the space empty as long as nothing collides. At n = 100 in a
 space that needs 10,000 to fill, the first will cluster representatives across
 many regions and the second will string points along the frontier.
 
-The four factors above are written for MAX-MIN. The companion coverage paper
-optimizes the other one, and the calculus has to change with it. The
+The four factors above are written for MAX-MIN. The coverage objective
+is the other one, and the calculus has to change with it. The
 differences are not cosmetic -- they point in opposite directions on two of
 the four terms.
 

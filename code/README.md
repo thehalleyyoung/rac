@@ -13,9 +13,10 @@ two objectives, over a shared core.
 
 ## Theory (no API keys, no network)
 ```bash
-python3 verify_theory.py    # 8/8   core theorems
-python3 verify_slices.py    # 7/7   conditional-dimension theorems
-python3 calculus.py         #       calculus self-test, both objectives
+python3 simulate_exam.py    #       writes the exam outputs T3 and T4 read
+python3 verify_theory.py    # 9/9   core theorems
+python3 verify_slices.py    # 7/7   conditional-dimension theorems (slow)
+python3 calculus.py         #       calculus self-test (max-min objective)
 ```
 
 ## Simulation
@@ -49,4 +50,4 @@ python3 image_steer.py coverage 60  # CLIP-steered, coverage objective
 
 ## Coverage half
 See `coverage/` — same core, covering objective, its own benchmark and
-head-to-head harnesses.
+head-to-head scripts.

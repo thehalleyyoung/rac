@@ -18,6 +18,9 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 
 TITLE = "Recursive Axis Conditioning for Diverse Synthetic Data Generation"
+AUTHOR = "Halley Young"
+EMAIL = "thehalleyyoung@gmail.com"
+DATE = "October 2026"
 
 PREAMBLE = r"""
 % ICLR-style page: 5.5in text block on US letter, Times, 10pt
@@ -166,6 +169,8 @@ def iclr_polish(tex: Path) -> None:
                                for k in ("", "sub", "subsub")) if i > 0), default=-1)
         if nxt > 0:
             t = t[:nxt] + "\\end{iclrabstract}\n\n" + t[nxt:]
+    t = t.replace(f"\\author{{{AUTHOR}}}",
+                  f"\\author{{{AUTHOR}\\\\[0.2em]{{\\normalsize\\texttt{{{EMAIL}}}}}}}", 1)
     t = fit_tables(t)
     tex.write_text(t)
 
@@ -178,7 +183,7 @@ def build_pdf() -> None:
         "-t", "latex", "-s", "--pdf-engine=xelatex",
         "-V", "documentclass=article", "-V", "fontsize=10pt",
         "-V", "mainfont=Times New Roman", "-V", "monofont=Menlo",
-        "-M", f"title={TITLE}", "-M", "date=",
+        "-M", f"title={TITLE}", "-M", f"author={AUTHOR}", "-M", f"date={DATE}",
         "-H", str(pre), "-o", str(HERE / "paper.tex")], check=True, cwd=HERE)
     iclr_polish(HERE / "paper.tex")
     print("paper.tex written")

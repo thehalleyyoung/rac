@@ -1,7 +1,10 @@
 # Recursive Axis Conditioning for Diverse Synthetic Data Generation
 
-Site: https://thehalleyyoung.github.io/rac/ · Paper: [`paper/paper.pdf`](paper/paper.pdf)
-· Companion: [Proxy Embeddings](https://thehalleyyoung.github.io/proxy-embeddings/)
+Halley Young · October 2026
+
+**Read it:** [web version](https://thehalleyyoung.github.io/rac/) ·
+[PDF](paper/paper.pdf) · companion paper:
+[Proxy Embeddings](https://thehalleyyoung.github.io/proxy-embeddings/)
 
 A synthetic corpus is judged by a measure, and the measure is chosen before the
 corpus is. **Recursive Axis Conditioning** (RAC) is a generation loop that
@@ -34,7 +37,7 @@ procedure that produced them (`data/maxmin/provenance.json`).
 
 | finding | number |
 |---|---|
-| coverage of a held-out human reference, matched *n* = 450 | **1st of 12 corpora**, 0.4441 vs Alpaca's 0.3722, on 1/20 the budget |
+| coverage of a held-out human reference, matched *n* = 450 | **1st of 12 corpora**, 0.4441 vs Alpaca's 0.3722, from a corpus 1/20 the size |
 | naive psychometric bank, exact-duplicate rate | **73.6%** (one item ×2,726 in 10,000) |
 | same, with axis conditioning | 0.0% |
 | usable capacity at a blind-adjudicated enemy radius | RAC **100%**, human MMLU 94.9%, naive prompting **15.3%** |
@@ -45,7 +48,7 @@ procedure that produced them (`data/maxmin/provenance.json`).
 | naming a whole 10-way partition vs a 5-way slice of it | entropy **+0.219** [+0.138, +0.297] vs +0.117 |
 | enumerating every device form of one construct | dominant form **76% → 24%**, contract held at 100% |
 | k-center: min-gap rank / coverage rank | **1st / last** |
-| coverage AUC → retrieval quality / in-context quality / fine-tuning | *r* = 0.97 / 0.82 / **−0.17** |
+| coverage AUC → retrieval quality / in-context quality / fine-tuning | *r* = 0.97 (near-collinear by construction, §7.6) / 0.82 / **−0.17** |
 
 ## What's here
 
@@ -54,9 +57,10 @@ paper/      source.md (the manuscript), build_paper.py, figures/, and the built
             paper.md, paper.tex, paper.pdf
 index.html  the GitHub Pages site: the paper with every figure embedded
 build_site.py, site.css, preview.sh
-code/       every script needed to reproduce the numbers (see code/README.md);
+code/       the scripts behind the numbers (see code/README.md);
             code/rac_improve/ holds the axis-level experiments of §8
-data/       result JSONs, provenance registry, mined ledgers
+data/       result JSONs and the provenance registry
+CITATION.cff, LICENSE, sitemap.xml
 ```
 
 `paper/source.md` is the manuscript. Figures are referenced as `{{FIG:name.png}}`
@@ -85,12 +89,12 @@ next item should land and have no way to decode that point into text. Everything
 follows from that: the system must propose, measure and select rather than solve,
 and the only steering handles are language-valued.
 
-Three lessons transfer past the method. **Name the measure**, because covering
+Past this method, **name the measure**, because covering
 and packing are not one problem and each one's characteristic tool damages the
 other's score. **Score your control variables by manipulation, not attribution**
-— the obvious observational estimator is not merely noisy but inverted,
-penalizing an axis in proportion to how well it works (`code/calculus.py`, and
-the ground-truth test in §5.3). And **name the whole space, or the repetition
+— the obvious observational estimator is inverted,
+penalizing an axis in proportion to how well it works (§5.3, with its
+ground-truth test in `code/rac_improve/test_scoring_ground_truth.py`). And **name the whole space, or the repetition
 moves** — an axis enumerating a proper subset of the space a measure is defined
 over displaces concentration into the complement rather than removing it (§8.3,
 seven controlled comparisons with blind judges).
@@ -99,16 +103,38 @@ seven controlled comparisons with blind judges).
 
 ```bash
 pip install numpy scipy matplotlib transformers torch soundfile pillow
-python3 code/verify_theory.py     # 8/8 theorem checks
-python3 code/verify_slices.py     # 7/7 conditional-dimension checks
-python3 code/calculus.py          # calculus self-test, both objectives
+python3 code/simulate_exam.py     # writes the exam outputs T3 and T4 read
+python3 code/verify_theory.py     # 9/9 theorem checks
+python3 code/verify_slices.py     # 7/7 conditional-dimension checks (slow)
+python3 code/calculus.py          # calculus self-test (max-min objective)
 ```
 
 Live runs need `OPENROUTER_API_KEY`, a local Ollama with `nomic-embed-text`, and
 optionally `OPENAI_API_KEY` (images) and a Gemini key (Lyria audio). See
 `code/README.md`.
 
+The generated corpora are not in this repository: they and their embeddings live
+in the several-gigabyte working tree. A few scripts also import modules from
+that tree (the head-to-head script behind §7.3 and the manipulation scorer
+behind §5.3 among them), so the theory checks above run from this repository
+alone and the live experiments do not.
+
+## Citing
+
+```bibtex
+@misc{young2026rac,
+  title        = {{Recursive Axis Conditioning for Diverse Synthetic Data Generation}},
+  author       = {Young, Halley},
+  year         = {2026},
+  month        = oct,
+  howpublished = {\url{https://thehalleyyoung.github.io/rac/}},
+  note         = {Code and data: \url{https://github.com/thehalleyyoung/rac}}
+}
+```
+
+GitHub's "Cite this repository" button reads the same details from
+[`CITATION.cff`](CITATION.cff).
+
 ## Licence
 
-Code MIT. Paper CC BY 4.0. Generated corpora are model outputs and are released
-alongside the code for replication.
+Code: MIT ([`LICENSE`](LICENSE)). Paper and figures: CC BY 4.0.
