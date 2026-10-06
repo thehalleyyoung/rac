@@ -24,6 +24,7 @@ DATE_SHOWN = "October 2026"
 PUB_DATE = "2026/10/06"            # citation_publication_date, YYYY/MM/DD
 SITE_URL = "https://thehalleyyoung.github.io/rac/"
 PDF_URL = SITE_URL + "paper/paper.pdf"
+DOI = "10.5281/zenodo.23197986"                # Zenodo concept DOI: resolves to the latest version
 REPO_URL = "https://github.com/thehalleyyoung/rac"
 COMPANION_URL = "https://thehalleyyoung.github.io/proxy-embeddings/"
 COMPANION_LABEL = "companion paper: Proxy Embeddings"
@@ -44,7 +45,9 @@ BIBTEX = f"""@misc{{young2026rac,
   author       = {{{AUTHOR_CITATION}}},
   year         = {{2026}},
   month        = oct,
-  howpublished = {{\\url{{{SITE_URL}}}}},
+  publisher    = {{Zenodo}},
+  doi          = {{{DOI}}},
+  url          = {{https://doi.org/{DOI}}},
   note         = {{Code and data: \\url{{{REPO_URL}}}}}
 }}"""
 
@@ -136,6 +139,7 @@ def head_meta() -> str:
         ("citation_author", AUTHOR_CITATION),
         ("citation_publication_date", PUB_DATE),
         ("citation_pdf_url", PDF_URL),
+        ("citation_doi", DOI),
         ("citation_abstract_html_url", SITE_URL),
         ("citation_fulltext_html_url", SITE_URL),
         ("citation_language", "en"),
@@ -156,7 +160,7 @@ def cite_block() -> str:
     esc = lambda t: t.replace("&", "&amp;").replace("<", "&lt;")
     return ('<h2 id="cite">Cite this paper</h2>\n'
             f'<p>Young, H. ({DATE_SHOWN.split()[-1]}). <em>{TITLE}</em>. '
-            f'<a href="{SITE_URL}">{SITE_URL}</a></p>\n'
+            f'Zenodo. <a href="https://doi.org/{DOI}">https://doi.org/{DOI}</a></p>\n'
             f'<pre><code>{esc(BIBTEX)}</code></pre>\n')
 
 

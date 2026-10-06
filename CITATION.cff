@@ -6,6 +6,15 @@ authors:
     given-names: Halley
     email: thehalleyyoung@gmail.com
 date-released: 2026-10-06
+doi: 10.5281/zenodo.23197986
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23197986
+    description: Concept DOI (all versions)
+  - type: doi
+    value: 10.5281/zenodo.23197987
+    description: Version 1.0.0
+version: 1.0.0
 url: "https://thehalleyyoung.github.io/rac/"
 repository-code: "https://github.com/thehalleyyoung/rac"
 license: MIT
@@ -32,4 +41,7 @@ preferred-citation:
       given-names: Halley
   year: 2026
   month: 10
+  doi: 10.5281/zenodo.23197986
+  publisher:
+    name: Zenodo
   url: "https://thehalleyyoung.github.io/rac/"

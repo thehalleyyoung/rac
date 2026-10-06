@@ -1,6 +1,6 @@
 # Recursive Axis Conditioning for Diverse Synthetic Data Generation
 
-Halley Young · October 2026
+Halley Young · October 2026 · [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23197986.svg)](https://doi.org/10.5281/zenodo.23197986)
 
 **Read it:** [web version](https://thehalleyyoung.github.io/rac/) ·
 [PDF](paper/paper.pdf) · companion paper:
@@ -127,7 +127,9 @@ alone and the live experiments do not.
   author       = {Young, Halley},
   year         = {2026},
   month        = oct,
-  howpublished = {\url{https://thehalleyyoung.github.io/rac/}},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.23197986},
+  url          = {https://doi.org/10.5281/zenodo.23197986},
   note         = {Code and data: \url{https://github.com/thehalleyyoung/rac}}
 }
 ```
