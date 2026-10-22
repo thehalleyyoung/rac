@@ -1,5 +1,5 @@
 {
-  "version": "financial-axes-v2.10-four-categories",
+  "version": "financial-axes-v2.11-four-categories",
   "provenance": "RQ01 designed research policy; no claim of empirically representative retail frequencies. Catalog names are design inputs, not verified provider coverage or live listings.",
   "tasks": {
     "price_move": {
@@ -36,14 +36,14 @@
       }
     },
     "full_analysis": {
-      "description": "Integrate multiple market signals into an asset assessment",
+      "description": "Integrate multiple independent classes of market evidence into an asset assessment, beyond a technical setup alone",
       "domains": [
         "crypto_majors",
         "commodities",
         "equities"
       ],
       "variants": {
-        "signal_integration": "Combine trend, volume and other independent signals",
+        "signal_integration": "Combine price/trend with at least one nontechnical class such as macro, news, derivatives or flows",
         "signal_conflict": "Reconcile contradictory signals rather than picking one blindly",
         "liquidity_context": "Combine liquidity, trading activity and recent news",
         "bull_bear_case": "Present evidence for competing bullish and bearish cases",
@@ -1397,7 +1397,8 @@
   "format_policy": "deterministic short format suffix only when absent; raw model text retained",
   "task_mode_constraints": {
     "full_analysis": [
-      "open_query"
+      "open_query",
+      "claim_check"
     ],
     "event_study": [
       "open_query"
@@ -1428,5 +1429,5 @@
       "claim_check"
     ]
   },
-  "calibration_note": "A single-background diagnostic preserved premise/form labels but changed the parent task for four of twelve outputs. Production mode constraints narrowed accordingly; the narrowing has offline tests, not a fresh paid full-bank validation."
+  "calibration_note": "One background per intervened axis: premise/form labels matched 12/12; intended full-analysis parent matched 8/12. Open-query premise variants were labeled technical setups, hypothetical variants scenario analysis, claim checks full analysis. Production excludes full-analysis hypothetical mode and sharpens independent evidence classes. Narrowing is offline tested, not a fresh paid full-bank validation."
 }

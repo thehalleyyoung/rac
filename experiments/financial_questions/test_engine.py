@@ -141,7 +141,7 @@ class Tests(unittest.TestCase):
         self.assertNotIn('source_id',seen[0]['requests'][0]['spec'])
     def test_production_rejects_observed_task_mode_coupling(self):
         s=sample_one(self.c,random.Random(2),'full_analysis','crypto_majors','open_query',ASOF)
-        s['premise_mode']='claim_check'
+        s['premise_mode']='hypothetical'
         with self.assertRaises(ValueError):validate_spec(self.c,s)
         # Explicit intervention probes may deliberately leave the production region.
         s['intervention_axis']='premise_mode';validate_spec(self.c,s)
