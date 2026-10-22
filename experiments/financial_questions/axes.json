@@ -1,0 +1,1432 @@
+{
+  "version": "financial-axes-v2.10-four-categories",
+  "provenance": "RQ01 designed research policy; no claim of empirically representative retail frequencies. Catalog names are design inputs, not verified provider coverage or live listings.",
+  "tasks": {
+    "price_move": {
+      "description": "Explain or verify the causes of a market price move",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "spot_derivatives": "Distinguish spot flow from derivatives/liquidation explanations",
+        "market_specific": "Distinguish broad-market and asset-specific drivers",
+        "relative_divergence": "Explain why two assets moved differently",
+        "macro_channel": "Assess how rates/currency/macro news could transmit into price",
+        "reversal": "Explain a reversal or a failed breakout",
+        "premise_check": "Verify that the claimed move happened before explaining it"
+      }
+    },
+    "news": {
+      "description": "Retrieve and assess recent asset news, not price analysis",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "announcement": "Find recent issuer/protocol/product announcements",
+        "governance": "Find recent governance/management/treasury news",
+        "incident": "Check for recent incidents, outages or operational problems",
+        "listing_access": "Find recent listings, trading-access or fund changes",
+        "rumor_check": "Verify a circulating news rumor against primary sources",
+        "freshness": "Separate genuinely new reporting from recycled news"
+      }
+    },
+    "full_analysis": {
+      "description": "Integrate multiple market signals into an asset assessment",
+      "domains": [
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "signal_integration": "Combine trend, volume and other independent signals",
+        "signal_conflict": "Reconcile contradictory signals rather than picking one blindly",
+        "liquidity_context": "Combine liquidity, trading activity and recent news",
+        "bull_bear_case": "Present evidence for competing bullish and bearish cases",
+        "trend_catalyst": "Combine current trend with possible future catalysts",
+        "change_since": "Explain what changed across several signals since an earlier time",
+        "weekly_outlook": "Combine the past week\u2019s performance with a conditional next-week setup"
+      }
+    },
+    "relative_strength": {
+      "description": "Rank a supplied universe by relative performance",
+      "domains": [
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "benchmark_return": "Rank supplied assets by return relative to a named benchmark",
+        "two_windows": "Compare rankings across two lookback windows",
+        "drawdown_adjusted": "Rank relative performance while considering drawdown",
+        "risk_adjusted": "Rank performance after accounting for volatility",
+        "sector_comparison": "Rank supplied sector/fund proxies against a benchmark",
+        "trend_consistency": "Rank how consistently assets outperformed a benchmark"
+      }
+    },
+    "event_study": {
+      "description": "Compare observed historical responses to past events",
+      "domains": [
+        "crypto_majors",
+        "commodities"
+      ],
+      "variants": {
+        "macro_repeats": "Compare returns after several past macro releases",
+        "intraday_daily": "Compare initial and next-day reactions to past releases",
+        "cross_asset": "Compare two assets after the same historical events",
+        "drawdown": "Compare post-event drawdowns across historical occurrences",
+        "reversal_frequency": "Count how often the initial historical reaction reversed",
+        "anticipation_reaction": "Compare pre-event and post-event historical returns"
+      }
+    },
+    "theme_exposure": {
+      "description": "Find and compare instruments expressing an investment theme",
+      "domains": [
+        "equities"
+      ],
+      "variants": {
+        "direct_indirect": "Compare direct and indirect ways to express a theme",
+        "single_basket": "Compare single-name exposure with a basket",
+        "pure_diversified": "Compare focused and diversified thematic exposure",
+        "cost_access": "Compare access, fees and trading constraints for a theme",
+        "proxy_quality": "Assess whether an available proxy really tracks the thesis",
+        "liquidity_tradeoff": "Compare thematic exposure with liquidity/concentration tradeoffs"
+      }
+    },
+    "allocate_capital": {
+      "description": "Choose purchases or staged deployment of new capital",
+      "domains": [
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "single_choice": "Choose among assets for a fresh budget",
+        "staged_entry": "Compare deploying a fresh budget now versus in stages",
+        "concentration": "Allocate new capital while limiting concentration",
+        "holding_horizon": "Allocate fresh capital for a stated holding period",
+        "alternatives": "Compare explicit alternatives for a new purchase",
+        "risk_preference": "Allocate new capital under a stated loss/risk preference"
+      }
+    },
+    "manage_position": {
+      "description": "Hold, trim, exit or reallocate an explicitly owned position",
+      "domains": [
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "hold_exit": "Compare holding an owned position with exiting it",
+        "trim_all": "Compare trimming an owned position with a full exit",
+        "unrealized_loss": "Decide what to do with an owned losing position",
+        "unrealized_gain": "Decide what to do with an owned profitable position",
+        "reallocate": "Compare keeping an owned position with reallocating it",
+        "decision_trigger": "Identify evidence that would change a hold/sell decision"
+      }
+    },
+    "short_setup": {
+      "description": "Identify or compare potential short setups",
+      "domains": [
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "invalidation": "Find a short idea with a clear invalidation condition",
+        "compare_candidates": "Compare two candidate shorts with entry conditions",
+        "crowding_cost": "Find a short while considering crowding/funding/borrow costs",
+        "short_horizon": "Find a short for a specified short holding period",
+        "relative_weakness": "Find a weak asset against a stronger benchmark",
+        "liquidity": "Find a short with sufficient liquidity and feasible execution"
+      }
+    },
+    "catalyst_entry": {
+      "description": "Decide whether to buy or wait ahead of a conditional prospective catalyst",
+      "domains": [
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "priced_in": "Assess whether a possible catalyst is already priced in",
+        "buy_wait": "Compare buying before a possible event with waiting",
+        "event_confirmation": "Make an entry decision conditional on confirming an event",
+        "sell_news": "Assess risk of buying ahead of a possible sell-the-news reaction",
+        "delay_failure": "Assess entry risk if a prospective event is delayed or fails",
+        "alternative_exposure": "Compare ways to enter around the same possible catalyst"
+      }
+    },
+    "risk_sizing": {
+      "description": "Calculate or assess position size under explicit loss constraints",
+      "domains": [
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "stop_budget": "Size a position from a hypothetical loss budget and stop distance",
+        "volatility_size": "Compare position sizes under different volatility assumptions",
+        "concentration_cap": "Size an addition under a portfolio concentration cap",
+        "leverage_margin": "Assess leverage/margin limits for a hypothetical trade",
+        "scale_in": "Compare sizing across staged entries",
+        "gap_risk": "Assess how gap/slippage risk changes a nominal stop-based size"
+      }
+    },
+    "execution_cost": {
+      "description": "Assess implementation costs for a hypothetical order",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "market_limit": "Compare market and limit order tradeoffs",
+        "slippage_depth": "Estimate possible slippage from available depth",
+        "fees_total": "Compare total trading costs including fees and spread",
+        "slice_order": "Compare a single order with sliced execution",
+        "venue_cost": "Compare execution cost across available venues",
+        "illiquid_period": "Assess execution risk when trading activity is thin"
+      }
+    },
+    "portfolio_risk": {
+      "description": "Assess joint exposures and concentration of a supplied portfolio",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "concentration": "Find common exposures hidden behind several holdings",
+        "correlation": "Assess diversification versus correlated losses",
+        "stress": "Assess portfolio impact of a hypothetical market shock",
+        "hedge": "Compare ways to reduce a specified portfolio exposure",
+        "rebalance": "Compare rebalancing alternatives against a stated objective",
+        "liquidity": "Assess portfolio liquidity under a hypothetical exit need"
+      }
+    },
+    "source_verification": {
+      "description": "Assess truth, provenance, time or comparability of a market claim",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "primary_source": "Verify a quoted market claim against primary sources",
+        "timestamp": "Check whether cited data are stale or time-mismatched",
+        "definitions": "Resolve conflicting numbers with different metric definitions",
+        "venue_identity": "Check that a claim refers to the same market/instrument/venue",
+        "causal_claim": "Distinguish an asserted cause from mere correlation",
+        "cherry_picking": "Check whether a performance claim cherry-picks its comparison window"
+      }
+    },
+    "instrument_mechanics": {
+      "description": "Apply instrument mechanics to a concrete retail situation",
+      "domains": [
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "carrying_cost": "Explain carrying/funding/financing cost for a hypothetical position",
+        "settlement": "Explain settlement or cash-flow mechanics for a hypothetical position",
+        "tracking": "Explain why an instrument may differ from its underlying exposure",
+        "leverage_payoff": "Explain leveraged versus unleveraged hypothetical payoff",
+        "liquidity_access": "Explain how instrument access/liquidity affects a hypothetical choice",
+        "structural_risk": "Explain product-specific risks for a concrete holding choice"
+      }
+    },
+    "scenario_analysis": {
+      "description": "Reason conditionally about a hypothetical future market state",
+      "domains": [
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "rate_shock": "Assess effects of a hypothetical rate surprise",
+        "risk_off": "Compare exposures under a hypothetical risk-off move",
+        "liquidity_shock": "Assess effects of a hypothetical liquidity squeeze",
+        "currency_move": "Assess effects of a hypothetical currency move",
+        "catalyst_failure": "Compare outcomes if a hypothetical catalyst succeeds or fails",
+        "counterfactual": "Compare two explicit hypothetical market paths"
+      }
+    },
+    "token_due_diligence": {
+      "description": "Assess an onchain token identity, trading health and specific risks",
+      "domains": [
+        "onchain_spot"
+      ],
+      "variants": {
+        "identity_drivers": "Resolve token identity and explain what might drive trading",
+        "trading_status": "Check whether trading/project activity continues or failed",
+        "holder_distribution": "Assess holder concentration together with volume/trading health",
+        "rug_risk": "Investigate rug/manipulation risk using onchain evidence",
+        "entry_risk": "Assess whether an onchain token is worth entering given risks",
+        "exit_liquidity": "Assess ability to exit an onchain token without assuming liquidity"
+      }
+    },
+    "derivatives_positioning": {
+      "description": "Assess derivatives positioning rather than merely quote a price",
+      "domains": [
+        "crypto_majors"
+      ],
+      "variants": {
+        "funding_crowding": "Use funding to assess whether longs or shorts are crowded",
+        "open_interest": "Assess changes in open interest and what they imply",
+        "price_oi": "Interpret price and open-interest changes jointly",
+        "funding_oi": "Reconcile funding and open-interest signals",
+        "basis": "Assess spot/futures basis and positioning",
+        "liquidation_risk": "Assess liquidation/crowding risk from derivatives evidence"
+      }
+    },
+    "technical_setup": {
+      "description": "Assess a concrete technical trading setup or risk level",
+      "domains": [
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "support_resistance": "Identify support/resistance and their relevance",
+        "breakout": "Check whether a potential breakout is confirmed",
+        "extension": "Assess whether a move is overextended",
+        "stop_invalidation": "Choose a defensible stop/invalidation for a hypothetical trade",
+        "entry_trigger": "Identify evidence needed to trigger an entry",
+        "scenario_levels": "Compare alternative price scenarios and relevant levels"
+      }
+    },
+    "fund_flows": {
+      "description": "Measure or explain fund/institutional capital flows, not token trading volume",
+      "domains": [
+        "crypto_majors"
+      ],
+      "variants": {
+        "etf_net": "Report aggregate ETF net inflows/outflows for an asset",
+        "daily_weekly": "Compare daily and weekly ETF flow patterns",
+        "issuer_breakdown": "Compare flows across fund issuers",
+        "flow_price": "Compare fund flows with underlying price behavior",
+        "flow_reversal": "Check whether fund-flow direction changed",
+        "source_reconcile": "Reconcile fund-flow reports and their timestamps"
+      }
+    },
+    "relative_value": {
+      "description": "Compare linked asset values, ratios, spreads or an asset backing premium",
+      "domains": [
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "precious_ratio": "Assess the gold/silver ratio and relative-value implications",
+        "crude_spread": "Assess the Brent-WTI spread and its interpretation",
+        "asset_nav": "Compare an equity value with reported underlying asset holdings/NAV",
+        "relative_expensiveness": "Assess whether one linked asset looks expensive versus another",
+        "historical_range": "Compare a ratio/spread/premium with its own history",
+        "drivers": "Explain what could account for a ratio/spread/premium"
+      }
+    },
+    "event_outlook": {
+      "description": "Assess a relevant event calendar, expectations and market implications",
+      "domains": [
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "calendar_consensus": "Find the next issuer earnings date and expected results",
+        "news_reaction": "Relate supply/producer-policy news to a commodity reaction",
+        "weather": "Assess weather-linked catalysts for natural gas",
+        "supply_demand": "Assess supply/demand events relevant to a commodity outlook",
+        "event_risk": "Compare possible event outcomes without claiming a schedule",
+        "expectations": "Separate event expectations from an already observed outcome"
+      }
+    },
+    "trade_selection": {
+      "description": "Choose among prospective longs without assuming a fresh capital budget",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "risk_reward": "Identify an attractive long after comparing risk/reward",
+        "compare_longs": "Compare two possible long trades",
+        "timing": "Compare entering a long now versus waiting",
+        "liquidity_filter": "Choose a possible long while accounting for liquidity",
+        "thematic_selection": "Choose a long consistent with an investment theme",
+        "invalidation": "Choose a potential long with a clear invalidation condition"
+      }
+    },
+    "book_depth": {
+      "description": "Request concrete visible order-book/depth information, not a price-cause explanation",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "top_levels": "Show top bid and ask price levels with displayed sizes",
+        "price_band": "Show displayed depth within a price band",
+        "imbalance": "Compare displayed bid and ask depth",
+        "venues": "Compare visible depth across named venues",
+        "spread_levels": "Show spread together with nearby levels",
+        "order_capacity": "Assess displayed depth for a hypothetical order size"
+      }
+    },
+    "sentiment": {
+      "description": "Summarize public discussion and narratives",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "equities"
+      ],
+      "variants": {
+        "bull_bear": "Compare bullish and bearish public narratives",
+        "narrative_change": "Compare how public discussion changed over time",
+        "disagreement": "Identify what public participants disagree about",
+        "credibility": "Assess sources behind a public narrative",
+        "cross_asset": "Compare public narratives for two assets",
+        "promotion_noise": "Separate substantive discussion from promotion/bots"
+      }
+    }
+  },
+  "profiles": {
+    "four_category_reference": {
+      "description": "Equal coverage of all 32 user-supplied intent cells, eight per category; compatible randomized variation within each cell.",
+      "reference_cells": true,
+      "category_weights": {
+        "onchain_spot": 1,
+        "crypto_majors": 1,
+        "commodities": 1,
+        "equities": 1
+      }
+    },
+    "four_category_explore": {
+      "description": "Equal category mass; randomized selection from additional compatible retail tasks. Reference intent cells remain the starting vocabulary, not mandatory fixed quotas.",
+      "reference_cells": false,
+      "category_weights": {
+        "onchain_spot": 1,
+        "crypto_majors": 1,
+        "commodities": 1,
+        "equities": 1
+      }
+    }
+  },
+  "axes": {
+    "premise_mode": {
+      "open_query": 0.65,
+      "hypothetical": 0.25,
+      "claim_check": 0.1
+    },
+    "voice": {
+      "casual": 0.55,
+      "plain": 0.3,
+      "skeptical": 0.15
+    },
+    "difficulty": {
+      "basic": 0.45,
+      "intermediate": 0.4,
+      "advanced": 0.15
+    },
+    "evidence_demand": {
+      "ordinary": 0.65,
+      "primary_sources": 0.15,
+      "conflicting_evidence": 0.1,
+      "missing_or_stale_data": 0.1
+    },
+    "answer_shape": {
+      "plain": 0.6,
+      "brief_bullets": 0.2,
+      "ranked_list": 0.1,
+      "comparison_table": 0.1
+    },
+    "intent_structure": {
+      "single_request": 0.6,
+      "linked_followup": 0.4
+    }
+  },
+  "horizons": {
+    "current": [
+      "right now",
+      "today",
+      "over the last hour"
+    ],
+    "trailing": [
+      "over the last 24 hours",
+      "over the last 7 days",
+      "over the last 30 days"
+    ],
+    "historical": [
+      "after the last three FOMC decisions",
+      "after the last three CPI releases",
+      "after the last three Fed rate decisions"
+    ],
+    "prospective": [
+      "over the next day",
+      "over the next week",
+      "over the next month"
+    ]
+  },
+  "themes": {
+    "onchain_spot": [
+      "onchain token momentum",
+      "onchain project risk"
+    ],
+    "crypto_majors": [
+      "crypto infrastructure",
+      "major crypto relative strength"
+    ],
+    "commodities": [
+      "precious metals",
+      "energy supply",
+      "industrial metals"
+    ],
+    "equities": [
+      "AI stocks",
+      "semiconductors",
+      "optical networking"
+    ]
+  },
+  "catalog": {
+    "onchain_spot": [
+      {
+        "symbol": "SI",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "autoton",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "ABYSS",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "claudia",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "STONK",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "NIL",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "GRASS",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "DRV",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      },
+      {
+        "symbol": "PRL",
+        "kind": "onchain_token",
+        "identity_status": "unresolved user-supplied name/symbol; chain/address absent",
+        "chain": null,
+        "address": null
+      }
+    ],
+    "crypto_majors": [
+      {
+        "symbol": "BTC",
+        "kind": "crypto_asset",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "ETH",
+        "kind": "crypto_asset",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "SOL",
+        "kind": "crypto_asset",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "HYPE",
+        "kind": "crypto_asset",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "XRP",
+        "kind": "crypto_asset",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "DOGE",
+        "kind": "crypto_asset",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      }
+    ],
+    "commodities": [
+      {
+        "symbol": "GOLD",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      },
+      {
+        "symbol": "SILVER",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      },
+      {
+        "symbol": "CRUDE",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      },
+      {
+        "symbol": "NATGAS",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      },
+      {
+        "symbol": "COPPER",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      },
+      {
+        "symbol": "BRENT",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      },
+      {
+        "symbol": "WTI",
+        "kind": "commodity_reference",
+        "identity_status": "underlying reference, not a specified tradable contract"
+      }
+    ],
+    "equities": [
+      {
+        "symbol": "NVDA",
+        "kind": "equity",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "TSLA",
+        "kind": "equity",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "MU",
+        "kind": "equity",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "SPX",
+        "kind": "equity_index",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "MSTR",
+        "kind": "equity",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      },
+      {
+        "symbol": "AAPL",
+        "kind": "equity",
+        "identity_status": "reference symbol; provider identity/market not verified"
+      }
+    ]
+  },
+  "venues": {
+    "onchain_spot": [
+      "the token\u2019s resolved spot venue"
+    ],
+    "crypto_majors": [
+      "the resolved spot or perp market"
+    ],
+    "commodities": [
+      "the specified commodity instrument/venue"
+    ],
+    "equities": [
+      "the specified equity market"
+    ]
+  },
+  "bounds": {
+    "max_specs": 240,
+    "max_rounds": 3,
+    "candidates_per_spec": 2,
+    "spec_pool": 8,
+    "max_words": 30,
+    "duplicate_cosine": 0.9,
+    "budget_usd": 5,
+    "max_tokens": 500000,
+    "max_requests": 80
+  },
+  "seeded_fields": [
+    "task",
+    "variant",
+    "domain",
+    "symbols",
+    "horizon_type",
+    "window",
+    "premise_mode",
+    "voice",
+    "difficulty",
+    "evidence_demand",
+    "answer_shape",
+    "trader_context",
+    "decision_constraint",
+    "theme",
+    "venue_scope",
+    "source_id",
+    "asset_rule",
+    "intent_structure",
+    "holding_period",
+    "risk_appetite",
+    "evidence_surface"
+  ],
+  "reference_cells": [
+    {
+      "source_id": "oc-si",
+      "category": "onchain_spot",
+      "task": "token_due_diligence",
+      "allowed_variants": [
+        "entry_risk",
+        "rug_risk",
+        "exit_liquidity"
+      ],
+      "asset_rule": "onchain_any",
+      "reference_prompt": "whats going on with $SI? worth aping?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-autoton",
+      "category": "onchain_spot",
+      "task": "token_due_diligence",
+      "allowed_variants": [
+        "trading_status",
+        "rug_risk",
+        "identity_drivers"
+      ],
+      "asset_rule": "onchain_any",
+      "reference_prompt": "what happened to autoton? did it rug?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-abyss",
+      "category": "onchain_spot",
+      "task": "token_due_diligence",
+      "allowed_variants": [
+        "holder_distribution",
+        "trading_status",
+        "exit_liquidity"
+      ],
+      "asset_rule": "onchain_any",
+      "reference_prompt": "is ABYSS still running? hows volume and who's holding it",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-claudia",
+      "category": "onchain_spot",
+      "task": "token_due_diligence",
+      "allowed_variants": [
+        "rug_risk",
+        "holder_distribution",
+        "identity_drivers"
+      ],
+      "asset_rule": "onchain_any",
+      "reference_prompt": "$claudia is trending on fomo, legit or rug risk?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-stonk",
+      "category": "onchain_spot",
+      "task": "trade_selection",
+      "allowed_variants": [
+        "risk_reward",
+        "timing",
+        "invalidation"
+      ],
+      "asset_rule": "onchain_any",
+      "reference_prompt": "whats the play on STONK today?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-nil-grass",
+      "category": "onchain_spot",
+      "task": "trade_selection",
+      "allowed_variants": [
+        "compare_longs",
+        "risk_reward",
+        "liquidity_filter"
+      ],
+      "asset_rule": "onchain_pair",
+      "reference_prompt": "NIL or GRASS, which is the better long right now?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-drv",
+      "category": "onchain_spot",
+      "task": "execution_cost",
+      "allowed_variants": [
+        "slippage_depth",
+        "fees_total",
+        "market_limit"
+      ],
+      "asset_rule": "drv_spot",
+      "reference_prompt": "how is DRV trading on hyperliquid spot? is liquidity ok for a $5k buy?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "oc-prl",
+      "category": "onchain_spot",
+      "task": "token_due_diligence",
+      "allowed_variants": [
+        "identity_drivers",
+        "trading_status",
+        "holder_distribution"
+      ],
+      "asset_rule": "onchain_any",
+      "reference_prompt": "what is PRL (pearl) and why is it moving?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-btc-drivers",
+      "category": "crypto_majors",
+      "task": "price_move",
+      "allowed_variants": [
+        "spot_derivatives",
+        "market_specific",
+        "macro_channel",
+        "reversal"
+      ],
+      "asset_rule": "major_any",
+      "reference_prompt": "whats driving BTC today?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-eth-crowded",
+      "category": "crypto_majors",
+      "task": "derivatives_positioning",
+      "allowed_variants": [
+        "funding_crowding",
+        "funding_oi",
+        "liquidation_risk"
+      ],
+      "asset_rule": "major_any",
+      "reference_prompt": "is ETH funding elevated right now? are longs crowded?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-sol-levels",
+      "category": "crypto_majors",
+      "task": "technical_setup",
+      "allowed_variants": [
+        "support_resistance",
+        "entry_trigger",
+        "scenario_levels"
+      ],
+      "asset_rule": "major_any",
+      "reference_prompt": "key support and resistance levels for SOL this week?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-hype-vs-sol",
+      "category": "crypto_majors",
+      "task": "relative_strength",
+      "allowed_variants": [
+        "benchmark_return",
+        "two_windows",
+        "risk_adjusted"
+      ],
+      "asset_rule": "major_pair",
+      "reference_prompt": "HYPE vs SOL over the last 30 days, which has been stronger?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-xrp-news",
+      "category": "crypto_majors",
+      "task": "news",
+      "allowed_variants": [
+        "announcement",
+        "freshness",
+        "incident",
+        "governance"
+      ],
+      "asset_rule": "major_any",
+      "reference_prompt": "any news on XRP today?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-weakest",
+      "category": "crypto_majors",
+      "task": "short_setup",
+      "allowed_variants": [
+        "relative_weakness",
+        "compare_candidates",
+        "invalidation"
+      ],
+      "asset_rule": "major_pair",
+      "reference_prompt": "which major looks weakest for a short right now?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-etf-flows",
+      "category": "crypto_majors",
+      "task": "fund_flows",
+      "allowed_variants": [
+        "etf_net",
+        "daily_weekly",
+        "issuer_breakdown",
+        "flow_price"
+      ],
+      "asset_rule": "etf_underlying",
+      "reference_prompt": "what were the BTC ETF flows this week?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "mj-doge-oi",
+      "category": "crypto_majors",
+      "task": "derivatives_positioning",
+      "allowed_variants": [
+        "open_interest",
+        "price_oi",
+        "funding_oi"
+      ],
+      "asset_rule": "major_any",
+      "reference_prompt": "is open interest building on DOGE?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-gold-why",
+      "category": "commodities",
+      "task": "price_move",
+      "allowed_variants": [
+        "macro_channel",
+        "market_specific",
+        "reversal"
+      ],
+      "asset_rule": "commodity_any",
+      "reference_prompt": "why is gold moving today?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-oil-opec",
+      "category": "commodities",
+      "task": "event_outlook",
+      "allowed_variants": [
+        "news_reaction",
+        "supply_demand",
+        "expectations"
+      ],
+      "asset_rule": "crude",
+      "reference_prompt": "any OPEC news? how is crude reacting?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-gold-silver",
+      "category": "commodities",
+      "task": "relative_value",
+      "allowed_variants": [
+        "precious_ratio",
+        "historical_range",
+        "relative_expensiveness",
+        "drivers"
+      ],
+      "asset_rule": "precious_pair",
+      "reference_prompt": "what's the gold/silver ratio right now, is silver cheap?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-natgas",
+      "category": "commodities",
+      "task": "event_outlook",
+      "allowed_variants": [
+        "weather",
+        "supply_demand",
+        "event_risk"
+      ],
+      "asset_rule": "natgas",
+      "reference_prompt": "natgas outlook for the week, any weather catalysts?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-copper",
+      "category": "commodities",
+      "task": "technical_setup",
+      "allowed_variants": [
+        "breakout",
+        "entry_trigger",
+        "scenario_levels"
+      ],
+      "asset_rule": "commodity_any",
+      "reference_prompt": "is copper breaking out?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-brent-wti",
+      "category": "commodities",
+      "task": "relative_value",
+      "allowed_variants": [
+        "crude_spread",
+        "historical_range",
+        "drivers"
+      ],
+      "asset_rule": "crude_pair",
+      "reference_prompt": "whats the brent wti spread right now?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-gold-stop",
+      "category": "commodities",
+      "task": "technical_setup",
+      "allowed_variants": [
+        "stop_invalidation",
+        "scenario_levels",
+        "support_resistance"
+      ],
+      "asset_rule": "commodity_any",
+      "reference_prompt": "I want to long gold with 5x, where's a sensible stop?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "cm-momentum",
+      "category": "commodities",
+      "task": "relative_strength",
+      "allowed_variants": [
+        "benchmark_return",
+        "two_windows",
+        "trend_consistency"
+      ],
+      "asset_rule": "commodity_basket",
+      "reference_prompt": "which commodity has the most momentum this week?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-nvda-earnings",
+      "category": "equities",
+      "task": "event_outlook",
+      "allowed_variants": [
+        "calendar_consensus",
+        "event_risk",
+        "expectations"
+      ],
+      "asset_rule": "issuer",
+      "reference_prompt": "when is NVDA's next earnings and what's expected?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-tsla-why",
+      "category": "equities",
+      "task": "price_move",
+      "allowed_variants": [
+        "market_specific",
+        "macro_channel",
+        "reversal"
+      ],
+      "asset_rule": "equity_any",
+      "reference_prompt": "why is TSLA moving?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-mu-extended",
+      "category": "equities",
+      "task": "technical_setup",
+      "allowed_variants": [
+        "extension",
+        "breakout",
+        "scenario_levels"
+      ],
+      "asset_rule": "equity_any",
+      "reference_prompt": "MU has been ripping, is it overextended?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-spx-week",
+      "category": "equities",
+      "task": "full_analysis",
+      "allowed_variants": [
+        "weekly_outlook",
+        "bull_bear_case",
+        "change_since"
+      ],
+      "asset_rule": "index",
+      "reference_prompt": "how did the S&P do this week and what's the setup for next week?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-ai-long",
+      "category": "equities",
+      "task": "trade_selection",
+      "allowed_variants": [
+        "thematic_selection",
+        "risk_reward",
+        "compare_longs"
+      ],
+      "asset_rule": "ai_equity",
+      "reference_prompt": "best AI stock to long right now?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-mstr-premium",
+      "category": "equities",
+      "task": "relative_value",
+      "allowed_variants": [
+        "asset_nav",
+        "historical_range",
+        "drivers"
+      ],
+      "asset_rule": "holdings_proxy",
+      "reference_prompt": "is MSTR trading at a premium to the BTC it holds?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-aapl-news",
+      "category": "equities",
+      "task": "news",
+      "allowed_variants": [
+        "announcement",
+        "freshness",
+        "governance"
+      ],
+      "asset_rule": "equity_any",
+      "reference_prompt": "any news on AAPL?",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    },
+    {
+      "source_id": "eq-short-idea",
+      "category": "equities",
+      "task": "short_setup",
+      "allowed_variants": [
+        "short_horizon",
+        "invalidation",
+        "compare_candidates"
+      ],
+      "asset_rule": "equity_pair",
+      "reference_prompt": "give me one stock to short into next week and why",
+      "provenance": "user supplied question; intent decomposition is research policy, not an answer or annotation gold label"
+    }
+  ],
+  "related_symbols": {
+    "equities": {
+      "holdings_proxy": [
+        "BTC"
+      ]
+    }
+  },
+  "aliases": {
+    "gold": "GOLD",
+    "silver": "SILVER",
+    "crude": "CRUDE",
+    "crude oil": "CRUDE",
+    "oil": "CRUDE",
+    "natural gas": "NATGAS",
+    "natgas": "NATGAS",
+    "copper": "COPPER",
+    "Brent": "BRENT",
+    "WTI": "WTI",
+    "S&P": "SPX",
+    "S&P 500": "SPX",
+    "S&P500": "SPX",
+    "Bitcoin": "BTC",
+    "ether": "ETH",
+    "Solana": "SOL",
+    "pearl": "PRL",
+    "Pearl": "PRL",
+    "autoton": "autoton",
+    "claudia": "claudia"
+  },
+  "source_fixture": {
+    "file": "four-categories-32.json",
+    "sha256": "15c4273242fd1c2e09f02718e0afc65e7efa004ed9e92eb0918042c1614b0afe",
+    "count": 32,
+    "categories": {
+      "onchain_spot": 8,
+      "crypto_majors": 8,
+      "commodities": 8,
+      "equities": 8
+    },
+    "status": "user-supplied question examples, not verified financial observations"
+  },
+  "holding_periods": {
+    "intraday": "within a day",
+    "one_week": "about a week",
+    "one_month": "about a month",
+    "longer": "several months"
+  },
+  "risk_appetites": {
+    "capital_preservation": 0.25,
+    "balanced": 0.5,
+    "speculative": 0.25
+  },
+  "evidence_surfaces": {
+    "onchain_spot": [
+      "token_identity",
+      "contract_permissions",
+      "holder_distribution",
+      "pool_liquidity",
+      "transaction_activity",
+      "project_announcements",
+      "order_book"
+    ],
+    "crypto_majors": [
+      "spot_price_volume",
+      "funding_open_interest",
+      "liquidations",
+      "fund_flows",
+      "issuer_protocol_news",
+      "macro_releases",
+      "order_book"
+    ],
+    "commodities": [
+      "spot_futures_prices",
+      "physical_inventories",
+      "producer_policy",
+      "weather_forecasts",
+      "currency_rates",
+      "supply_demand_reports",
+      "order_book"
+    ],
+    "equities": [
+      "price_volume",
+      "issuer_filings",
+      "earnings_guidance",
+      "company_announcements",
+      "sector_comparisons",
+      "reported_asset_holdings",
+      "order_book"
+    ]
+  },
+  "surface_compatibility": {
+    "price_move": {
+      "onchain_spot": [
+        "pool_liquidity",
+        "transaction_activity",
+        "project_announcements"
+      ],
+      "crypto_majors": [
+        "spot_price_volume",
+        "liquidations",
+        "macro_releases"
+      ],
+      "commodities": [
+        "spot_futures_prices",
+        "currency_rates",
+        "supply_demand_reports"
+      ],
+      "equities": [
+        "price_volume",
+        "company_announcements",
+        "sector_comparisons"
+      ]
+    },
+    "technical_setup": {
+      "crypto_majors": [
+        "spot_price_volume"
+      ],
+      "commodities": [
+        "spot_futures_prices"
+      ],
+      "equities": [
+        "price_volume"
+      ]
+    },
+    "relative_strength": {
+      "crypto_majors": [
+        "spot_price_volume"
+      ],
+      "commodities": [
+        "spot_futures_prices"
+      ],
+      "equities": [
+        "price_volume"
+      ]
+    },
+    "derivatives_positioning": {
+      "crypto_majors": [
+        "funding_open_interest",
+        "liquidations"
+      ]
+    },
+    "fund_flows": {
+      "crypto_majors": [
+        "fund_flows"
+      ]
+    },
+    "execution_cost": {
+      "onchain_spot": [
+        "pool_liquidity"
+      ],
+      "crypto_majors": [
+        "order_book"
+      ],
+      "commodities": [
+        "order_book"
+      ],
+      "equities": [
+        "order_book"
+      ]
+    },
+    "book_depth": {
+      "onchain_spot": [
+        "pool_liquidity"
+      ],
+      "crypto_majors": [
+        "order_book"
+      ],
+      "commodities": [
+        "order_book"
+      ],
+      "equities": [
+        "order_book"
+      ]
+    },
+    "news": {
+      "onchain_spot": [
+        "project_announcements"
+      ],
+      "crypto_majors": [
+        "issuer_protocol_news"
+      ],
+      "commodities": [
+        "producer_policy",
+        "supply_demand_reports"
+      ],
+      "equities": [
+        "company_announcements",
+        "issuer_filings"
+      ]
+    },
+    "relative_value": {
+      "commodities": [
+        "spot_futures_prices"
+      ],
+      "equities": [
+        "reported_asset_holdings",
+        "issuer_filings",
+        "price_volume"
+      ]
+    }
+  },
+  "variant_surface_compatibility": {
+    "token_due_diligence/identity_drivers": [
+      "token_identity",
+      "transaction_activity",
+      "project_announcements"
+    ],
+    "token_due_diligence/trading_status": [
+      "transaction_activity",
+      "pool_liquidity",
+      "project_announcements"
+    ],
+    "token_due_diligence/holder_distribution": [
+      "holder_distribution",
+      "transaction_activity"
+    ],
+    "token_due_diligence/rug_risk": [
+      "contract_permissions",
+      "holder_distribution",
+      "pool_liquidity"
+    ],
+    "token_due_diligence/entry_risk": [
+      "pool_liquidity",
+      "holder_distribution",
+      "contract_permissions"
+    ],
+    "token_due_diligence/exit_liquidity": [
+      "pool_liquidity",
+      "holder_distribution"
+    ],
+    "event_outlook/weather": [
+      "weather_forecasts",
+      "supply_demand_reports"
+    ],
+    "event_outlook/calendar_consensus": [
+      "earnings_guidance",
+      "company_announcements",
+      "issuer_filings"
+    ],
+    "event_outlook/news_reaction": [
+      "producer_policy",
+      "supply_demand_reports"
+    ],
+    "event_outlook/supply_demand": [
+      "physical_inventories",
+      "supply_demand_reports"
+    ]
+  },
+  "fidelity_policy": "intent",
+  "hard_axes": [
+    "task",
+    "domain",
+    "premise_mode",
+    "answer_shape",
+    "literal_assigned_symbols"
+  ],
+  "soft_axes": [
+    "requested_reasoning_variant_within_allowed_source_intent",
+    "difficulty",
+    "evidence_demand",
+    "voice",
+    "intent_structure",
+    "holding_period",
+    "risk_appetite"
+  ],
+  "retry_policy": "resample compatible subordinate axes while preserving source intent, task and category; retain every revision",
+  "format_policy": "deterministic short format suffix only when absent; raw model text retained",
+  "task_mode_constraints": {
+    "full_analysis": [
+      "open_query"
+    ],
+    "event_study": [
+      "open_query"
+    ],
+    "relative_strength": [
+      "open_query",
+      "hypothetical"
+    ],
+    "trade_selection": [
+      "open_query",
+      "hypothetical"
+    ],
+    "short_setup": [
+      "open_query",
+      "hypothetical"
+    ],
+    "scenario_analysis": [
+      "hypothetical"
+    ],
+    "risk_sizing": [
+      "hypothetical"
+    ],
+    "source_verification": [
+      "claim_check"
+    ],
+    "catalyst_entry": [
+      "hypothetical",
+      "claim_check"
+    ]
+  },
+  "calibration_note": "A single-background diagnostic preserved premise/form labels but changed the parent task for four of twelve outputs. Production mode constraints narrowed accordingly; the narrowing has offline tests, not a fresh paid full-bank validation."
+}

@@ -1,0 +1,37 @@
+[
+ {"id":"oc-si","category":"onchain spot","src":"onchain spot","prompt":"whats going on with $SI? worth aping?"},
+ {"id":"oc-autoton","category":"onchain spot","src":"onchain spot","prompt":"what happened to autoton? did it rug?"},
+ {"id":"oc-abyss","category":"onchain spot","src":"onchain spot","prompt":"is ABYSS still running? hows volume and who's holding it"},
+ {"id":"oc-claudia","category":"onchain spot","src":"onchain spot","prompt":"$claudia is trending on fomo, legit or rug risk?"},
+ {"id":"oc-stonk","category":"onchain spot","src":"onchain spot","prompt":"whats the play on STONK today?"},
+ {"id":"oc-nil-grass","category":"onchain spot","src":"onchain spot","prompt":"NIL or GRASS, which is the better long right now?"},
+ {"id":"oc-drv","category":"onchain spot","src":"onchain spot","prompt":"how is DRV trading on hyperliquid spot? is liquidity ok for a $5k buy?"},
+ {"id":"oc-prl","category":"onchain spot","src":"onchain spot","prompt":"what is PRL (pearl) and why is it moving?"},
+
+ {"id":"mj-btc-drivers","category":"crypto majors","src":"crypto majors","prompt":"whats driving BTC today?"},
+ {"id":"mj-eth-crowded","category":"crypto majors","src":"crypto majors","prompt":"is ETH funding elevated right now? are longs crowded?"},
+ {"id":"mj-sol-levels","category":"crypto majors","src":"crypto majors","prompt":"key support and resistance levels for SOL this week?"},
+ {"id":"mj-hype-vs-sol","category":"crypto majors","src":"crypto majors","prompt":"HYPE vs SOL over the last 30 days, which has been stronger?"},
+ {"id":"mj-xrp-news","category":"crypto majors","src":"crypto majors","prompt":"any news on XRP today?"},
+ {"id":"mj-weakest","category":"crypto majors","src":"crypto majors","prompt":"which major looks weakest for a short right now?"},
+ {"id":"mj-etf-flows","category":"crypto majors","src":"crypto majors","prompt":"what were the BTC ETF flows this week?"},
+ {"id":"mj-doge-oi","category":"crypto majors","src":"crypto majors","prompt":"is open interest building on DOGE?"},
+
+ {"id":"cm-gold-why","category":"commodities","src":"commodities","prompt":"why is gold moving today?"},
+ {"id":"cm-oil-opec","category":"commodities","src":"commodities","prompt":"any OPEC news? how is crude reacting?"},
+ {"id":"cm-gold-silver","category":"commodities","src":"commodities","prompt":"what's the gold/silver ratio right now, is silver cheap?"},
+ {"id":"cm-natgas","category":"commodities","src":"commodities","prompt":"natgas outlook for the week, any weather catalysts?"},
+ {"id":"cm-copper","category":"commodities","src":"commodities","prompt":"is copper breaking out?"},
+ {"id":"cm-brent-wti","category":"commodities","src":"commodities","prompt":"whats the brent wti spread right now?"},
+ {"id":"cm-gold-stop","category":"commodities","src":"commodities","prompt":"I want to long gold with 5x, where's a sensible stop?"},
+ {"id":"cm-momentum","category":"commodities","src":"commodities","prompt":"which commodity has the most momentum this week?"},
+
+ {"id":"eq-nvda-earnings","category":"equities","src":"equities","prompt":"when is NVDA's next earnings and what's expected?"},
+ {"id":"eq-tsla-why","category":"equities","src":"equities","prompt":"why is TSLA moving?"},
+ {"id":"eq-mu-extended","category":"equities","src":"equities","prompt":"MU has been ripping, is it overextended?"},
+ {"id":"eq-spx-week","category":"equities","src":"equities","prompt":"how did the S&P do this week and what's the setup for next week?"},
+ {"id":"eq-ai-long","category":"equities","src":"equities","prompt":"best AI stock to long right now?"},
+ {"id":"eq-mstr-premium","category":"equities","src":"equities","prompt":"is MSTR trading at a premium to the BTC it holds?"},
+ {"id":"eq-aapl-news","category":"equities","src":"equities","prompt":"any news on AAPL?"},
+ {"id":"eq-short-idea","category":"equities","src":"equities","prompt":"give me one stock to short into next week and why"}
+]
