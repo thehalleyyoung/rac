@@ -1,0 +1,14 @@
+[
+ {"id":"btc-why","src":"history","prompt":"Why is BTC down right now?"},
+ {"id":"zro-news","src":"history","prompt":"any news on ZRO in the last hour?"},
+ {"id":"x-hype","src":"history","prompt":"what are people on X saying about HYPE"},
+ {"id":"btc-full","src":"history","prompt":"Give me a full analysis of BTC: price action, funding, open interest, and what's driving it right now."},
+ {"id":"rel-strength","src":"history","prompt":"rank SOL, HYPE, ETH, DOGE, AVAX by 7d relative strength vs BTC, top 5 only"},
+ {"id":"fomc-eth","src":"history","prompt":"what did ETH do in the 24h after each of the last 3 FOMC decisions?"},
+ {"id":"optical","src":"history","prompt":"what's the best way to go long optical and optics stocks / perps"},
+ {"id":"eth-book","src":"history","prompt":"show me the top 10 levels of the ETH order book"},
+ {"id":"buy-1000","src":"buy/sell","prompt":"I have $1,000 to put to work today. What should I buy, and why?"},
+ {"id":"sell-eth","src":"buy/sell","prompt":"Should I sell my ETH here or hold? I bought around $2,800."},
+ {"id":"best-short","src":"buy/sell","prompt":"What's the best short setup right now?"},
+ {"id":"hype-buyback","src":"buy/sell","prompt":"Is HYPE a buy ahead of the buyback next week?"}
+]
