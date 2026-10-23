@@ -1,0 +1,89 @@
+{
+  "schema_version": "financial-benchmark-policy/v1",
+  "policy_id": "synthetic-manifest-control/v1",
+  "status": "development_proposal",
+  "task_registry": [
+    "price_move",
+    "options_analysis"
+  ],
+  "required_source_intents": [
+    "control:control-price",
+    "control:control-options"
+  ],
+  "total": {
+    "exact": 2
+  },
+  "quotas": [
+    {
+      "where": {
+        "asset_class": "equities",
+        "instrument": "options",
+        "task": "options_analysis"
+      },
+      "exact": 1
+    },
+    {
+      "where": {
+        "stratum": "ordinary"
+      },
+      "exact": 1
+    },
+    {
+      "where": {
+        "stratum": "challenge"
+      },
+      "exact": 1
+    }
+  ],
+  "max_duplicate_excess": 0,
+  "task_compatibility": {
+    "price_move": {
+      "asset_classes": [
+        "equities"
+      ],
+      "instruments": [
+        "spot"
+      ]
+    },
+    "options_analysis": {
+      "asset_classes": [
+        "equities"
+      ],
+      "instruments": [
+        "options"
+      ]
+    }
+  },
+  "required_realization_axes": [
+    "asset_class",
+    "instrument",
+    "task"
+  ],
+  "assignment_rules": [
+    {
+      "where": {},
+      "only_missing": true,
+      "set": {
+        "stratum": "ordinary",
+        "timezone": "UTC",
+        "identity_policy": "resolve_at_run",
+        "evidence_mode": "end_to_end",
+        "success_criteria": [
+          "Use supplied evidence or explicitly state that it is unavailable."
+        ]
+      }
+    },
+    {
+      "where": {
+        "premise_mode": "claim_check"
+      },
+      "only_missing": false,
+      "set": {
+        "stratum": "challenge",
+        "challenge_tags": [
+          "premise_verification"
+        ]
+      }
+    }
+  ]
+}

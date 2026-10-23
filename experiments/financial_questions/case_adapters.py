@@ -53,6 +53,8 @@ def rq01_cases(provenance, datasets, namespace, hashes):
         row = next((r for r in rows if r["id"] == record_id), None)
         if row is None or row.get("userPrompt") != link.get("prompt"):
             raise ContractError("RQ01 case missing or exact prompt mismatch: " + str(record_id))
+        if row.get("executionMode") != "live_read_only" or not {"request_trade", "stage_order_action"} <= set(row.get("forbiddenTools", [])):
+            raise ContractError("RQ01 input is not a declared read-only case: " + record_id)
         family = link.get("sourceFamily")
         if not isinstance(family, str) or not family:
             raise ContractError("RQ01 source family missing")
@@ -80,6 +82,8 @@ def generated_cases(rows, namespace, sha):
         spec = row.get("requested_spec")
         if not isinstance(spec, dict):
             raise ContractError("generated question requires its requested_spec")
+        if spec.get("external_effects_allowed", False) is not False or spec.get("access_mode") not in (None, "read_only", "decision_support"):
+            raise ContractError("generated spec requests external effect authority")
         source_id = spec.get("source_id") or row.get("source_id")
         family = namespace + ":" + (source_id or spec.get("id", ""))
         if family == namespace + ":":

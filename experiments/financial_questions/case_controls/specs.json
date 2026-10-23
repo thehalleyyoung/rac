@@ -1,0 +1,20 @@
+[
+  {
+    "id": "c0",
+    "source_id": "control-price",
+    "asset_class": "equities",
+    "instrument": "spot",
+    "task": "price_move",
+    "premise_mode": "claim_check",
+    "as_of": "2026-10-23T12:00:00Z"
+  },
+  {
+    "id": "c1",
+    "source_id": "control-options",
+    "asset_class": "equities",
+    "instrument": "options",
+    "task": "options_analysis",
+    "premise_mode": "hypothetical",
+    "as_of": "2026-10-23T12:00:00Z"
+  }
+]

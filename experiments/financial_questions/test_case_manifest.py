@@ -14,7 +14,7 @@ CUTOFF = "2026-10-23T12:00:00Z"
 
 def complete_case(record_id="control"):
     """Synthetic case contract, not a provider observation or answer label."""
-    case = blank_case("synthetic", record_id, "What evidence is available?",
+    case = blank_case("synthetic", record_id, "What evidence is available for " + record_id + "?",
                       "synthetic:family", HASH, "synthetic_test")
     assign(case, {"asset_class": "equities", "instrument": "spot", "task": "news",
                   "stratum": "ordinary", "cutoff": CUTOFF, "timezone": "UTC",
@@ -126,6 +126,13 @@ class CaseContractTests(unittest.TestCase):
         self.assertIn("invalid_contract_context", [i["code"] for i in validate_case(bad)])
         bad["undeclared_permission"] = True
         self.assertIn("unknown_case_field", [i["code"] for i in validate_case(bad)])
+        bad = complete_case()
+        bad["assigned_requirements"]["task"] = True
+        self.assertIn("invalid_assignment_provenance", [i["code"] for i in validate_case(bad)])
+        bad = complete_case()
+        bad["identity_status"] = None
+        self.assertIn({"code": "missing_freeze_requirement", "field": "identity_status"},
+                      validate_case(bad, freeze=True))
 
 
 class AdapterTests(unittest.TestCase):
@@ -151,7 +158,8 @@ class AdapterTests(unittest.TestCase):
 
     def test_rq01_provenance_selects_exact_rows_but_never_drops_a_missing_row(self):
         row = {"id": "golden-rq01-one", "userPrompt": "What happened?",
-               "gradingCriteria": ["Check the premise."], "executionMode": "live_read_only"}
+               "gradingCriteria": ["Check the premise."], "executionMode": "live_read_only",
+               "forbiddenTools": ["request_trade", "stage_order_action"]}
         link = {"caseId": row["id"], "sourceFamily": "news", "candidateId": "c1",
                 "prompt": row["userPrompt"], "dataset": "golden-user-prompts.jsonl"}
         provenance = {"rows": [link]}

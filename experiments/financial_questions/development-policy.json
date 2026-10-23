@@ -1,0 +1,421 @@
+{
+  "schema_version": "financial-benchmark-policy/v1",
+  "policy_id": "rq01-development-coverage/v1",
+  "status": "development_proposal",
+  "task_registry": [
+    "allocate_capital",
+    "book_depth",
+    "catalyst_entry",
+    "derivatives_positioning",
+    "event_outlook",
+    "event_study",
+    "execution_cost",
+    "full_analysis",
+    "fund_flows",
+    "instrument_mechanics",
+    "manage_position",
+    "news",
+    "options_analysis",
+    "portfolio_risk",
+    "prediction_market_analysis",
+    "price_move",
+    "relative_strength",
+    "relative_value",
+    "risk_sizing",
+    "scenario_analysis",
+    "sentiment",
+    "short_setup",
+    "source_verification",
+    "technical_setup",
+    "theme_exposure",
+    "token_due_diligence",
+    "trade_selection"
+  ],
+  "required_source_intents": [
+    "reference32:oc-si",
+    "reference32:oc-autoton",
+    "reference32:oc-abyss",
+    "reference32:oc-claudia",
+    "reference32:oc-stonk",
+    "reference32:oc-nil-grass",
+    "reference32:oc-drv",
+    "reference32:oc-prl",
+    "reference32:mj-btc-drivers",
+    "reference32:mj-eth-crowded",
+    "reference32:mj-sol-levels",
+    "reference32:mj-hype-vs-sol",
+    "reference32:mj-xrp-news",
+    "reference32:mj-weakest",
+    "reference32:mj-etf-flows",
+    "reference32:mj-doge-oi",
+    "reference32:cm-gold-why",
+    "reference32:cm-oil-opec",
+    "reference32:cm-gold-silver",
+    "reference32:cm-natgas",
+    "reference32:cm-copper",
+    "reference32:cm-brent-wti",
+    "reference32:cm-gold-stop",
+    "reference32:cm-momentum",
+    "reference32:eq-nvda-earnings",
+    "reference32:eq-tsla-why",
+    "reference32:eq-mu-extended",
+    "reference32:eq-spx-week",
+    "reference32:eq-ai-long",
+    "reference32:eq-mstr-premium",
+    "reference32:eq-aapl-news",
+    "reference32:eq-short-idea"
+  ],
+  "total": {
+    "min": 32
+  },
+  "quotas": [
+    {
+      "where": {
+        "asset_class": "commodities"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "asset_class": "crypto_majors"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "asset_class": "crypto_onchain"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "asset_class": "equities"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "instrument": "options"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "instrument": "perps"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "instrument": "prediction_markets"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "instrument": "spot"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "stratum": "ordinary"
+      },
+      "min": 1
+    },
+    {
+      "where": {
+        "stratum": "challenge"
+      },
+      "min": 1
+    }
+  ],
+  "max_duplicate_excess": 0,
+  "task_compatibility": {
+    "price_move": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "news": {
+      "asset_classes": [
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "full_analysis": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "relative_strength": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "event_study": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "theme_exposure": {
+      "asset_classes": [
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "allocate_capital": {
+      "asset_classes": [
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "manage_position": {
+      "asset_classes": [
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "short_setup": {
+      "asset_classes": [
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "catalyst_entry": {
+      "asset_classes": [
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "risk_sizing": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "execution_cost": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "portfolio_risk": {
+      "asset_classes": [
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "source_verification": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "instrument_mechanics": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "scenario_analysis": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "token_due_diligence": {
+      "asset_classes": [
+        "crypto_onchain"
+      ],
+      "instruments": [
+        "spot"
+      ]
+    },
+    "derivatives_positioning": {
+      "asset_classes": [
+        "crypto_majors"
+      ],
+      "instruments": [
+        "perps"
+      ]
+    },
+    "technical_setup": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "fund_flows": {
+      "asset_classes": [
+        "crypto_majors"
+      ],
+      "instruments": [
+        "spot"
+      ]
+    },
+    "relative_value": {
+      "asset_classes": [
+        "commodities",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "event_outlook": {
+      "asset_classes": [
+        "commodities",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "trade_selection": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "book_depth": {
+      "asset_classes": [
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "sentiment": {
+      "asset_classes": [
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "spot",
+        "perps"
+      ]
+    },
+    "options_analysis": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "options"
+      ]
+    },
+    "prediction_market_analysis": {
+      "asset_classes": [
+        "commodities",
+        "crypto_majors",
+        "crypto_onchain",
+        "equities"
+      ],
+      "instruments": [
+        "prediction_markets"
+      ]
+    }
+  },
+  "required_realization_axes": [],
+  "assignment_rules": []
+}

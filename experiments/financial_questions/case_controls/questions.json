@@ -1,0 +1,42 @@
+[
+  {
+    "id": "synthetic-q0",
+    "spec_id": "c0",
+    "prompt": "Did the synthetic example asset actually fall in the supplied fixture?",
+    "decision": "selected",
+    "requested_spec": {
+      "id": "c0",
+      "source_id": "control-price",
+      "asset_class": "equities",
+      "instrument": "spot",
+      "task": "price_move",
+      "premise_mode": "claim_check",
+      "as_of": "2026-10-23T12:00:00Z"
+    },
+    "label": {
+      "task": "price_move",
+      "asset_class": "equities",
+      "instrument": "spot"
+    }
+  },
+  {
+    "id": "synthetic-q1",
+    "spec_id": "c1",
+    "prompt": "Using synthetic option terms, how would its hypothetical payoff change at expiry?",
+    "decision": "selected",
+    "requested_spec": {
+      "id": "c1",
+      "source_id": "control-options",
+      "asset_class": "equities",
+      "instrument": "options",
+      "task": "options_analysis",
+      "premise_mode": "hypothetical",
+      "as_of": "2026-10-23T12:00:00Z"
+    },
+    "label": {
+      "task": "options_analysis",
+      "asset_class": "equities",
+      "instrument": "options"
+    }
+  }
+]

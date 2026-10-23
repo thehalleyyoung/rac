@@ -1,5 +1,12 @@
 # RQ01: randomized financial-intelligence questions
 
+The portable case contract and offline import/audit/freeze tool are documented
+in [case_contract.md](case_contract.md). `benchmark_cases.py` imports the supplied
+32 questions, RQ01-linked eval additions and selected generator runs without
+silently filling unknown metadata. It emits coverage, conditional quota checks
+and deterministic bundles. This additive interface does not change the
+generator commands below, call GTE, or establish answer-judge validity.
+
 This is an isolated research generator. Its primary input is `four-categories-32.json`, SHA256 `15c4273242fd1c2e09f02718e0afc65e7efa004ed9e92eb0918042c1614b0afe`. The file has eight examples in each category: onchain spot, crypto majors, commodities and equities. It replaces the earlier 12-example distribution for this experiment. Reference questions and their intent decomposition are design inputs, not answer labels or verified market observations.
 
 The implementation imports RAC's actual `coverage_levels` primitive from `./rac/code/calculus.py`, through the preceding RQ01 provider adapter. Clean RAC source snapshot: `62c0404c1c96689cad2f921c1e7345065516b2d3`. The previous research control is `6e89f85d9961c04afa8cb31601eaf26763f2b37a`. The adapter uses the official model API rather than importing RAC's poem-specific provider pipeline. No GTE calls, trade execution or private account reads occur.

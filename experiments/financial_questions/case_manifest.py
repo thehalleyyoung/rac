@@ -22,7 +22,7 @@ ASSIGNABLE = {
 }
 REQUIRED_FOR_FREEZE = {
     "asset_class", "instrument", "task", "stratum", "cutoff", "timezone",
-    "identity_policy", "success_criteria", "evidence_mode",
+    "identity_status", "identity_policy", "premise_truth_status", "success_criteria", "evidence_mode",
 }
 DOMAIN_ASSETS = {"onchain_spot": "crypto_onchain", "onchain spot": "crypto_onchain",
                  "crypto majors": "crypto_majors", "crypto_majors": "crypto_majors",
@@ -77,8 +77,8 @@ def normalized_prompt(text):
 def blank_case(namespace, record_id, prompt, family_id, source_sha256, source_format):
     if not re.fullmatch(r"[a-z][a-z0-9_-]*", namespace):
         raise ContractError("source namespace must be a stable lowercase identifier")
-    if not isinstance(record_id, str) or not record_id.strip():
-        raise ContractError("source record ID must be a nonempty string")
+    if not isinstance(record_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:-]*", record_id):
+        raise ContractError("source record ID must be a stable non-path identifier")
     if not isinstance(prompt, str) or not prompt.strip():
         raise ContractError("source prompt must be a nonempty string")
     return {
@@ -206,12 +206,19 @@ def validate_case(case, freeze=False, tasks=None):
         for row in provenance:
             if not isinstance(row, dict) or not re.fullmatch(r"[0-9a-f]{64}", str(row.get("source_sha256", ""))):
                 issue("invalid_source_hash", "provenance")
+            if not isinstance(row, dict) or any(not isinstance(row.get(k), str) or not row[k].strip()
+                                                for k in ("source_name", "source_record_id", "source_format")):
+                issue("invalid_source_provenance", "provenance")
     if not isinstance(case.get("assigned_requirements"), dict):
         issue("missing_assignment_provenance", "assigned_requirements")
-    elif freeze:
-        for field in REQUIRED_FOR_FREEZE:
-            if not case["assigned_requirements"].get(field):
-                issue("missing_assignment_provenance", field)
+    else:
+        for field, origin in case["assigned_requirements"].items():
+            if field not in ASSIGNABLE or not isinstance(origin, str) or not origin.strip():
+                issue("invalid_assignment_provenance", field)
+        if freeze:
+            for field in REQUIRED_FOR_FREEZE - {"identity_status", "premise_truth_status"}:
+                if not case["assigned_requirements"].get(field):
+                    issue("missing_assignment_provenance", field)
     if not isinstance(case.get("assignment_history"), list):
         issue("invalid_assignment_history", "assignment_history")
     labels = case.get("inferred_labels")
@@ -243,7 +250,7 @@ def validate_case(case, freeze=False, tasks=None):
         if not isinstance(item, dict):
             issue("invalid_evidence", "verified_evidence")
             continue
-        if item.get("kind") not in {"provider_capture", "official_document", "calculation"}:
+        if item.get("kind") not in ("provider_capture", "official_document", "calculation"):
             issue("unsupported_evidence_kind", "verified_evidence")
         for field in ("evidence_id", "source_ref", "producer"):
             if not isinstance(item.get(field), str) or not item[field].strip():
@@ -262,6 +269,6 @@ def validate_case(case, freeze=False, tasks=None):
                     issue("invalid_evidence_time", field)
         if freeze and (not item.get("known_at") or not item.get("retrieved_at")):
             issue("missing_evidence_eligibility_times", "verified_evidence")
-    if (context.get("availability") == "verified" or case.get("premise_truth_status") in {"supported", "contradicted"}) and not evidence:
+    if (context.get("availability") == "verified" or case.get("premise_truth_status") in ("supported", "contradicted")) and not evidence:
         issue("asserted_fact_without_evidence", "verified_evidence")
     return issues
