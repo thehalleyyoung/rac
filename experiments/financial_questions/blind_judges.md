@@ -35,9 +35,19 @@ python3 experiments/financial_questions/blind_judges.py --bundle <frozen-bundle>
   --rubric <five-dimension-anchor-map.json> --out <new-directory>
 ```
 
-Ten synthetic controls cover positive two-family report integration, original
+Eleven synthetic controls cover positive two-family report integration, original
 evidence bytes, known identity leakage, payload substitution after rehashing,
 foreign response IDs/hashes, changed answers, unknown aliases, invalid scores,
 unknown judge, failed answer, incomplete rubric, output permissions and unique
 request IDs. They establish protocol behavior, not financial answer quality,
 independent judges, live Edge permission enforcement or independent V1 readiness.
+
+Workflow callers pass the verified prior transcript to both `prepare` and `bind`.
+The payload retains those user/assistant pairs, and the private binding pins its
+hash; a response cannot be rebound with a different expected context. A standalone
+request uses an empty transcript. The CLI prepares standalone requests only.
+The workflow wrapper supplies ordering checks; this adapter cannot authenticate
+a caller's claim about where a transcript came from. Contextual requests/payloads/
+private bindings use v2. Standalone v1 projection and binding remain accepted
+unchanged. Both produce the unchanged v1 judge record; the v1 response envelope
+binds either request through its ID and payload hash.

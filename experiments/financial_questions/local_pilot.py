@@ -101,13 +101,13 @@ def run_pilot(out):
                              "bounds": expected[system["system_id"]][index],
                              "rationale": "Predeclared synthetic supported/unsupported content control; not a human or model assessment."})
             for judge in plan["judges"]:
-                request, binding = prepare(root / "bundle", plan, answer, judge["judge_id"], ANCHORS)
+                request, binding = prepare(root / "bundle", plan, answer, judge["judge_id"], ANCHORS, context)
                 save_new(root / (system["system_id"] + "-step%d-" % (index + 1) + judge["judge_id"]), request, binding)
                 response = {"schema_version": "financial-blind-response/v1", "request_id": request["request_id"],
                             "payload_sha256": request["payload_sha256"], "scores": {d: 4 if positive else 0 for d in DIMENSIONS},
                             "reason": "Hardcoded synthetic control score; not a judge-model inference.",
                             "evidence_refs": ["e0001"], "critical_flags": [] if positive else ["scripted_negative_control"]}
-                records.append(bind(root / "bundle", plan, answer, request, binding, response))
+                records.append(bind(root / "bundle", plan, answer, request, binding, response, context))
                 responses.append(response)
     workflow_report = report_workflow(root / "bundle", workflow, plan, answers, records, receipts)
     control_report = audit_controls(controls, plan["judges"], records)

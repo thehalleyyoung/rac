@@ -1,5 +1,15 @@
 # RQ01: randomized financial-intelligence questions
 
+Local follow-up consumers: [blind_judges.md](blind_judges.md) documents standalone
+v1 and contextual v2 judge requests plus exact response binding;
+[workflow_cases.md](workflow_cases.md) describes ordered step/context receipts;
+[market_catalog.md](market_catalog.md) describes retained-listing coverage gates;
+[scoring_controls.md](scoring_controls.md) defines the anchored control audit.
+[local_pilot.md](local_pilot.md) runs their disclosed synthetic workflow composition.
+These are research-only additive tools. A passing scripted pilot does not establish
+real catalog coverage, model judge validity, authenticated Edge execution or V1
+readiness. The catalog gate is separate from that synthetic A/B workflow pilot.
+
 The portable case contract and offline import/audit/freeze tool are documented
 in [case_contract.md](case_contract.md). `benchmark_cases.py` imports the supplied
 32 questions, RQ01-linked eval additions and selected generator runs without

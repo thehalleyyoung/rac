@@ -43,6 +43,8 @@ class BlindJudgeTests(unittest.TestCase):
 
     def test_payload_has_no_system_metadata_and_preserves_original_content(self):
         payload = self.request["payload"]
+        self.assertEqual(self.request["schema_version"], "financial-blind-request/v1")
+        self.assertNotIn("prior_context", payload)
         self.assertEqual(payload["evidence"][0]["content"], self.answer["evidence"][0]["content"])
         self.assertEqual(payload["cutoff"], "2026-10-23T12:00:00Z")
         for forbidden in ("system_id", "configuration_sha256", "model", "metrics", "tool_trace", "plan_sha256"):
@@ -104,6 +106,19 @@ class BlindJudgeTests(unittest.TestCase):
         other, _ = prepare(self.bundle, self.plan, self.answer, "judge-a", rubric_control())
         self.assertNotEqual(other["request_id"], self.request["request_id"])
         self.assertEqual(other["payload"], self.request["payload"])
+
+    def test_prior_workflow_context_is_explicit_and_substitution_fails(self):
+        context = [{"role": "user", "content": "Compare synthetic A and B."},
+                   {"role": "assistant", "content": "A exceeds B under the prior synthetic observation."}]
+        request, binding = prepare(self.bundle, self.plan, self.answer, "judge-a", rubric_control(), context)
+        self.assertEqual(request["schema_version"], "financial-blind-request/v2")
+        self.assertEqual(request["payload"]["prior_context"], context)
+        bind(self.bundle, self.plan, self.answer, request, binding, response_control(request), context)
+        with self.assertRaisesRegex(ContractError, "context binding changed"):
+            bind(self.bundle, self.plan, self.answer, request, binding, response_control(request), [])
+        context[0]["role"] = "system"
+        with self.assertRaisesRegex(ContractError, "role/content"):
+            prepare(self.bundle, self.plan, self.answer, "judge-a", rubric_control(), context)
 
 
 if __name__ == "__main__":

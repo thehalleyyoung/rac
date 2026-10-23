@@ -17,6 +17,8 @@ class LocalPilotTests(unittest.TestCase):
             self.assertEqual(len(report["steps"]), 6)
             self.assertFalse(parse_json((out / "flat-high-negative.json").read_text())["passed"])
             self.assertTrue(parse_json((out / "control-report.json").read_text())["passed"])
+            request = parse_json(next(out.glob("scripted-good-step3-*/request.json")).read_text())
+            self.assertEqual(len(request["payload"]["prior_context"]), 4)
             with self.assertRaises(FileExistsError):
                 run_pilot(out)
 
