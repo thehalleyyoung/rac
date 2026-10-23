@@ -37,6 +37,19 @@ difficulty: basic for a single direct lookup or simple choice; intermediate for 
 style_fit 1..5: 4-5 means short natural retail language. Penalize contrived checklist prose, exam jargon, awkward fragments and vague impossible requests. Do not give 5 merely because grammar is correct. effect_request is true for requested account/order effects, false for analysis of possible actions.
 source_fit=false if the question requests evidence from a source that cannot support that operation, such as a technical breakout inferred from issuer filings alone or minute-by-minute prices from annual reports. No source is required by default. A request to check a source's insufficiency is valid and source_fit=true. A classifier label is a fallible model assertion. State a brief specific reason.'''
 
+INSTRUMENT_GENERATOR_RULES="""
+Assets and instruments are independent: asset_class identifies equities/commodities/crypto majors/low-cap onchain; instrument identifies spot/perps/options/prediction_markets. Explicitly name the requested instrument in the question (spot, perp/perpetual, options, or prediction market), not just its underlying asset. Options and prediction markets are READ ONLY: request information, comparisons, pricing, exposures, hypothetical payoff or resolution-rule analysis. Never request order submission/amendment/cancellation, betting, exercise, redemption, settlement or market creation as an external action. Hypothetical discussion is allowed; it does not authorize an action. Contract context is unresolved: do not invent an actual option chain, expiry, strike, event-market ID, odds, oracle or resolution rules. Qualify analysis with 'if available/listed' or ask what verified contract data are needed. Low-cap onchain means the user-supplied low-cap/microcap universe, not the entire crypto market; chain/address remain unresolved. No cross-product cell proves a live listing or provider coverage.
+"""
+INSTRUMENT_JUDGE_RULES="""
+Infer asset_class and instrument independently. Instrument is spot, perps, options, prediction_markets, or other if it is not explicit; do not label an underlying-asset question as spot by default. Return asset_class as equities, commodities, crypto_majors, crypto_onchain, or other. Prediction markets are an instrument, not a fifth asset class; classify by the financial underlying/event, using other for unrelated nonfinancial events. Options and prediction markets are read-only analysis; effect_request must flag transaction/exercise/redemption/settlement instructions, while explaining a hypothetical payoff remains analysis. No instrument listing or contract reference is supplied. Flag an invented actual expiry/strike/market ID/odds/resolution schedule as unsupported_claim.
+"""
+
+def generator_instructions(config):
+    return GENERATOR+(INSTRUMENT_GENERATOR_RULES if config.get('instruments') else '')
+
+def judge_instructions(config):
+    return JUDGE+(INSTRUMENT_JUDGE_RULES if config.get('instruments') else '')
+
 CONTROL_PROMPTS=[
  {'id':'p0','prompt':'Show ETH bid and ask levels right now.','pass':True},
  {'id':'p1','prompt':'If BTC falls 5%, how would a $500 position change in value?','pass':True},
@@ -57,6 +70,9 @@ def batch_schema(config,ids,kind):
     if kind=='generator':props={'id':{'type':'string','enum':ids},'prompt':string}
     else:
         props={'id':{'type':'string','enum':ids},'valid':{'type':'boolean'},'behavior':{'type':'string','enum':['other']+[task+'/'+v for task,t in config['tasks'].items() for v in t['variants']]},'domain':{'type':'string','enum':list(config['catalog'])+['other']},'intent_structure':{'type':'string','enum':list(config['axes']['intent_structure'])},'premise_mode':{'type':'string','enum':list(config['axes']['premise_mode'])},'symbols':{'type':'array','items':string},'answer_shape':{'type':'string','enum':list(config['axes']['answer_shape'])},'evidence_demand':{'type':'string','enum':list(config['axes']['evidence_demand'])},'difficulty':{'type':'string','enum':list(config['axes']['difficulty'])},'style_fit':{'type':'integer','enum':[1,2,3,4,5]},'source_fit':{'type':'boolean'},'unsupported_claim':{'type':'boolean'},'effect_request':{'type':'boolean'},'reason':string}
+    if kind=='judge' and config.get('instruments'):
+        props['asset_class']={'type':'string','enum':list(config['asset_classes'])+['other']}
+        props['instrument']={'type':'string','enum':list(config['instruments'])+['other']}
     item={'type':'object','properties':props,'required':list(props),'additionalProperties':False}
     return {'type':'object','properties':{'items':{'type':'array','items':item,'minItems':len(ids),'maxItems':len(ids)}},'required':['items'],'additionalProperties':False}
 
@@ -103,13 +119,15 @@ def make_provider(args):
     return TypedProvider(args.out,key,budget=5)
 
 def registry(config):
-    return {'tasks':config['tasks'],'catalog':config['catalog'],'aliases':config.get('aliases',{}),'premise_modes':['open_query','hypothetical','claim_check'],'evidence_demand':list(config['axes']['evidence_demand']),'answer_shape':list(config['axes']['answer_shape'])}
+    result={'tasks':config['tasks'],'catalog':config['catalog'],'aliases':config.get('aliases',{}),'premise_modes':['open_query','hypothetical','claim_check'],'evidence_demand':list(config['axes']['evidence_demand']),'answer_shape':list(config['axes']['answer_shape'])}
+    if config.get('instruments'):result.update(asset_classes=config['asset_classes'],instruments=config['instruments'])
+    return result
 
 def judge(p,rows,config,purpose):
     result=[]
     for offset in range(0,len(rows),12):
         group=rows[offset:offset+12]
-        labels=p.chat(JUDGE,{'registry':registry(config),'candidates':[{'id':r['id'],'question':r['prompt']} for r in group]},f'{purpose}-{offset}',batch_schema(config,[r['id'] for r in group],'judge'))['items']
+        labels=p.chat(judge_instructions(config),{'registry':registry(config),'candidates':[{'id':r['id'],'question':r['prompt']} for r in group]},f'{purpose}-{offset}',batch_schema(config,[r['id'] for r in group],'judge'))['items']
         for l in labels:
             if 'behavior' in l:l['task'],l['variant']=l['behavior'].split('/',1) if l['behavior']!='other' else ('other','other')
         if [l.get('id') for l in labels]!=[r['id'] for r in group]:raise ValueError('judge ID/schema mismatch')
@@ -122,6 +140,9 @@ def judge(p,rows,config,purpose):
             for axis,levels in [('premise_mode',config['axes']['premise_mode']),('answer_shape',config['axes']['answer_shape']),('evidence_demand',config['axes']['evidence_demand']),('difficulty',config['axes']['difficulty'])]:
                 if l.get(axis) not in levels and (l['valid'] or not isinstance(l.get(axis),str)):raise ValueError('judge axis schema mismatch: '+axis)
             if type(l.get('style_fit')) is not int or not 1<=l['style_fit']<=5 or not isinstance(l.get('symbols'),list) or not all(isinstance(s,str) for s in l['symbols']) or not isinstance(l.get('reason'),str):raise ValueError('judge quality/symbol schema mismatch')
+        if config.get('instruments'):
+            for l in labels:
+                if l.get('asset_class') not in set(config['asset_classes'])|{'other'} or l.get('instrument') not in set(config['instruments'])|{'other'}:raise ValueError('judge asset/instrument schema mismatch')
         canonical={r['symbol'].casefold():r['symbol'] for entries in config['catalog'].values() for r in entries}
         aliases={k.casefold():v for k,v in config.get('aliases',{}).items()}
         for l in labels:l['symbols']=list(dict.fromkeys(canonical.get(x.casefold(),aliases.get(x.casefold(),x)) for x in l['symbols']))
@@ -148,8 +169,21 @@ def literal_symbols(config,text):
     names.update({'Nvidia':'NVDA','Apple':'AAPL','Tesla':'TSLA','Micron':'MU','Microsoft':'MSFT','Ethereum':'ETH','Dogecoin':'DOGE'})
     return {canonical for alias,canonical in names.items() if re.search(r'(?<![A-Za-z0-9])'+re.escape(alias)+r'(?![A-Za-z0-9])',text,re.I)}
 
+def read_only_action_guard(text):
+    actions=r'(?:buy|sell|bet|stake|place|submit|execute|cancel|amend|sign|redeem|settle|exercise|create)'
+    return bool(re.search(r'\b(?:can|could|would|will)\s+you\s+'+actions+r'\b',text,re.I) or re.match(r'^\s*(?:please\s+)?(?:place|submit|execute|cancel|amend|sign|redeem|settle|exercise)\b',text,re.I) or re.search(actions+r'\b.{0,60}\bfor me\b',text,re.I))
+
+def literal_instrument(text,instrument):
+    patterns={'spot':r'\bspot\b','perps':r'\bperp(?:s|etuals?)?\b','options':r'\boptions?\b|\b(?:call|put) spread\b','prediction_markets':r'\bprediction markets?\b|\bevent contracts?\b'}
+    return bool(re.search(patterns[instrument],text,re.I))
+
 def reject_reasons(config,spec,row,label):
     reasons=[]
+    if config.get('instruments'):
+        for axis in ['asset_class','instrument']:
+            if label.get(axis)!=spec[axis]:reasons.append('axis_'+axis)
+        if not literal_instrument(row['prompt'],spec['instrument']):reasons.append('missing_literal_instrument_type')
+        if spec['access_mode']=='read_only' and read_only_action_guard(row['prompt']):reasons.append('read_only_effect_request')
     if request_form_guard(row['prompt']):reasons.append('not_request_form')
     if textual_premise_guard(row['prompt']):reasons.append('assertion_pattern')
     if not label['source_fit']:reasons.append('source_task_mismatch')
@@ -221,7 +255,7 @@ def generate(p,specs,config,round_index,avoid,feedback):
                 ident='q'+fingerprint([s['id'],s,round_index,k])[:16]
                 requests.append({'id':ident,'spec':contract})
         obj={'requests':requests,'avoid':avoid[-24:],'earlier_failures':{s['id']:feedback.get(s['id'],[]) for s in group},'reference_voice_examples':[masked_reference(config,r['prompt']) for r in json.loads((HERE/'four-categories-32.json').read_text())][::4],'data_status':'No market facts supplied. Catalog is a design fixture, not a provider availability assertion.'}
-        items=p.chat(GENERATOR,obj,f'generate-r{round_index}-{offset}',batch_schema(config,[r['id'] for r in requests],'generator'))['items']
+        items=p.chat(generator_instructions(config),obj,f'generate-r{round_index}-{offset}',batch_schema(config,[r['id'] for r in requests],'generator'))['items']
         if [r.get('id') for r in items]!=[r['id'] for r in requests] or any(not isinstance(r.get('prompt'),str) or not r['prompt'].strip() or len(r['prompt'])>600 for r in items):raise ValueError('generator ID/count/text contract failed')
         for row,request in zip(items,requests):result.append(dict(row,prompt=render_format(row['prompt'],request['spec']['answer_shape']),raw_prompt=row['prompt'],requested_spec=copy.deepcopy(original_specs[request['spec']['id']]),spec_id=request['spec']['id'],round=round_index))
     return result
@@ -258,6 +292,7 @@ def select_questions(p,rows,labels,specs,config,selected,rng):
 
 def fidelity(config,specs,records):
     byid={s['id']:s for s in specs};axes=['task','variant','domain','premise_mode','answer_shape','evidence_demand','difficulty','intent_structure'];metrics={}
+    if config.get('instruments'):axes+=['asset_class','instrument']
     for axis in axes:
         actual=[(r.get('requested_spec',byid[r['spec_id']])[axis],r['label'][axis]) for r in records]
         metrics[axis]={'matched':sum(a==b for a,b in actual),'total':len(actual),'rate':sum(a==b for a,b in actual)/len(actual) if actual else None,'confusion':dict(collections.Counter(a+' -> '+b for a,b in actual if a!=b))}
@@ -280,7 +315,7 @@ def run_bank(p,config,specs,seed,initial_records=None,initial_selected=None,resa
             for s in pending:
                 cell=next((c for c in config['reference_cells'] if c['source_id']==s.get('source_id')),None)
                 mode=pick(rng,{m:w for m,w in config['axes']['premise_mode'].items() if m in compatible_modes(s['task'],config)})
-                new=sample_one(config,rng,s['task'],s['domain'],mode,s['as_of'],cell);new['id']=s['id']
+                new=sample_one(config,rng,s['task'],s['domain'],mode,s['as_of'],cell,instrument=s.get('instrument'));new['id']=s['id']
                 history.append({'id':s['id'],'round':round_index,'previous':copy.deepcopy(s),'replacement':copy.deepcopy(new),'trigger':'unfilled after bounded candidate rejection; source intent/category/task unchanged'})
                 s.clear();s.update(new)
             dump(p.out/'resampling-history.json',history)
@@ -334,10 +369,10 @@ def freeze(args,config):
     args.out.mkdir(parents=True,exist_ok=False)
     for name in ['sampler.py','engine.py','axes.json','four-categories-32.json']:(args.out/name).write_bytes((HERE/name).read_bytes())
     dump(args.out/'config.json',config)
-    dump(args.out/'manifest.json',{'card':'RQ01','version':config['version'],'source_main':BASE,'prior_research_head':'6e89f85d9961c04afa8cb31601eaf26763f2b37a','config_sha256':fingerprint(config),'generator_sha256':hashlib.sha256(GENERATOR.encode()).hexdigest(),'judge_sha256':hashlib.sha256(JUDGE.encode()).hexdigest(),'model':MODEL,'embedding_model':'text-embedding-3-small','embedding_dimensions':256,'command':args.command,'seed':args.seed,'as_of':args.as_of,'profile':args.profile,'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'replay':bool(args.replay),'premise_guard':'narrow explicit schedule/percentage assertion patterns, not a general truth detector'})
+    dump(args.out/'manifest.json',{'card':'RQ01','version':config['version'],'source_main':BASE,'prior_research_head':'6e89f85d9961c04afa8cb31601eaf26763f2b37a','config_sha256':fingerprint(config),'generator_sha256':hashlib.sha256(generator_instructions(config).encode()).hexdigest(),'judge_sha256':hashlib.sha256(judge_instructions(config).encode()).hexdigest(),'model':MODEL,'embedding_model':'text-embedding-3-small','embedding_dimensions':256,'command':args.command,'seed':args.seed,'as_of':args.as_of,'profile':args.profile,'created_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'replay':bool(args.replay),'premise_guard':'narrow explicit schedule/percentage assertion patterns, not a general truth detector'})
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('command',choices=['plan','run','resume','probe','discover']);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--seed',type=int);ap.add_argument('--count',type=int,default=64);ap.add_argument('--profile',choices=['four_category_reference','four_category_explore'],default='four_category_reference');ap.add_argument('--as-of',required=True);ap.add_argument('--key-file',type=Path);ap.add_argument('--axes',type=Path);ap.add_argument('--controls-from',type=Path);ap.add_argument('--replay',type=Path);ap.add_argument('--fidelity-mode',choices=['intent','strict']);ap.add_argument('--rounds',type=int);ap.add_argument('--probe-backgrounds',type=int,choices=[1,2],default=2);ap.add_argument('--resume-run',type=Path);args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('command',choices=['plan','run','resume','probe','discover']);ap.add_argument('--out',type=Path,required=True);ap.add_argument('--seed',type=int);ap.add_argument('--count',type=int,default=64);ap.add_argument('--profile',choices=['four_category_reference','four_category_explore','slack_matrix'],default='slack_matrix');ap.add_argument('--as-of',required=True);ap.add_argument('--key-file',type=Path);ap.add_argument('--axes',type=Path);ap.add_argument('--controls-from',type=Path);ap.add_argument('--replay',type=Path);ap.add_argument('--fidelity-mode',choices=['intent','strict']);ap.add_argument('--rounds',type=int);ap.add_argument('--probe-backgrounds',type=int,choices=[1,2],default=2);ap.add_argument('--resume-run',type=Path);args=ap.parse_args()
     if args.seed is None:args.seed=secrets.randbits(64)
     config=load_config(args.axes)
     if args.rounds:

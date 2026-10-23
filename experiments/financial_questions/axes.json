@@ -1,5 +1,5 @@
 {
-  "version": "financial-axes-v2.11-four-categories",
+  "version": "financial-axes-v3.0-slack-instruments",
   "provenance": "RQ01 designed research policy; no claim of empirically representative retail frequencies. Catalog names are design inputs, not verified provider coverage or live listings.",
   "tasks": {
     "price_move": {
@@ -391,6 +391,40 @@
         "cross_asset": "Compare public narratives for two assets",
         "promotion_noise": "Separate substantive discussion from promotion/bots"
       }
+    },
+    "options_analysis": {
+      "description": "Read-only analysis of option chains, pricing, exposures and hypothetical payoffs",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "greeks": "Interpret option delta/gamma/theta/vega exposures",
+        "volatility": "Compare implied and realized volatility without assuming a quoted chain",
+        "skew_term": "Read option skew or term structure",
+        "liquidity": "Assess option bid/ask spread, size and liquidity",
+        "event_pricing": "Assess option-implied event pricing if a chain is available",
+        "payoff_risk": "Compare hypothetical option payoffs and bounded/unbounded risk"
+      }
+    },
+    "prediction_market_analysis": {
+      "description": "Read-only analysis of prediction-market prices, liquidity, rules and uncertainty",
+      "domains": [
+        "onchain_spot",
+        "crypto_majors",
+        "commodities",
+        "equities"
+      ],
+      "variants": {
+        "implied_probability": "Interpret a quoted market price as an implied probability with caveats",
+        "resolution_rules": "Examine the exact event, deadline, oracle and resolution rules",
+        "liquidity": "Read depth/spread and possible slippage without placing a bet",
+        "source_verification": "Compare an event claim with authoritative evidence",
+        "price_disagreement": "Compare market odds with a supplied evidence-based probability",
+        "settlement_risk": "Assess ambiguity, cancellation and settlement risks without settling/redeeming"
+      }
     }
   },
   "profiles": {
@@ -402,6 +436,12 @@
         "crypto_majors": 1,
         "commodities": 1,
         "equities": 1
+      },
+      "instrument_weights": {
+        "spot": 0.65,
+        "perps": 0.35,
+        "options": 0,
+        "prediction_markets": 0
       }
     },
     "four_category_explore": {
@@ -412,6 +452,29 @@
         "crypto_majors": 1,
         "commodities": 1,
         "equities": 1
+      },
+      "instrument_weights": {
+        "spot": 0.65,
+        "perps": 0.35,
+        "options": 0,
+        "prediction_markets": 0
+      }
+    },
+    "slack_matrix": {
+      "description": "Balanced asset-class \u00d7 instrument design cells, starting from the four-category vocabulary and adding read-only derivative/event-market analysis. Does not claim every underlying has every listed instrument.",
+      "reference_cells": false,
+      "instrument_first": true,
+      "category_weights": {
+        "onchain_spot": 1,
+        "crypto_majors": 1,
+        "commodities": 1,
+        "equities": 1
+      },
+      "instrument_weights": {
+        "spot": 1,
+        "perps": 1,
+        "options": 1,
+        "prediction_markets": 1
       }
     }
   },
@@ -704,7 +767,11 @@
     "intent_structure",
     "holding_period",
     "risk_appetite",
-    "evidence_surface"
+    "evidence_surface",
+    "asset_class",
+    "instrument",
+    "access_mode",
+    "contract_context"
   ],
   "reference_cells": [
     {
@@ -1188,7 +1255,11 @@
       "pool_liquidity",
       "transaction_activity",
       "project_announcements",
-      "order_book"
+      "order_book",
+      "option_chain",
+      "prediction_market_quotes",
+      "resolution_terms",
+      "event_sources"
     ],
     "crypto_majors": [
       "spot_price_volume",
@@ -1197,7 +1268,11 @@
       "fund_flows",
       "issuer_protocol_news",
       "macro_releases",
-      "order_book"
+      "order_book",
+      "option_chain",
+      "prediction_market_quotes",
+      "resolution_terms",
+      "event_sources"
     ],
     "commodities": [
       "spot_futures_prices",
@@ -1206,7 +1281,11 @@
       "weather_forecasts",
       "currency_rates",
       "supply_demand_reports",
-      "order_book"
+      "order_book",
+      "option_chain",
+      "prediction_market_quotes",
+      "resolution_terms",
+      "event_sources"
     ],
     "equities": [
       "price_volume",
@@ -1215,7 +1294,11 @@
       "company_announcements",
       "sector_comparisons",
       "reported_asset_holdings",
-      "order_book"
+      "order_book",
+      "option_chain",
+      "prediction_market_quotes",
+      "resolution_terms",
+      "event_sources"
     ]
   },
   "surface_compatibility": {
@@ -1327,6 +1410,42 @@
         "issuer_filings",
         "price_volume"
       ]
+    },
+    "options_analysis": {
+      "onchain_spot": [
+        "option_chain"
+      ],
+      "crypto_majors": [
+        "option_chain"
+      ],
+      "commodities": [
+        "option_chain"
+      ],
+      "equities": [
+        "option_chain"
+      ]
+    },
+    "prediction_market_analysis": {
+      "onchain_spot": [
+        "prediction_market_quotes",
+        "resolution_terms",
+        "event_sources"
+      ],
+      "crypto_majors": [
+        "prediction_market_quotes",
+        "resolution_terms",
+        "event_sources"
+      ],
+      "commodities": [
+        "prediction_market_quotes",
+        "resolution_terms",
+        "event_sources"
+      ],
+      "equities": [
+        "prediction_market_quotes",
+        "resolution_terms",
+        "event_sources"
+      ]
     }
   },
   "variant_surface_compatibility": {
@@ -1374,6 +1493,18 @@
     "event_outlook/supply_demand": [
       "physical_inventories",
       "supply_demand_reports"
+    ],
+    "prediction_market_analysis/resolution_rules": [
+      "resolution_terms"
+    ],
+    "prediction_market_analysis/settlement_risk": [
+      "resolution_terms"
+    ],
+    "prediction_market_analysis/source_verification": [
+      "event_sources"
+    ],
+    "prediction_market_analysis/implied_probability": [
+      "prediction_market_quotes"
     ]
   },
   "fidelity_policy": "intent",
@@ -1427,7 +1558,168 @@
     "catalyst_entry": [
       "hypothetical",
       "claim_check"
+    ],
+    "options_analysis": [
+      "hypothetical"
+    ],
+    "prediction_market_analysis": [
+      "hypothetical"
     ]
   },
-  "calibration_note": "One background per intervened axis: premise/form labels matched 12/12; intended full-analysis parent matched 8/12. Open-query premise variants were labeled technical setups, hypothetical variants scenario analysis, claim checks full analysis. Production excludes full-analysis hypothetical mode and sharpens independent evidence classes. Narrowing is offline tested, not a fresh paid full-bank validation."
+  "calibration_note": "One background per intervened axis: premise/form labels matched 12/12; intended full-analysis parent matched 8/12. Open-query premise variants were labeled technical setups, hypothetical variants scenario analysis, claim checks full analysis. Production excludes full-analysis hypothetical mode and sharpens independent evidence classes. Narrowing is offline tested, not a fresh paid full-bank validation.",
+  "asset_classes": {
+    "equities": {
+      "domain": "equities",
+      "label": "equities"
+    },
+    "commodities": {
+      "domain": "commodities",
+      "label": "commodities"
+    },
+    "crypto_majors": {
+      "domain": "crypto_majors",
+      "label": "crypto majors"
+    },
+    "crypto_onchain": {
+      "domain": "onchain_spot",
+      "label": "crypto onchain (low market cap)"
+    }
+  },
+  "instruments": {
+    "spot": {
+      "label": "spot",
+      "access_mode": "decision_support",
+      "external_effects_allowed": false
+    },
+    "perps": {
+      "label": "perps",
+      "access_mode": "decision_support",
+      "external_effects_allowed": false
+    },
+    "options": {
+      "label": "options",
+      "access_mode": "read_only",
+      "external_effects_allowed": false
+    },
+    "prediction_markets": {
+      "label": "prediction markets",
+      "access_mode": "read_only",
+      "external_effects_allowed": false
+    }
+  },
+  "instrument_policy_note": "Slack scope: asset class and instrument are separate dimensions. Compatibility is a question-design policy, not proof of a listing, supported provider, GTE endpoint or execution authority. Options/prediction markets are read-only. Existing domain IDs are retained for old data.",
+  "task_instruments": {
+    "price_move": [
+      "spot",
+      "perps"
+    ],
+    "news": [
+      "spot",
+      "perps"
+    ],
+    "full_analysis": [
+      "spot",
+      "perps"
+    ],
+    "relative_strength": [
+      "spot",
+      "perps"
+    ],
+    "event_study": [
+      "spot",
+      "perps"
+    ],
+    "theme_exposure": [
+      "spot",
+      "perps"
+    ],
+    "allocate_capital": [
+      "spot",
+      "perps"
+    ],
+    "manage_position": [
+      "spot",
+      "perps"
+    ],
+    "short_setup": [
+      "spot",
+      "perps"
+    ],
+    "catalyst_entry": [
+      "spot",
+      "perps"
+    ],
+    "risk_sizing": [
+      "spot",
+      "perps"
+    ],
+    "execution_cost": [
+      "spot",
+      "perps"
+    ],
+    "portfolio_risk": [
+      "spot",
+      "perps"
+    ],
+    "source_verification": [
+      "spot",
+      "perps"
+    ],
+    "instrument_mechanics": [
+      "spot",
+      "perps"
+    ],
+    "scenario_analysis": [
+      "spot",
+      "perps"
+    ],
+    "token_due_diligence": [
+      "spot"
+    ],
+    "derivatives_positioning": [
+      "perps"
+    ],
+    "technical_setup": [
+      "spot",
+      "perps"
+    ],
+    "fund_flows": [
+      "spot"
+    ],
+    "relative_value": [
+      "spot",
+      "perps"
+    ],
+    "event_outlook": [
+      "spot",
+      "perps"
+    ],
+    "trade_selection": [
+      "spot",
+      "perps"
+    ],
+    "book_depth": [
+      "spot",
+      "perps"
+    ],
+    "sentiment": [
+      "spot",
+      "perps"
+    ],
+    "options_analysis": [
+      "options"
+    ],
+    "prediction_market_analysis": [
+      "prediction_markets"
+    ]
+  },
+  "default_profile": "slack_matrix",
+  "asset_class_traits": {
+    "crypto_onchain": {
+      "segment": "low_market_cap",
+      "market_cap_usd": null,
+      "market_cap_verified": false,
+      "note": "User-supplied low-cap onchain seed universe; actual capitalization/chain/address require as-of evidence."
+    }
+  }
 }

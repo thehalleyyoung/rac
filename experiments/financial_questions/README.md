@@ -4,6 +4,32 @@ This is an isolated research generator. Its primary input is `four-categories-32
 
 The implementation imports RAC's actual `coverage_levels` primitive from `./rac/code/calculus.py`, through the preceding RQ01 provider adapter. Clean RAC source snapshot: `62c0404c1c96689cad2f921c1e7345065516b2d3`. The previous research control is `6e89f85d9961c04afa8cb31601eaf26763f2b37a`. The adapter uses the official model API rather than importing RAC's poem-specific provider pipeline. No GTE calls, trade execution or private account reads occur.
 
+## Slack scope correction, 23 October 2026
+
+Assets and instruments are now separate required axes:
+
+| Asset class | Instruments in the design matrix |
+| --- | --- |
+| Equities | Spot, perps, options (read-only), prediction markets (read-only) |
+| Commodities | Spot, perps, options (read-only), prediction markets (read-only) |
+| Crypto majors | Spot, perps, options (read-only), prediction markets (read-only) |
+| Crypto onchain, low market cap | Spot, perps, options (read-only), prediction markets (read-only) |
+
+The matrix describes benchmark scope, not verified product listings. In particular, a low-cap token need not have listed perps/options or an associated event market. Its chain/address and actual market cap remain unresolved until supplied as-of evidence. Options/prediction-market specs have `access_mode=read_only`, unresolved contract/chain/expiry/strike/market-ID/resolution fields, and no external effects. Read-only permits retrieval, comparison, risk and hypothetical payoff analysis; it does not authorize orders, bets, exercise, redemption, settlement or market creation. The question generator performs no transactions for spot or perps either.
+
+The new default `slack_matrix` profile balances all 16 asset × instrument design cells. A 64-slot plan has four specifications per pair. The former `four_category_reference` remains a 32-intent comparison control and samples compatible spot/perp contexts; it does not claim options/prediction-market coverage. `four_category_explore` likewise remains the earlier task-exploration control. Two new parent families cover read-only option-chain/volatility/Greeks/payoff analysis and prediction-market odds/rules/liquidity/settlement-risk analysis. Current registry: 27 parent tasks and 163 reasoning levels; historical V2 counts/results below remain unchanged.
+
+For the requested full scope:
+
+```sh
+python experiments/financial_questions/engine.py plan --out <new-plan-directory> --profile slack_matrix --count 64 --seed 20261023 --as-of 2026-10-23T00:00:00Z
+python experiments/financial_questions/engine.py run --out <new-run-directory> --profile slack_matrix --count 64 --seed 20261023 --as-of 2026-10-23T00:00:00Z
+```
+
+The sampler, generation instructions, typed judge schema and acceptance gate all carry the instrument separately from the underlying asset. Literal instrument wording and the judge's inferred instrument must match. Read-only action requests, access-mode escalation, incompatible task/instrument pairs and invented registered contract references fail closed. Compatible resampling preserves the instrument as well as the source task/category. Legacy `onchain_spot` domain IDs are retained for old data, but their new explicit `asset_class` is `crypto_onchain`; the legacy name no longer determines the instrument.
+
+This correction has offline sampling/contract tests and a checksummed 64-slot plan under `./output/financial-question-generator-slack/`. No paid generation or GTE capability test was performed for the new instrument scope. The earlier 31-question development bank does not establish coverage of options or prediction markets. Prior configs without the new instrument policy retain their old schema/prompt behavior.
+
 ## Run it
 
 Requirements: Python with NumPy, an OpenAI API credential in `OPENAI_API_KEY`, and an explicit benchmark as-of time. From the isolated RAC worktree:
@@ -48,7 +74,7 @@ The optional `--controls-from` reuses one recorded control response only when it
 | Voice/difficulty | Casual/plain/skeptical; basic/intermediate/advanced | These are soft controls with model diagnostics, not independently validated traits. |
 | Intent structure | One request or a tightly linked followup | Linked requests must stay within the same underlying task. |
 
-There are 25 parent tasks and 151 listed reasoning levels in this design registry. These counts are vocabulary size, not a proof of 151 independent capabilities or a claim of unbounded usable questions. Many axes are conditional or correlated. The reference profile activates a subset; the broader profile does not inherit all original 32 intent quotas.
+The historical V2 design registry had 25 parent tasks and 151 listed reasoning levels; the Slack-scope addition above extends it to 27 and 163. These counts are vocabulary size, not a proof of 151 independent capabilities or a claim of unbounded usable questions. Many axes are conditional or correlated. The reference profile activates a subset; the broader profile does not inherit all original 32 intent quotas.
 
 ## How randomization and RAC interact
 

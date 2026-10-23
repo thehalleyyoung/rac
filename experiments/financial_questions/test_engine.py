@@ -3,7 +3,7 @@ from unittest.mock import patch
 from pathlib import Path
 import numpy as np
 from sampler import load_config,make_plan,sample_one,validate_spec,fingerprint,assign_compatible
-from engine import reject_reasons,intervention_specs,select_questions,ReplayProvider,judge,textual_premise_guard,request_form_guard,batch_schema,literal_symbols,render_format,run_bank,generate
+from engine import reject_reasons,intervention_specs,select_questions,ReplayProvider,judge,textual_premise_guard,request_form_guard,batch_schema,literal_symbols,render_format,run_bank,generate,read_only_action_guard,literal_instrument
 
 ASOF='2026-10-22T00:00:00Z'
 class Tests(unittest.TestCase):
@@ -63,16 +63,16 @@ class Tests(unittest.TestCase):
             self.assertTrue(all(s==held[0] for s in held))
             self.assertEqual(len({s[group['axis']] for s in chosen}),3)
     def label(self,s):
-        return dict(valid=True,source_fit=True,unsupported_claim=False,effect_request=False,style_fit=4,reason='synthetic control',symbols=s['symbols'],**{k:s[k] for k in ['task','variant','domain','premise_mode','answer_shape','evidence_demand','difficulty','intent_structure']})
+        return dict(valid=True,source_fit=True,unsupported_claim=False,effect_request=False,style_fit=4,reason='synthetic control',symbols=s['symbols'],**{k:s[k] for k in ['task','variant','domain','premise_mode','answer_shape','evidence_demand','difficulty','intent_structure']},**{k:s[k] for k in ['asset_class','instrument'] if k in s})
     def test_hard_fidelity_and_premise_gate_not_just_finance_validity(self):
-        s=sample_one(self.c,random.Random(3),'price_move','crypto_majors','open_query',ASOF);row={'prompt':'What is moving '+s['symbols'][0]+' today?'};l=self.label(s)
+        s=sample_one(self.c,random.Random(3),'price_move','crypto_majors','open_query',ASOF);row={'prompt':'What is moving '+s['symbols'][0]+' '+s['instrument']+' today?'};l=self.label(s)
         self.assertEqual(reject_reasons(self.c,s,row,l),[])
         for field,value in [('variant','other'),('premise_mode','hypothetical'),('domain','equities'),('unsupported_claim',True),('effect_request',True)]:
             self.assertTrue(reject_reasons(self.c,s,row,dict(l,**{field:value})))
         self.assertIn('outside_domain_catalog',reject_reasons(self.c,s,row,dict(l,symbols=['LUNA'])))
     def test_duplicate_selection_reaches_negative_case(self):
         s=sample_one(self.c,random.Random(3),'price_move','crypto_majors','open_query',ASOF);specs=[dict(s,id='s0'),dict(s,id='s1')]
-        rows=[{'id':'q0','spec_id':'s0','prompt':s['symbols'][0]+' first question?'},{'id':'q1','spec_id':'s1','prompt':s['symbols'][0]+' semantically identical question?'}];labels=[self.label(s),self.label(s)]
+        rows=[{'id':'q0','spec_id':'s0','prompt':s['symbols'][0]+' '+s['instrument']+' first question?'},{'id':'q1','spec_id':'s1','prompt':s['symbols'][0]+' '+s['instrument']+' semantically identical question?'}];labels=[self.label(s),self.label(s)]
         class Fake:
             def embed(self,texts,purpose):return np.array([[1.,0.]]*len(texts))
         records,selected=select_questions(Fake(),rows,labels,specs,self.c,[],random.Random(1))
@@ -112,7 +112,7 @@ class Tests(unittest.TestCase):
         seen=[]
         def generation(p,specs,config,round_index,avoid,feedback):
             current=copy.deepcopy(specs[0]);seen.append(current)
-            return [{'id':'q'+str(round_index),'spec_id':'s','round':round_index,'prompt':'What are the risks of '+', '.join(current['symbols'])+'?','requested_spec':current}]
+            return [{'id':'q'+str(round_index),'spec_id':'s','round':round_index,'prompt':'What are the risks of '+', '.join(current['symbols'])+' '+current['instrument']+'?','requested_spec':current}]
         def judging(p,rows,config,purpose):
             label=self.label(rows[0]['requested_spec']);label['unsupported_claim']=len(seen)==1
             return [label]
@@ -145,6 +145,37 @@ class Tests(unittest.TestCase):
         with self.assertRaises(ValueError):validate_spec(self.c,s)
         # Explicit intervention probes may deliberately leave the production region.
         s['intervention_axis']='premise_mode';validate_spec(self.c,s)
+    def test_slack_matrix_separates_all_assets_and_instruments(self):
+        for seed in range(6):
+            p=make_plan(self.c,seed,64,'slack_matrix',ASOF,pool_size=2)
+            cells={}
+            for pool in p['pools']:
+                for spec in pool['proposals']:
+                    validate_spec(self.c,spec)
+                    if spec['instrument'] in ['options','prediction_markets']:
+                        self.assertEqual(spec['access_mode'],'read_only')
+                        self.assertIsNone(spec['contract_context']['contract_reference'])
+                s=pool['proposals'][0];key=(s['asset_class'],s['instrument']);cells[key]=cells.get(key,0)+1
+            self.assertEqual(len(cells),16);self.assertEqual(set(cells.values()),{4})
+    def test_read_only_scope_cannot_be_escalated_or_contract_invented(self):
+        s=sample_one(self.c,random.Random(2),'options_analysis','equities','hypothetical',ASOF,instrument='options')
+        bad=copy.deepcopy(s);bad['access_mode']='decision_support'
+        with self.assertRaises(ValueError):validate_spec(self.c,bad)
+        bad=copy.deepcopy(s);bad['contract_context']['strike']=100
+        with self.assertRaises(ValueError):validate_spec(self.c,bad)
+        bad=copy.deepcopy(s);bad['instrument']='spot'
+        with self.assertRaises(ValueError):validate_spec(self.c,bad)
+        l=self.label(s);text='Can you execute '+s['symbols'][0]+' options for me?'
+        self.assertIn('read_only_effect_request',reject_reasons(self.c,s,{'prompt':text},l))
+        self.assertTrue(read_only_action_guard('Redeem my prediction market shares.'))
+        self.assertFalse(read_only_action_guard('How does exercise change a hypothetical option payoff?'))
+        self.assertTrue(literal_instrument('Compare perpetual funding','perps'))
+    def test_instrument_judge_and_literal_binding_are_required(self):
+        s=sample_one(self.c,random.Random(2),'prediction_market_analysis','commodities','hypothetical',ASOF,instrument='prediction_markets')
+        l=self.label(s);text='If listed, compare '+s['symbols'][0]+' prediction market odds?'
+        self.assertEqual(reject_reasons(self.c,s,{'prompt':text},l),[])
+        self.assertIn('axis_instrument',reject_reasons(self.c,s,{'prompt':text},dict(l,instrument='spot')))
+        self.assertIn('missing_literal_instrument_type',reject_reasons(self.c,s,{'prompt':'What about '+s['symbols'][0]+'?'},l))
     def test_bad_judge_schema_fails_closed(self):
         class Fake:
             def chat(self,*args):return {'items':[{'id':'q','valid':'yes'}]}

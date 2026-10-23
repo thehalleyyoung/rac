@@ -64,7 +64,20 @@ def variants(config,task,mode,domain=None,cell=None):
         result=[v for v in result if v not in (['calendar_consensus'] if domain=='commodities' else ['weather','news_reaction','supply_demand'])]
     return result
 
-def sample_one(config,rng,task,domain,mode,as_of,cell=None):
+def instrument_choices(config,task):
+    return config.get('task_instruments',{}).get(task,list(config.get('instruments',{})))
+
+def add_instrument(config,spec,instrument):
+    domain=spec['domain']
+    spec['asset_class']=next(k for k,v in config['asset_classes'].items() if v['domain']==domain)
+    spec['instrument']=instrument
+    spec['access_mode']=config['instruments'][instrument]['access_mode']
+    if instrument!='spot':spec['venue_scope']='unresolved '+instrument+' venue; no listing asserted'
+    if spec['asset_class']=='crypto_onchain':spec['market_cap_context']=copy.deepcopy(config.get('asset_class_traits',{}).get('crypto_onchain',{}))
+    spec['contract_context']={'availability':'unverified','contract_reference':None,'market_id':None,'expiry':None,'strike':None,'resolution_rules':None,'identity_status':'instrument/venue/contract must be resolved; no listing asserted'}
+    return spec
+
+def sample_one(config,rng,task,domain,mode,as_of,cell=None,instrument=None):
     v=rng.choice(variants(config,task,mode,domain,cell));assets=config['catalog'][domain]
     rule=cell['asset_rule'] if cell else ('onchain_any' if domain=='onchain_spot' else 'major_any' if domain=='crypto_majors' else 'commodity_any' if domain=='commodities' else 'equity_any')
     if task=='relative_value' and not cell:rule='holdings_proxy' if domain=='equities' else rng.choice(['precious_pair','crude_pair'])
@@ -107,12 +120,22 @@ def sample_one(config,rng,task,domain,mode,as_of,cell=None):
     spec['evidence_surface']=rng.choice(surface_pool) if spec['evidence_demand']!='ordinary' else None
     if decision and spec['horizon_type']=='prospective':
         spec['horizon_type']='trailing';spec['window']=rng.choice(config['horizons']['trailing'])
+    if config.get('instruments'):
+        choices=instrument_choices(config,task)
+        if instrument is None:instrument=rng.choice(choices)
+        add_instrument(config,spec,instrument)
     validate_spec(config,spec)
     return spec
 
 def validate_spec(config,s):
     if s['task'] not in config['tasks']:raise ValueError('unknown task')
     t=config['tasks'][s['task']]
+    if config.get('instruments'):
+        if s.get('instrument') not in instrument_choices(config,s['task']):raise ValueError('incompatible task/instrument')
+        if s.get('asset_class') not in config['asset_classes'] or config['asset_classes'][s['asset_class']]['domain']!=s['domain']:raise ValueError('asset class/domain mismatch')
+        if s.get('access_mode')!=config['instruments'][s['instrument']]['access_mode']:raise ValueError('instrument access-mode escalation')
+        ctx=s.get('contract_context',{})
+        if ctx.get('availability')!='unverified' or any(ctx.get(k) is not None for k in ['contract_reference','market_id','expiry','strike','resolution_rules']):raise ValueError('unregistered instrument contract/listing assertion')
     if s['domain'] not in t['domains']:raise ValueError('incompatible task/domain')
     if s.get('intervention_axis')!='premise_mode' and s['premise_mode'] not in compatible_modes(s['task'],config):raise ValueError('incompatible task/premise')
     if s['variant'] not in variants(config,s['task'],s['premise_mode'],s['domain']):raise ValueError('incompatible variant')
@@ -136,7 +159,17 @@ def validate_spec(config,s):
 def make_plan(config,seed,n,profile,as_of,pool_size=None):
     if not 1<=n<=config['bounds']['max_specs']:raise ValueError('count outside declared bound')
     p=config['profiles'][profile];rng=random.Random(seed);cells=[]
-    if p['reference_cells']:
+    if p.get('instrument_first'):
+        pairs={d+'|'+i:dw*iw for d,dw in p['category_weights'].items() for i,iw in p['instrument_weights'].items()}
+        jq=quotas(pairs,n,rng);sq={}
+        for pair,amount in jq.items():
+            domain,instrument=pair.split('|')
+            compatible=[t for t,v in config['tasks'].items() if domain in v['domains'] and instrument in instrument_choices(config,t)]
+            if not compatible and amount:raise ValueError('unfillable asset/instrument design cell')
+            for _ in range(amount):
+                cells.append({'source_id':None,'category':domain,'task':rng.choice(compatible),'instrument':instrument})
+        rng.shuffle(cells)
+    elif p['reference_cells']:
         source_weights=p.get('source_weights') or {r['source_id']:1 for r in config['reference_cells']}
         if not set(source_weights)<=set(r['source_id'] for r in config['reference_cells']):raise ValueError('unknown source weight key')
         sq=quotas(source_weights,n,rng)
@@ -145,7 +178,7 @@ def make_plan(config,seed,n,profile,as_of,pool_size=None):
     else:
         dq=quotas(p['category_weights'],n,rng);sq={}
         for domain,count in dq.items():
-            compatible=[t for t,d in config['tasks'].items() if domain in d['domains']]
+            compatible=[t for t,d in config['tasks'].items() if domain in d['domains'] and (not config.get('instruments') or any(p['instrument_weights'].get(i,0)>0 for i in instrument_choices(config,t)))]
             tw=p.get('task_weights_by_category',{}).get(domain) or {t:1 for t in compatible}
             if not set(tw)<=set(compatible):raise ValueError('incompatible task weight key')
             tq=quotas(tw,count,rng)
@@ -153,6 +186,10 @@ def make_plan(config,seed,n,profile,as_of,pool_size=None):
                 cells += [{'source_id':None,'category':domain,'task':task,'asset_rule':None,'allowed_variants':None}]*amount
         rng.shuffle(cells)
     tasks=[c['task'] for c in cells];domains=[c['category'] for c in cells]
+    assigned_instruments=None
+    if config.get('instruments'):
+        if p.get('instrument_first'):assigned_instruments=[c['instrument'] for c in cells]
+        else:assigned_instruments=assign_compatible(list(range(len(tasks))),quotas(p['instrument_weights'],n,rng),lambda j:['spot'] if cells[j].get('asset_rule')=='drv_spot' else instrument_choices(config,tasks[j]),rng)
     mq=quotas(config['axes']['premise_mode'],n,rng)
     try:
         modes=assign_compatible(tasks,mq,lambda t:compatible_modes(t,config),rng);mode_policy='exact compatible premise quotas'
@@ -164,19 +201,30 @@ def make_plan(config,seed,n,profile,as_of,pool_size=None):
         pool=[]
         for _ in range(size):
             for attempt in range(100):
-                s=sample_one(config,rng,task,domain,mode,as_of,cell if p['reference_cells'] else None);fp=fingerprint(s)
+                s=sample_one(config,rng,task,domain,mode,as_of,cell if p['reference_cells'] else None,assigned_instruments[i] if assigned_instruments else None);fp=fingerprint(s)
                 if fp not in seen:break
             else:raise ValueError('spec pool saturated')
             seen.add(fp);pool.append(s)
         pools.append({'slot':f's{i:04d}','task':task,'domain':domain,'premise_mode':mode,'source_id':cell['source_id'],'proposals':pool})
-    return {'version':config['version'],'seed':seed,'count':n,'profile':profile,'as_of':as_of,'config_sha256':fingerprint(config),'sampling':'randomized reference-intent/category strata; compatible conditional proposal pools; later RAC representative selection','premise_policy':mode_policy,'source_quotas':sq,'task_quotas':dict(collections.Counter(tasks)),'domain_quotas':dict(collections.Counter(domains)),'premise_quotas':dict(collections.Counter(modes)),'pools':pools}
+    result={'version':config['version'],'seed':seed,'count':n,'profile':profile,'as_of':as_of,'config_sha256':fingerprint(config),'sampling':'randomized reference-intent/category strata; compatible conditional proposal pools; later RAC representative selection','premise_policy':mode_policy,'source_quotas':sq,'task_quotas':dict(collections.Counter(tasks)),'domain_quotas':dict(collections.Counter(domains)),'premise_quotas':dict(collections.Counter(modes)),'pools':pools}
+
+    if config.get('instruments'):
+        first=[p['proposals'][0] for p in pools]
+        result['asset_class_quotas']=dict(collections.Counter(s['asset_class'] for s in first))
+        result['instrument_quotas']=dict(collections.Counter(s['instrument'] for s in first))
+        result['asset_instrument_quotas']=dict(collections.Counter(s['asset_class']+'/'+s['instrument'] for s in first))
+    return result
 
 def spec_text(config,s):
-    return '. '.join([config['tasks'][s['task']]['description'],config['tasks'][s['task']]['variants'][s['variant']],s['domain'],s['premise_mode'],s['horizon_type'],s['evidence_demand'],s['answer_shape'],s['difficulty']])
+    return '. '.join([config['tasks'][s['task']]['description'],config['tasks'][s['task']]['variants'][s['variant']],s['domain'],s['premise_mode'],s['horizon_type'],s['evidence_demand'],s['answer_shape'],s['difficulty']]+([s['asset_class'],s['instrument'],s['access_mode']] if 'instrument' in s else []))
 
 def summarize_specs(specs):
     axes=['task','domain','source_id','premise_mode','horizon_type','voice','difficulty','evidence_demand','answer_shape','intent_structure']
     counts={axis:dict(collections.Counter(s[axis] for s in specs)) for axis in axes}
     counts['task_variant']=dict(collections.Counter(s['task']+'/'+s['variant'] for s in specs))
+    if specs and 'instrument' in specs[0]:
+        counts['asset_class']=dict(collections.Counter(s['asset_class'] for s in specs))
+        counts['instrument']=dict(collections.Counter(s['instrument'] for s in specs))
+        counts['asset_instrument']=dict(collections.Counter(s['asset_class']+'/'+s['instrument'] for s in specs))
     counts['symbols']=dict(collections.Counter(x for s in specs for x in s['symbols']))
     return counts
