@@ -4,7 +4,7 @@ from pathlib import Path
 import unittest
 
 from case_manifest import ContractError
-from coverage import (apply_policy_assignments, coverage_report, selection_coverage,
+from coverage import (apply_policy_assignments, coverage_markdown, coverage_report, selection_coverage,
                       validate_policy)
 from test_case_manifest import HERE, complete_case
 
@@ -141,6 +141,14 @@ class CoverageTests(unittest.TestCase):
         self.assertEqual(p["status"], "development_proposal")
         self.assertEqual(p["assignment_rules"], [])
         self.assertEqual(len(p["task_registry"]), 27)
+
+    def test_unknown_labels_remain_visible_in_rendered_markdown_tables(self):
+        case = complete_case()
+        case["instrument"] = None
+        report = coverage_report([case], policy())
+        text = coverage_markdown(report)
+        self.assertIn("| &lt;unknown&gt; | 1 |", text)
+        self.assertEqual(report["counts"]["instrument"]["<unknown>"], 1)
 
 
 if __name__ == "__main__":

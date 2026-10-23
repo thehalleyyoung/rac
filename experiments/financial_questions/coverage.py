@@ -284,7 +284,8 @@ def coverage_markdown(report):
              "Freeze ready: " + str(report["freeze_ready"]).lower(), ""]
     for axis, rows in report["counts"].items():
         lines += ["## " + axis, "", "| Value | Count |", "| --- | ---: |"]
-        lines += ["| " + key.replace("|", "\\|") + " | " + str(n) + " |" for key, n in rows.items()]
+        lines += ["| " + key.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("|", "\\|")
+                  + " | " + str(n) + " |" for key, n in rows.items()]
         lines.append("")
     lines += ["## Open requirements", "",
               "Missing source intents: " + str(len(report["missing_source_intents"])),
