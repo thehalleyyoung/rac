@@ -216,7 +216,7 @@ def validate_case(case, freeze=False, tasks=None):
             if field not in ASSIGNABLE or not isinstance(origin, str) or not origin.strip():
                 issue("invalid_assignment_provenance", field)
         if freeze:
-            for field in REQUIRED_FOR_FREEZE - {"identity_status", "premise_truth_status"}:
+            for field in sorted(REQUIRED_FOR_FREEZE - {"identity_status", "premise_truth_status"}):
                 if not case["assigned_requirements"].get(field):
                     issue("missing_assignment_provenance", field)
     if not isinstance(case.get("assignment_history"), list):

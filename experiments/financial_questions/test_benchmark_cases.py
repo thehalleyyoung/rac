@@ -1,5 +1,6 @@
 import copy
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -51,6 +52,25 @@ class CliTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             build(self.args("freeze", first))
         self.assertTrue(verify(first)["verified"])
+
+    def test_incomplete_audit_is_identical_and_verifiable_across_hash_seeds(self):
+        case = complete_case()
+        case.update(instrument=None, timezone=None, cutoff=None, stratum=None)
+        case["assigned_requirements"] = {}
+        self.input.write_bytes(canonical_bytes(case) + b"\n")
+        outputs = []
+        for seed in ["17", "91"]:
+            out = self.root / ("hash-seed-" + seed)
+            env = dict(os.environ, PYTHONHASHSEED=seed)
+            run = subprocess.run([sys.executable, str(HERE / "benchmark_cases.py"), "audit", "--cases",
+                                  "synthetic=" + str(self.input), "--policy", str(self.policy_path),
+                                  "--out", str(out)], capture_output=True, text=True, env=env)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            outputs.append({p.name: p.read_bytes() for p in out.iterdir()})
+            check = subprocess.run([sys.executable, str(HERE / "benchmark_cases.py"), "verify", str(out)],
+                                   capture_output=True, text=True, env=dict(env, PYTHONHASHSEED="123"))
+            self.assertEqual(check.returncode, 0, check.stderr)
+        self.assertEqual(outputs[0], outputs[1])
 
     def test_audit_keeps_incomplete_case_but_freeze_exits_two_with_rejected_artifacts(self):
         case = complete_case()
